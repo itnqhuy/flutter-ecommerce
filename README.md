@@ -1,6 +1,8 @@
 # ecommerce
 
-A new Flutter project.
+Team member:
+- 52200084 - Nguyễn Quốc Huy
+- 52200080 - Nguyễn Nhật Huy
 
 ## Getting Started
 
