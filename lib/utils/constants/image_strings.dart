@@ -1,0 +1,25 @@
+class MyImages {
+  MyImages._();
+
+  // -- App Logos
+  static const String darkAppLogo = "assets/logos/e_tech_logo_black.png";
+  static const String lightAppLogo = "assets/logos/e_tech_logo_white.png";
+
+  // -- Social Logos
+  static const String google = "assets/logos/google-icon.png";
+  static const String facebook = "assets/logos/facebook-icon.png";
+
+  // -- Category Icons (Example)
+  static const String laptopCategory = "assets/icons/laptop.png";
+
+  static const String onBoardingImage1 =
+      "assets/amimations/onBoardingImage1.json";
+  static const String onBoardingImage2 =
+      "assets/amimations/onBoardingImage2.json";
+  static const String onBoardingImage3 =
+      "assets/amimations/onBoardingImage3.json";
+
+  // -- Placeholder Images
+  //static const String productPlaceholder = "assets/images/product_placeholder.png";
+  static const String userPlaceholder = "assets/images/user.png";
+}
