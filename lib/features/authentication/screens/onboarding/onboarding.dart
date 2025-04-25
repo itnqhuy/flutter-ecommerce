@@ -1,7 +1,9 @@
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/onboarding/onboarding_controller.dart';
 import 'widgets/on_boarding_nextbutton.dart';
 import 'widgets/on_boarding_page.dart';
 import 'widgets/on_boarding_skip.dart';
@@ -12,11 +14,14 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnboardingController());
     return Scaffold(
       body: Stack(
         children: [
           // Scrollable Pages
           PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
             children: [
               OnBoardingPage(
                 image: MyImages.onBoardingImage1,
