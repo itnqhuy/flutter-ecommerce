@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TPrimaryHeaderContainer extends StatelessWidget {
@@ -14,7 +15,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return TCurvedEdgeWidget(
       child: Container(
-        color: TColors.primary,
+        color: MyColors.primary,
         padding: const EdgeInsets.all(0),
         child: SizedBox(
           height: 400,
@@ -24,14 +25,16 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                 top: -150,
                 right: -250,
                 child: TCircularContainer(
-                  backgroundColor: TColors.textWhite.with0pacity(0.1),
+                  // ignore: deprecated_member_use
+                  backgroundColor: MyColors.textWhite.withOpacity(0.1),
                 ),
               ),
               Positioned(
                 top: 100,
                 right: -300,
                 child: TCircularContainer(
-                  backgroundColor: TColors.textWhite.with0pacity(0.1),
+                  // ignore: deprecated_member_use
+                  backgroundColor: MyColors.textWhite.withOpacity(0.1),
                 ),
               ),
             ],
