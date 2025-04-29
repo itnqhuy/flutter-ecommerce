@@ -18,6 +18,10 @@ class MyImages {
       "assets/amimations/onBoardingImage2.json";
   static const String onBoardingImage3 =
       "assets/amimations/onBoardingImage3.json";
+  static const String deliveredEmailIllustration =
+      "assets/amimations/deliveredEmail.json";
+  static const String staticSuccessIllustration =
+      "assets/amimations/successAnimation.json";
 
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";

@@ -49,7 +49,6 @@ flutter:
     - assets/images/user.png
     - assets/logos/
     - assets/icons/
-    - assets/icons/brands/
     - assets/amimations/
 
   # Fonts:

@@ -44,6 +44,10 @@ class MyTexts {
   static const String termsOfUse = "Điều khoản sử dụng";
   static const String verificationCode = "Mã xác thực";
   static const String resendEmail = "Gửi lại email";
+  static const String and = "và";
+  static const String continueText = "Tiếp tục";
+  static const String done = "Hoàn thành";
+  static const String submit = "Gửi";
 
   static const String signUpTitle = "Tạo tài khoản của bạn";
   static const String forgetPasswordTitle = "Quên mật khẩu?";
@@ -53,9 +57,9 @@ class MyTexts {
   static const String changeYourPasswordSubTitle =
       "Chúng tôi đã gửi liên kết đặt lại mật khẩu. Vui lòng sử dụng liên kết bảo mật để thay đổi mật khẩu và giữ an toàn cho tài khoản.";
 
-  static const String confirmEmailTitle = "Tài khoản của bạn đã sẵn sàng";
+  static const String confirmEmailTitle = "Xác thực tài khoản của bạn!";
   static const String confirmEmailSubTitle =
-      "Xác minh email để bắt đầu mua sắm và tận hưởng ưu đãi cá nhân hóa.";
+      "Đang chờ: Xác minh email để bắt đầu mua sắm và tận hưởng ưu đãi cá nhân hóa.";
   static const String emailNotReceivedMessage =
       "Không nhận được email? Kiểm tra thư rác hoặc gửi lại.";
   static const String yourAccountCreatedTitle =
