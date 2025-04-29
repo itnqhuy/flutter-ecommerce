@@ -2,12 +2,12 @@ class MyImages {
   MyImages._();
 
   // -- App Logos
-  static const String darkAppLogo = "assets/logos/e_tech_logo_black.png";
-  static const String lightAppLogo = "assets/logos/e_tech_logo_white.png";
+  static const String darkAppLogo = "assets/logos/e_tech_logo_white.png";
+  static const String lightAppLogo = "assets/logos/e_tech_logo_black.png";
 
   // -- Social Logos
-  static const String google = "assets/logos/google-icon.png";
-  static const String facebook = "assets/logos/facebook-icon.png";
+  static const String google = "assets/logos/google_icon.png";
+  static const String facebook = "assets/logos/facebook_icon.png";
 
   // -- Category Icons (Example)
   static const String laptopCategory = "assets/icons/laptop.png";
