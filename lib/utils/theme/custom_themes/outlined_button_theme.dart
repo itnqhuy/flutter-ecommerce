@@ -7,9 +7,9 @@ class MyOutlinedButtonTheme {
   static final OutlinedButtonThemeData lightOutlinedButtonTheme =
       OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      foregroundColor: Colors.blue,
+      foregroundColor: Colors.black,
       backgroundColor: Colors.transparent,
-      side: const BorderSide(color: Colors.blue),
+      side: const BorderSide(color: Colors.grey),
       padding: const EdgeInsets.symmetric(vertical: 18),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -17,7 +17,6 @@ class MyOutlinedButtonTheme {
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: Colors.blue,
       ),
     ),
   );
@@ -36,7 +35,6 @@ class MyOutlinedButtonTheme {
       textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: Colors.white,
       ),
     ),
   );
