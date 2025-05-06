@@ -8,6 +8,7 @@ class TCircularContainer extends StatelessWidget {
     this.width = 400,
     this.height = 400,
     this.radius = 400,
+    this.margin,
     this.padding = 0,
     this.backgroundColor = MyColors.white,
   });
@@ -15,7 +16,8 @@ class TCircularContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final double? radius;
-  final double? padding;
+  final double padding;
+  final EdgeInsets? margin;
   final Widget? child;
   final Color? backgroundColor;
 
@@ -24,7 +26,8 @@ class TCircularContainer extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      padding: const EdgeInsets.all(0),
+      margin: margin,
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(400),
         // ignore: deprecated_member_use
