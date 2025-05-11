@@ -15,37 +15,33 @@ class TPrimaryHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return TCurvedEdgeWidget(
       child: Container(
+        width: double.infinity,
         color: MyColors.primary,
         padding: EdgeInsets.zero,
-        child: SizedBox(
-          height: 400,
-          child: Stack(
-            children: [
-              // Các vòng tròn nền trang trí
-              Positioned(
-                top: -150,
-                right: -250,
-                child: TCircularContainer(
-                  backgroundColor: MyColors.textWhite.withOpacity(0.1),
-                ),
+        child: Stack(
+          children: [
+            // Các vòng tròn nền trang trí
+            Positioned(
+              top: -150,
+              right: -250,
+              child: TCircularContainer(
+                backgroundColor: MyColors.textWhite.withOpacity(0.1),
               ),
-              Positioned(
-                top: 100,
-                right: -300,
-                child: TCircularContainer(
-                  backgroundColor: MyColors.textWhite.withOpacity(0.1),
-                ),
+            ),
+            Positioned(
+              top: 100,
+              right: -300,
+              child: TCircularContainer(
+                backgroundColor: MyColors.textWhite.withOpacity(0.1),
               ),
+            ),
 
-              // ✅ Phần nội dung chính được truyền vào
-              Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: child,
-                ),
-              ),
-            ],
-          ),
+            // ✅ Nội dung chính, không ép height
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: child,
+            ),
+          ],
         ),
       ),
     );

@@ -27,4 +27,35 @@ class MyImages {
   static const String promoBanner1 = "assets/images/banners/banner_1.jpg";
   static const String promoBanner2 = "assets/images/banners/banner_2.jpg";
   static const String promoBanner3 = "assets/images/banners/banner_3.jpg";
+
+  //Products
+  static const String productImage1 =
+      "assets/images/products/acer_laptop_1.png";
+  static const String productImage2 =
+      "assets/images/products/acer_laptop_2.png";
+  static const String productImage3 =
+      "assets/images/products/acer_laptop_3.png";
+  static const String productImage4 =
+      "assets/images/products/acer_laptop_4.png";
+  static const String productImage5 =
+      "assets/images/products/iphone_13_pro.png";
+  static const String productImage6 =
+      "assets/images/products/iphone_14_pro.png";
+  static const String productImage7 =
+      "assets/images/products/iphone_14_white.png";
+  static const String productImage8 =
+      "assets/images/products/product-shirt_blue_1.png";
+  static const String productImage9 =
+      "assets/images/products/product-shirt_blue_2.png";
+  static const String productImage10 =
+      "assets/images/products/acer_laptop_var_1.png";
+  static const String productImage11 =
+      "assets/images/products/acer_laptop_var_2.png";
+  static const String productImage12 =
+      "assets/images/products/acer_laptop_var_3.png";
+  static const String productImage13 =
+      "assets/images/products/acer_laptop_var_4.png";
+
+  //Profile
+  static const String user = "assets/images/content/user.png";
 }

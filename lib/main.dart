@@ -1,5 +1,7 @@
 import 'package:ecommerce/features/shop/screens/home/home.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'app.dart';
 
 void main() {
@@ -11,10 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      title: 'E-Commerce App',
-      home: HomeScreen(), // Gọi màn hình Home
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Ecommerce App',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
+      home: const NavigationMenu(),
     );
   }
 }

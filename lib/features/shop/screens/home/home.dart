@@ -1,3 +1,5 @@
+import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
+import 'package:ecommerce/common/widgets/products/products_cards/product_card_vertical.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -24,10 +26,10 @@ class HomeScreen extends StatelessWidget {
             TPrimaryHeaderContainer(
               child: Column(
                 children: [
-                  const MyHomeAppBar(),
-                  const SizedBox(height: MySizes.spaceBtwSections),
-                  const MySearchContainer(text: 'Search in store'),
-                  const SizedBox(height: MySizes.spaceBtwSections),
+                  MyHomeAppBar(),
+                  SizedBox(height: MySizes.spaceBtwSections),
+                  MySearchContainer(text: 'Search in store'),
+                  SizedBox(height: MySizes.spaceBtwSections),
                   Padding(
                     padding: const EdgeInsets.only(left: MySizes.defaultSpace),
                     child: Column(
@@ -49,12 +51,24 @@ class HomeScreen extends StatelessWidget {
             // Body section
             Padding(
               padding: const EdgeInsets.all(MySizes.defaultSpace),
-              child: MyPromoSlider(
-                banners: [
-                  MyImages.promoBanner1,
-                  MyImages.promoBanner2,
-                  MyImages.promoBanner3,
-                  MyImages.promoBanner2,
+              child: Column(
+                children: [
+                  //promo
+                  MyPromoSlider(banners: [
+                    MyImages.promoBanner1,
+                    MyImages.promoBanner2,
+                    MyImages.promoBanner3,
+                    MyImages.promoBanner2,
+                  ]),
+                  SizedBox(height: MySizes.spaceBtwSections),
+
+                  MySectionHeading(title: 'Popular product', onPressed: () {}),
+                  SizedBox(height: MySizes.spaceBtwSections),
+
+                  //Products
+                  MyGridLayout(
+                      itemCount: 4,
+                      itemBuilder: (_, index) => const MyProductCardVertical())
                 ],
               ),
             ),
