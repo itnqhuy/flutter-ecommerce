@@ -1,4 +1,6 @@
+import 'package:ecommerce/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; // Import the GetX package
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -11,14 +13,21 @@ class MyTermsAndCondition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunctions.isDarkMode(context);
+    final controller = SignupController.instance;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-            width: 24,
-            height: 24,
-            child: Checkbox(value: true, onChanged: (value) {})),
+          width: 24,
+          height: 24,
+          child: Obx(
+            () => Checkbox(
+                value: controller.privacyPolicy.value,
+                onChanged: (value) => controller.privacyPolicy.value =
+                    !controller.privacyPolicy.value),
+          ),
+        ),
         const SizedBox(width: MySizes.spaceBtwItems),
         Expanded(
           child: Text.rich(

@@ -24,6 +24,8 @@ class SuccessScreen extends StatelessWidget {
         child: ResponsiveContainer(
           padding: EdgeInsets.all(MySizes.defaultSpace),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Success Anima
               Lottie.asset(

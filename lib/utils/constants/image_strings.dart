@@ -23,6 +23,9 @@ class MyImages {
   static const String staticSuccessIllustration =
       "assets/amimations/successAnimation.json";
 
+  static const String loadingAnimation =
+      "assets/amimations/loadingAnimation.json";
+
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";
   static const String userPlaceholder = "assets/images/user.png";

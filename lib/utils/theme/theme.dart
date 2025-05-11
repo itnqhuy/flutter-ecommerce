@@ -10,7 +10,7 @@ import 'custom_themes/outlined_button_theme.dart';
 import 'custom_themes/text_field_theme.dart';
 
 class MyAppTheme {
-  MyAppTheme._(); // Prevent instantiation
+  MyAppTheme._();
 
   /// Light Theme
   static final ThemeData lightTheme = ThemeData(
