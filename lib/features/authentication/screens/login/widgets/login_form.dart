@@ -1,16 +1,18 @@
+import 'package:ecommerce/features/authentication/screens/password_configuration/forget_password.dart';
+import 'package:ecommerce/features/authentication/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
 
 class MyLoginForm extends StatelessWidget {
-  const MyLoginForm({
-    super.key,
-  });
+  const MyLoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final rememberMe = false.obs;
     return Form(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: MySizes.spaceBtwSections),
@@ -40,13 +42,16 @@ class MyLoginForm extends StatelessWidget {
                 // Remember me
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Obx(() => Checkbox(
+                          value: rememberMe.value,
+                          onChanged: (value) => rememberMe.value = value!,
+                        )),
                     const Text(MyTexts.rememberMe),
                   ],
                 ),
                 // Forget Pass
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const ForgetPassword()),
                   child: const Text(MyTexts.forgetPassword, style: TextStyle()),
                 ),
               ],
@@ -63,7 +68,8 @@ class MyLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                  onPressed: () {}, child: const Text(MyTexts.createAccount)),
+                  onPressed: () => Get.to(() => const SignupScreen()),
+                  child: const Text(MyTexts.createAccount)),
             ),
             const SizedBox(height: MySizes.spaceBtwSections),
           ],
