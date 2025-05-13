@@ -2,7 +2,7 @@ import 'package:ecommerce/common/widgets/images/my_circular_image.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MyUserProfileTile extends StatelessWidget {
   const MyUserProfileTile({

@@ -75,7 +75,7 @@ class CheckoutScreen extends StatelessWidget {
             onPressed: () => Get.to(() => SuccessScreen(
                   image: MyImages.successfulPaymentIcon,
                   title: 'Payment SUccess',
-                  subtitle: 'Your item will be shipped soon!',
+                  subTitle: 'Your item will be shipped soon!',
                   onPressed: () => Get.offAll(() => const NavigationMenu()),
                 )),
             child: Text('Checkout \$256.0')),
