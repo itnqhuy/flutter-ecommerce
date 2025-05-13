@@ -60,12 +60,7 @@ class MyTextFormFieldTheme {
       fontStyle: FontStyle.normal,
     ),
     floatingLabelStyle: const TextStyle().copyWith(
-      color: Colors.white.withValues(
-        alpha: 255 * 0.8,
-        red: Colors.white.r.toDouble(),
-        green: Colors.white.g.toDouble(),
-        blue: Colors.white.b.toDouble(),
-      ),
+      color: Colors.white,
     ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),

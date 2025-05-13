@@ -33,7 +33,7 @@ class MyValidator {
       return 'Mật khẩu phải chứa ít nhất một số.';
     }
 
-    if (!value.contains(RegExp('[!@#\$%^&*()_+={}\[\]:;"\'<>,.?/|\\`~]'))) {
+    if (!value.contains(RegExp(r'[!@#\$%^&*()_]'))) {
       return 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt.';
     }
 

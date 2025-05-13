@@ -94,8 +94,7 @@ class SignupController extends GetxController {
       });
     } catch (e) {
       // Hiển thị thông báo lỗi chung cho người dùng
-      MyLoaders.errorSnackBar(
-          title: "Rất tiếc!!", message: "Chúng tôi đang gặp trục trặc...");
+      MyLoaders.errorSnackBar(title: "Oops!!", message: e.toString());
     } finally {
       // Dừng hiển thị loading
       MyFullScreenLoader.stopLoading();

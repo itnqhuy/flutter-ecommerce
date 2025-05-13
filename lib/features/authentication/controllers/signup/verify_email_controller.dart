@@ -11,8 +11,6 @@ import '../../../../utils/popups/loaders.dart';
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   // Send Email Verification Link whenever Verify Screen appears and Set Timer for auto redirect
   @override
   void onInit() {
@@ -50,8 +48,8 @@ class VerifyEmailController extends GetxController {
               image: MyImages.staticSuccessIllustration,
               title: MyTexts.yourAccountCreatedTitle,
               subTitle: MyTexts.yourAccountCreatedSubTitle,
-              onPressed: () => AuthenticationRepository.instance
-                  .screenRedirect(_auth.currentUser),
+              onPressed: () =>
+                  AuthenticationRepository.instance.screenRedirect(),
             ));
       }
     });
@@ -67,8 +65,7 @@ class VerifyEmailController extends GetxController {
             image: MyImages.staticSuccessIllustration,
             title: MyTexts.yourAccountCreatedTitle,
             subTitle: MyTexts.yourAccountCreatedSubTitle,
-            onPressed: () => AuthenticationRepository.instance
-                .screenRedirect(_auth.currentUser),
+            onPressed: () => AuthenticationRepository.instance.screenRedirect(),
           ));
     } else {
       // Display warning if email is not verified
