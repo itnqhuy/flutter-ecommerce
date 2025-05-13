@@ -1,67 +1,77 @@
-name: ecommerce
-description: "A new Flutter project."
+  name: ecommerce
+  description: "A new Flutter project."
 
-publish_to: 'none'
+  publish_to: 'none'
 
-version: 1.0.0+1
+  version: 1.0.0+1
 
-environment:
-  sdk: ^3.6.1
+  environment:
+    sdk: ^3.6.1
 
-dependencies:
+  dependencies:
+    flutter:
+      sdk: flutter
+
+    # Utility Packages
+    http: ^1.1.0
+    intl: ^0.18.1
+    logger: ^2.0.1
+    # url_launcher: ^6.3.1
+    flutter_native_splash: ^2.3.2
+    smooth_page_indicator: ^1.2.1
+    lottie: ^2.6.0
+    connectivity_plus: ^6.1.4
+    flutter_carousel_widget: ^2.1.0
+
+
+
+    # Icons
+    cupertino_icons: ^1.0.8
+    iconsax: ^0.0.8
+
+    # State Management
+    get: ^4.6.5
+    get_storage: ^2.1.1
+
+    flutter_svg: ^2.1.0
+
+    # Firebase
+    firebase_core: ^3.13.0
+    firebase_auth: ^5.5.3
+    cloud_firestore: ^5.6.7
+
+    #Product Management
+    readmore: ^2.2.0
+    flutter_rating_bar: ^4.0.1
+
+  dev_dependencies:
+    flutter_test:
+      sdk: flutter
+
+    flutter_lints: ^5.0.0
+
   flutter:
-    sdk: flutter
 
-  # Utility Packages
-  http: ^1.1.0
-  intl: ^0.18.1
-  logger: ^2.0.1
-  # url_launcher: ^6.3.1
-  flutter_native_splash: ^2.3.2
-  smooth_page_indicator: ^1.2.1
-  lottie: ^2.6.0
-  connectivity_plus: ^6.1.4
+    # material Icons class.
+    uses-material-design: true
 
+    # Local Assets
+    assets:
+      - assets/images/user.png
+      - assets/logos/
+      - assets/icons/
+      - assets/images/content/
+      - assets/images/products/
+      - assets/icons/brands/
+      - assets/icons/payment_methods/
+      - assets/images/banners/
+      - assets/amimations/
 
-  # Icons
-  cupertino_icons: ^1.0.8
-  iconsax: ^0.0.8
-
-  # State Management
-  get: ^4.6.5
-  get_storage: ^2.1.1
-
-  flutter_svg: ^2.1.0
-
-  # Firebase
-  firebase_core: ^3.13.0
-  firebase_auth: ^5.5.3
-  cloud_firestore: ^5.6.7
-
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  flutter_lints: ^5.0.0
-
-flutter:
-
-  # material Icons class.
-  uses-material-design: true
-
-  # Local Assets
-  assets:
-    - assets/images/user.png
-    - assets/logos/
-    - assets/icons/
-    - assets/amimations/
-
-  # Fonts:
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
-          weight: 800
+    # Fonts:
+    fonts:
+      - family: Poppins
+        fonts:
+          - asset: assets/fonts/Poppins-Regular.ttf
+            weight: 400
+          - asset: assets/fonts/Poppins-ExtraBold.ttf
+            weight: 800

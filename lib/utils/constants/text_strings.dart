@@ -2,6 +2,10 @@ class MyTexts {
   // -- GLOBAL Texts
   MyTexts._();
 
+  static const String skip = "Skip";
+  static const String appName = "T-Store";
+  static const String tContinue = "Continue";
+
   // -- Tiêu đề giới thiệu (OnBoarding Titles)
   static const String onBoardingTitle1 =
       "Khám phá thiết bị công nghệ chất lượng";
