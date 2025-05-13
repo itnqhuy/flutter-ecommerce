@@ -1,49 +1,62 @@
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/constants/text_strings.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/text_strings.dart';
+import '../../../../utils/helpers/helper_functions.dart';
+import '../layout/responsive_container.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen(
-      {super.key,
-      required this.image,
-      required this.title,
-      required this.subtitle,
-      required this.onPressed});
+  const SuccessScreen({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.subTitle,
+    required this.onPressed,
+  });
 
-  final String image, title, subtitle;
+  final String image, title, subTitle;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(MySizes.md * 2),
+        child: ResponsiveContainer(
+          padding: EdgeInsets.all(MySizes.defaultSpace),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Image
-              Image(
-                  image: AssetImage(image),
-                  width: MyHelperFunctions.screenWidth() * 0.6),
+              // Success Anima
+              Lottie.asset(
+                image,
+                width: MyHelperFunctions.screenWidth() * 0.6,
+                repeat: false,
+                animate: true,
+              ),
               const SizedBox(height: MySizes.spaceBtwSections),
-
-              // Title & Subtitle
-              Text(title,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  textAlign: TextAlign.center),
+              // Title
+              Text(
+                title,
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: MySizes.spaceBtwItems),
-              Text(subtitle,
-                  style: Theme.of(context).textTheme.labelMedium,
-                  textAlign: TextAlign.center),
+
+              // SubTitle
+              Text(
+                subTitle,
+                style: Theme.of(context).textTheme.labelMedium,
+                textAlign: TextAlign.center,
+              ),
               const SizedBox(height: MySizes.spaceBtwSections),
 
-              // Buttons
+              // Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: onPressed,
-                  child: const Text(MyTexts.tContinue),
+                  child: const Text(MyTexts.continueText),
                 ),
               ),
             ],

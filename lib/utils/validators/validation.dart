@@ -1,11 +1,13 @@
 class MyValidator {
-  /// Validate email address
+  MyValidator._();
+  // Validate email address
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập email.';
     }
 
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     if (!emailRegex.hasMatch(value)) {
       return 'Email không hợp lệ.';
     }
@@ -13,7 +15,7 @@ class MyValidator {
     return null;
   }
 
-  /// Validate password strength
+  // Validate password strength
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập mật khẩu.';
@@ -31,14 +33,14 @@ class MyValidator {
       return 'Mật khẩu phải chứa ít nhất một số.';
     }
 
-    if (!value.contains(RegExp(r'[!@#\$&*~]'))) {
+    if (!value.contains(RegExp('[!@#\$%^&*()_+={}\[\]:;"\'<>,.?/|\\`~]'))) {
       return 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt.';
     }
 
     return null;
   }
 
-  /// Validate Vietnamese phone number
+  // Validate Vietnamese phone number
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập số điện thoại.';
@@ -53,7 +55,7 @@ class MyValidator {
     return null;
   }
 
-  /// Validate quantity (must be positive integer)
+  // Validate quantity (must be positive integer)
   static String? validateQuantity(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập số lượng.';
@@ -67,7 +69,7 @@ class MyValidator {
     return null;
   }
 
-  /// Validate price (must be a positive number)
+  // Validate price (must be a positive number)
   static String? validatePrice(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập đơn giá.';
@@ -81,7 +83,7 @@ class MyValidator {
     return null;
   }
 
-  /// Validate CMND/CCCD (Vietnamese ID: 9 or 12 digits)
+  // Validate CMND/CCCD (Vietnamese ID: 9 or 12 digits)
   static String? validateVietnameseID(String? value) {
     if (value == null || value.isEmpty) {
       return 'Vui lòng nhập số CMND/CCCD.';
@@ -95,7 +97,7 @@ class MyValidator {
     return null;
   }
 
-  /// Validate general required text field (e.g. name)
+  // Validate general required text field (e.g. name)
   static String? validateRequiredField(String? value,
       {String fieldName = 'Trường này'}) {
     if (value == null || value.trim().isEmpty) {

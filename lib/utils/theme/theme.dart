@@ -9,8 +9,8 @@ import 'custom_themes/chip_theme.dart';
 import 'custom_themes/outlined_button_theme.dart';
 import 'custom_themes/text_field_theme.dart';
 
-class TAppTheme {
-  TAppTheme._(); // Prevent instantiation
+class MyAppTheme {
+  MyAppTheme._();
 
   /// Light Theme
   static final ThemeData lightTheme = ThemeData(

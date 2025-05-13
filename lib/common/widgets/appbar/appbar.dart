@@ -3,7 +3,7 @@ import 'package:ecommerce/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/utils.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({
@@ -42,6 +42,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(MyDeviceUtils.getAppBarHeight());
 }
