@@ -17,24 +17,22 @@ class MyFullScreenLoader {
           Get.overlayContext!, // Use Get.overlayContext for overlay dialogs
       barrierDismissible:
           false, // The dialog can't be dismissed by tapping outside it
-      builder: (BuildContext context) {
-        return PopScope(
-          canPop: false, // Disable popping with the back button
-          child: Container(
-            color: MyHelperFunctions.isDarkMode(Get.context!)
-                ? MyColors.dark
-                : MyColors.white,
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              children: [
-                const SizedBox(height: 250),
-                MyAnimationLoaderWidget(text: text, animation: animation),
-              ],
-            ),
+      builder: (_) => PopScope(
+        canPop: false, // Disable popping with the back button
+        child: Container(
+          color: MyHelperFunctions.isDarkMode(Get.context!)
+              ? MyColors.dark
+              : MyColors.white,
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            children: [
+              const SizedBox(height: 250),
+              MyAnimationLoaderWidget(text: text, animation: animation),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 

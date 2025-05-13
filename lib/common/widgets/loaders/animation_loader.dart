@@ -31,12 +31,10 @@ class MyAnimationLoaderWidget extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Lottie.asset(
-            animation,
-            width: MediaQuery.of(context).size.width *
-                0.8, // Display Lottie animation
-          ),
+          Lottie.asset(animation,
+              width: MediaQuery.of(context).size.width * 0.8),
           const SizedBox(height: MySizes.defaultSpace),
           Text(
             text,
