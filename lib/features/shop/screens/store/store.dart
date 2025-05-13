@@ -1,21 +1,19 @@
-import 'package:ecommerce/common/styles/rounded_container.dart';
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/appbar/tabbar.dart';
-import 'package:ecommerce/common/widgets/brands/brand_show_case.dart';
 import 'package:ecommerce/common/widgets/brands/my_brand_card.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:ecommerce/common/widgets/images/my_circular_image.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
-import 'package:ecommerce/common/widgets/products/cart/products_cart/cart_menu_icon.dart';
-import 'package:ecommerce/common/widgets/texts/my_brand_title_text_verified_icon.dart';
+import 'package:ecommerce/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
+import 'package:ecommerce/features/shop/screens/brand/all_brands.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/enums.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -59,7 +57,9 @@ class StoreScreen extends StatelessWidget {
 
                       //Feature brands
                       MySectionHeading(
-                          title: 'Featured Brands', onPressed: () {}),
+                          title: 'Featured Brands',
+                          onPressed: () =>
+                              Get.to(() => const AllBrandsScreen())),
                       const SizedBox(height: MySizes.spaceBtwItems / 1.5),
 
                       MyGridLayout(

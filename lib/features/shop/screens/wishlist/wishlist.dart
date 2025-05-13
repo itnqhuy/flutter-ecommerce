@@ -3,10 +3,10 @@ import 'package:ecommerce/common/widgets/icons/my_circular_icon.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/products_cards/product_card_vertical.dart';
 import 'package:ecommerce/features/shop/screens/home/home.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class FavouriteScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class FavouriteScreen extends StatelessWidget {
         actions: [
           MyCircularIcon(
             icon: Iconsax.add,
-            onPressed: () => Get.to(const HomeScreen()),
+            onPressed: () => Get.to(const NavigationMenu()),
           ),
         ],
       ), // TAppBar

@@ -2,12 +2,10 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_conta
 import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
 import 'package:ecommerce/features/shop/controllers/home_controller.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class MyPromoSlider extends StatelessWidget {
   const MyPromoSlider({

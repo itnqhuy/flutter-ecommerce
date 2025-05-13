@@ -1,5 +1,5 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/products/cart/products_cart/cart_menu_icon.dart';
+import 'package:ecommerce/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class MyHomeAppBar extends StatelessWidget {
         MyCartCountericon(
           onPressed: () {},
           iconColor: MyColors.white,
-        )
+        ),
       ],
     );
   }

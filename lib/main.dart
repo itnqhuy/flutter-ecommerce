@@ -1,8 +1,6 @@
-import 'package:ecommerce/features/shop/screens/home/home.dart';
 import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'app.dart';
 
 void main() {
   runApp(const MyApp());

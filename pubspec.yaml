@@ -34,6 +34,9 @@
 
     flutter_svg: ^2.1.0
 
+    #Product Management
+    readmore: ^2.2.0
+    flutter_rating_bar: ^4.0.1
 
   dev_dependencies:
     flutter_test:
@@ -54,6 +57,7 @@
       - assets/images/content/
       - assets/images/products/
       - assets/icons/brands/
+      - assets/icons/payment_methods/
       - assets/images/banners/
       - assets/amimations/
 

@@ -1,18 +1,18 @@
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/products/products_cards/product_card_vertical.dart';
+import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
-import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
 import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        const MySectionHeading(
+                        MySectionHeading(
                           title: 'Popular Categories',
                           showActionButton: false,
                           textColor: Colors.white,
@@ -62,7 +62,10 @@ class HomeScreen extends StatelessWidget {
                   ]),
                   SizedBox(height: MySizes.spaceBtwSections),
 
-                  MySectionHeading(title: 'Popular product', onPressed: () {}),
+                  MySectionHeading(
+                    title: 'Popular product',
+                    onPressed: () => Get.to(() => const AllProducts()),
+                  ),
                   SizedBox(height: MySizes.spaceBtwSections),
 
                   //Products

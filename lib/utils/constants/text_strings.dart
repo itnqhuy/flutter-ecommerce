@@ -2,6 +2,13 @@ class MyTexts {
   // -- GLOBAL Texts
   MyTexts._();
 
+  static const String and = "and";
+  static const String skip = "Skip";
+  static const String done = "Done";
+  static const String submit = "Submit";
+  static const String appName = "T-Store";
+  static const String tContinue = "Continue";
+
   // -- OnBoarding Titles
   static const String onBoardingTitle1 = "Browse quality tech gear";
   static const String onBoardingTitle2 = "Fast & secure payment";
