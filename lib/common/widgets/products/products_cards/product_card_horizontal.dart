@@ -49,7 +49,8 @@ class MyProductCardHorizontal extends StatelessWidget {
                   top: 12,
                   child: MyRoundedContainer(
                     radius: MySizes.sm,
-                    backgroundColor: MyColors.secondary.withOpacity(0.8),
+                    backgroundColor:
+                        MyColors.secondary.withAlpha((255 * 0.8).round()),
                     padding: const EdgeInsets.symmetric(
                       horizontal: MySizes.sm,
                       vertical: MySizes.xs,
@@ -98,7 +99,7 @@ class MyProductCardHorizontal extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //Price
-                      Flexible(child: MyProductPriceText(price: '256.0')),
+                      Flexible(child: MyProductPriceText(price: 256)),
 
                       //Add to Cart
                       Container(

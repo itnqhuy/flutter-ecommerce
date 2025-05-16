@@ -8,7 +8,7 @@ import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/helpers/network_manager.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
 import '../../../../utils/popups/loaders.dart';
-import '../../models/user_model.dart';
+import '../../../personalization/models/user_model.dart';
 import '../../screens/signup/verify_email.dart';
 
 class SignupController extends GetxController {

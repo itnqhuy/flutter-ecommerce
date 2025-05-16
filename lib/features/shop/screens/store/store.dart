@@ -1,32 +1,32 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/appbar/tabbar.dart';
-import 'package:ecommerce/common/widgets/brands/my_brand_card.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
-import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
-import 'package:ecommerce/common/widgets/products/cart/cart_menu_icon.dart';
-import 'package:ecommerce/common/widgets/texts/section_heading.dart';
-import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
-import 'package:ecommerce/features/shop/screens/brand/all_brands.dart';
-import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// ignore: unnecessary_import
-import 'package:get/get_core/src/get_main.dart';
+
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/appbar/tabbar.dart';
+import '../../../../common/widgets/brands/my_brand_card.dart';
+import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
+import '../../../../common/widgets/layouts/grid_layout.dart';
+import '../../../../common/widgets/products/cart/cart_menu_icon.dart';
+import '../../../../common/widgets/texts/section_heading.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/helpers/helper_functions.dart';
+import '../../controllers/category_controller.dart';
+import '../brand/all_brands.dart';
+import 'widgets/category_tab.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: MyAppBar(
-          title:
-              Text('Store', style: Theme.of(context).textTheme.headlineMedium),
+          title: Text('Cửa hàng',
+              style: Theme.of(context).textTheme.headlineMedium),
           actions: [
             MyCartCountericon(onPressed: () {}, iconColor: MyColors.accent),
           ],
@@ -51,14 +51,14 @@ class StoreScreen extends StatelessWidget {
                       //Search
                       const SizedBox(height: MySizes.spaceBtwItems),
                       MySearchContainer(
-                          text: 'Search in store',
+                          text: 'Tìm kiếm trong cửa hàng',
                           showBorder: true,
                           showBackground: false),
                       SizedBox(height: MySizes.spaceBtwSections),
 
                       //Feature brands
                       MySectionHeading(
-                          title: 'Featured Brands',
+                          title: 'Thương hiệu nổi bật',
                           onPressed: () =>
                               Get.to(() => const AllBrandsScreen())),
                       const SizedBox(height: MySizes.spaceBtwItems / 1.5),
@@ -75,13 +75,13 @@ class StoreScreen extends StatelessWidget {
 
                 //Tab_Bar
                 bottom: MyTabBar(
-                  tabs: [
-                    Tab(child: Text('Sports')),
-                    Tab(child: Text('Furniture')),
-                    Tab(child: Text('Elec')),
-                    Tab(child: Text('Clothes')),
-                    Tab(child: Text('Comestic')),
-                  ],
+                  tabs: categories
+                      .map(
+                        (category) => Tab(
+                          child: Text(category.name),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ];
@@ -89,13 +89,9 @@ class StoreScreen extends StatelessWidget {
 
           //Body
           body: TabBarView(
-            children: [
-              MyCategoryTab(),
-              MyCategoryTab(),
-              MyCategoryTab(),
-              MyCategoryTab(),
-              MyCategoryTab()
-            ],
+            children: categories
+                .map((category) => MyCategoryTab(category: category))
+                .toList(),
           ),
         ),
       ),

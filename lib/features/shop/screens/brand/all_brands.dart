@@ -1,13 +1,11 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/brands/my_brand_card.dart';
 import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
-import 'package:ecommerce/common/widgets/products/sortable/sortable_products.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/screens/brand/brand_products.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class AllBrandsScreen extends StatelessWidget {
   const AllBrandsScreen({super.key});
@@ -15,14 +13,14 @@ class AllBrandsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text('Brand'), showBackArrow: true),
+      appBar: MyAppBar(title: Text('Thương hiệu'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(MySizes.defaultSpace),
           child: Column(
             children: [
               // Heading
-              MySectionHeading(title: 'Brands', showActionButton: false),
+              MySectionHeading(title: 'Thương hiệu', showActionButton: false),
               SizedBox(height: MySizes.spaceBtwItems),
 
               // Brands

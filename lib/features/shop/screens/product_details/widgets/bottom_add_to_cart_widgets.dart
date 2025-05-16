@@ -35,9 +35,9 @@ class MyBottomAddToCart extends StatelessWidget {
                 height: 40,
                 color: MyColors.white,
               ),
-              const SizedBox(height: MySizes.spaceBtwItems),
+              const SizedBox(width: MySizes.spaceBtwItems),
               Text('2', style: Theme.of(context).textTheme.titleSmall),
-              const SizedBox(height: MySizes.spaceBtwItems),
+              const SizedBox(width: MySizes.spaceBtwItems),
               MyCircularIcon(
                 icon: Iconsax.add,
                 backgroundColor: MyColors.black,
@@ -51,10 +51,26 @@ class MyBottomAddToCart extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(MySizes.md),
-              backgroundColor: MyColors.black,
-              side: const BorderSide(color: MyColors.black),
+              backgroundColor: dark ? MyColors.grey : MyColors.black,
+              side: BorderSide(color: dark ? MyColors.grey : MyColors.black),
             ),
-            child: const Text('Add to Cart'),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Iconsax.shopping_bag,
+                  size: 20,
+                  color: dark ? MyColors.black : MyColors.grey,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Add to Cart',
+                  style: TextStyle(
+                    color: dark ? MyColors.black : MyColors.grey,
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),
