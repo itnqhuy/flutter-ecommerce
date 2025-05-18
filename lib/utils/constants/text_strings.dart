@@ -21,8 +21,8 @@ class MyTexts {
       "Nhận hàng nhanh chóng, đúng hẹn tại nhà hoặc văn phòng của bạn.";
 
   // -- Văn bản màn hình chính (Home Screen Texts)
-  static const String homeAppbarTitle = "Chào mừng đến với TechStore";
-  static const String homeAppbarSubTitle = "Mọi thứ bạn cần – đều có ở đây.";
+  static const String homeAppbarTitle = "Chúc bạn ngày mới vui vẻ";
+  static const String homeAppbarSubTitle = "TechStore";
 
   // -- Văn bản màn hình đăng nhập (Login Screen Texts)
   static const String loginTitle = "Chào mừng trở lại!";

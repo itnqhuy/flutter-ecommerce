@@ -31,12 +31,7 @@ class MyColors {
 
   // Background Container Colors
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static final Color darkContainer = white.withValues(
-    alpha: 255 * 0.1,
-    red: white.r.toDouble(),
-    green: white.g.toDouble(),
-    blue: white.b.toDouble(),
-  );
+  static final Color darkContainer = white.withAlpha((255 * 0.1).round());
 
   // Button Colors
   static const Color buttonPrimary = Color(0xFF4b68ff);

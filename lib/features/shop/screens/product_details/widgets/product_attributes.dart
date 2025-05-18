@@ -45,7 +45,7 @@ class MyProductAttributes extends StatelessWidget {
                           const SizedBox(width: MySizes.spaceBtwItems),
 
                           //Sale Tag
-                          MyProductPriceText(price: '20'),
+                          MyProductPriceText(price: 20),
                         ],
                       ),
 

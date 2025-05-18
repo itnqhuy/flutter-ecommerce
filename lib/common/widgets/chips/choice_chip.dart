@@ -27,7 +27,7 @@ class MyChoiceChip extends StatelessWidget {
         onSelected: onSelected,
         labelStyle: TextStyle(color: selected ? MyColors.white : null),
         avatar: isColor
-            ? TCircularContainer(
+            ? MyCircularContainer(
                 width: 50,
                 height: 50,
                 backgroundColor: MyHelperFunctions.getColor(text)!)

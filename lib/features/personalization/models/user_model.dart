@@ -9,8 +9,8 @@ class UserModel {
   final String lastName;
   final String username;
   final String email;
-  final String phoneNumber;
-  final String? avatarUrl;
+  final String? phoneNumber;
+  final String avatarUrl;
   final String role;
   final List<ShippingInfo>? shippingInfo;
   final bool isBanned;
@@ -24,8 +24,8 @@ class UserModel {
     required this.lastName,
     required this.username,
     required this.email,
-    required this.phoneNumber,
-    this.avatarUrl,
+    this.phoneNumber,
+    required this.avatarUrl,
     required this.role,
     this.shippingInfo,
     required this.isBanned,
@@ -34,12 +34,44 @@ class UserModel {
     required this.updatedAt,
   });
 
+  UserModel copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? username,
+    String? email,
+    String? phoneNumber,
+    String? avatarUrl,
+    String? role,
+    List<ShippingInfo>? shippingInfo,
+    bool? isBanned,
+    int? loyaltyPoints,
+    Timestamp? createdAt,
+    Timestamp? updatedAt,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      username: username ?? this.username,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      role: role ?? this.role,
+      shippingInfo: shippingInfo ?? this.shippingInfo,
+      isBanned: isBanned ?? this.isBanned,
+      loyaltyPoints: loyaltyPoints ?? this.loyaltyPoints,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   /// Helper function to get the full name (first + last)
   String get fullNameWithSpaces => '$firstName $lastName';
 
   /// Helper function to format phone number.
   String get formattedPhoneNo =>
-      MyFormatter.formatVietnamPhoneNumber(phoneNumber);
+      MyFormatter.formatVietnamPhoneNumber(phoneNumber!);
 
   /// Static function to split full name into first and last name.
   static List<String> nameParts(String fullName) => fullName.split(" ");
@@ -50,9 +82,8 @@ class UserModel {
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
 
-    String camelCaseUsername =
-        "$firstName$lastName"; // Combine first and last name
-    String usernameWithPrefix = "cwt_$camelCaseUsername"; // Add "cwt_" prefix
+    String camelCaseUsername = "$firstName$lastName";
+    String usernameWithPrefix = "tg_$camelCaseUsername"; //techgear
     return usernameWithPrefix;
   }
 
@@ -94,25 +125,29 @@ class UserModel {
   // Factory method to create a UserModel from Firestore document snapshot
   factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
-    var shippingInfoList = (data['shippingInfo'] as List<dynamic>?)
-        ?.map((s) => ShippingInfo.fromSnapshot(s))
-        .toList();
+    final data = document.data();
+    if (data != null) {
+      var shippingInfoList = (data['shippingInfo'] as List<dynamic>?)
+          ?.map((s) => ShippingInfo.fromSnapshot(s))
+          .toList();
 
-    return UserModel(
-      id: document.id,
-      firstName: data['firstName'] ?? "",
-      lastName: data['lastName'] ?? "",
-      username: data['username'] ?? "",
-      email: data['email'] ?? "",
-      phoneNumber: data['phoneNumber'] ?? "",
-      avatarUrl: data['avatarUrl'] ?? "",
-      role: data['role'] ?? "",
-      shippingInfo: shippingInfoList,
-      isBanned: data['isBanned'] ?? false,
-      loyaltyPoints: data['loyaltyPoints'] ?? 0,
-      createdAt: data['createdAt'] ?? Timestamp.now(),
-      updatedAt: data['updatedAt'] ?? Timestamp.now(),
-    );
+      return UserModel(
+        id: document.id,
+        firstName: data['firstName'] ?? "",
+        lastName: data['lastName'] ?? "",
+        username: data['username'] ?? "",
+        email: data['email'] ?? "",
+        phoneNumber: data['phoneNumber'] ?? "",
+        avatarUrl: data['avatarUrl'] ?? "",
+        role: data['role'] ?? "",
+        shippingInfo: shippingInfoList,
+        isBanned: data['isBanned'] ?? false,
+        loyaltyPoints: data['loyaltyPoints'] ?? 0,
+        createdAt: data['createdAt'] ?? Timestamp.now(),
+        updatedAt: data['updatedAt'] ?? Timestamp.now(),
+      );
+    } else {
+      return UserModel.empty();
+    }
   }
 }

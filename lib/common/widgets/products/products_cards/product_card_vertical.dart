@@ -7,24 +7,33 @@ import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
 import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
 import 'package:ecommerce/features/shop/screens/product_details/product_detail.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/controllers/brand_controller.dart';
+import '../../../../features/shop/controllers/product/product_controller.dart';
+import '../../../../features/shop/models/product_model.dart';
+
 class MyProductCardVertical extends StatelessWidget {
-  const MyProductCardVertical({super.key});
+  const MyProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunctions.isDarkMode(context);
 
+    final brandController = Get.put(BrandController());
+    brandController.loadBrandById(product.brandId);
+
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetail()),
+      onTap: () => Get.to(() => ProductDetailScreen(product: product)),
       child: Container(
         width: 180,
+        height: 180,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [MyShadowStyle.verticalProductShadow],
@@ -35,17 +44,17 @@ class MyProductCardVertical extends StatelessWidget {
           children: [
             // Ảnh với icon trái tim + sale tag
             MyRoundedContainer(
-              height: 80,
-              padding: const EdgeInsets.all(MySizes.sm),
+              height: 185,
               backgroundColor: dark ? MyColors.dark : MyColors.light,
               child: Stack(
                 children: [
                   // Ảnh không bị méo
-                  const Align(
+                  Align(
                     alignment: Alignment.center,
                     child: MyRoundedImage(
-                      imageUrl: MyImages.productImage1,
+                      imageUrl: product.imagesUrl.first,
                       applyImageRadius: true,
+                      isNetworkImage: true,
                     ),
                   ),
 
@@ -55,7 +64,8 @@ class MyProductCardVertical extends StatelessWidget {
                     left: 0,
                     child: MyRoundedContainer(
                       radius: MySizes.sm,
-                      backgroundColor: MyColors.secondary.withOpacity(0.8),
+                      backgroundColor:
+                          MyColors.secondary.withAlpha((255 * 0.8).round()),
                       padding: const EdgeInsets.symmetric(
                         horizontal: MySizes.sm,
                         vertical: MySizes.xs,
@@ -84,19 +94,20 @@ class MyProductCardVertical extends StatelessWidget {
             ),
 
             // Details
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: MySizes.sm),
-              // Only reason to use the [SizedBox] here is to make Column full Width
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MyProductTitleText(
-                        title: 'Green Nike Air Shoes sd sda dsa dsa dsd ',
-                        smallSize: true),
+                    MyProductTitleText(title: product.name, smallSize: true),
                     SizedBox(height: MySizes.spaceBtwItems / 2),
-                    MyBrandTitleWithVerifiedIcon(title: 'Nike'),
+                    Obx(() {
+                      final brand = brandController.brandCache[product.brandId];
+                      return MyBrandTitleWithVerifiedIcon(
+                          title: brand?.name ?? 'Thương hiệu không rõ');
+                    }),
                   ],
                 ),
               ),
@@ -104,17 +115,21 @@ class MyProductCardVertical extends StatelessWidget {
 
             const Spacer(),
 
-            /// Price Row
+            // Price Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /// Price
-                const Padding(
+                // Price
+                Padding(
                   padding: EdgeInsets.only(left: MySizes.sm),
-                  child: MyProductPriceText(price: '35.0'),
-                ), // Padding
+                  child: Obx(() {
+                    final sku = ProductController.instance.skuCache[product.id];
+                    final price = sku?.price ?? 0;
+                    return MyProductPriceText(price: price);
+                  }),
+                ),
 
-                /// Add to Cart Button
+                // Add to Cart Button
                 Container(
                   decoration: const BoxDecoration(
                     color: MyColors.dark,
@@ -122,66 +137,19 @@ class MyProductCardVertical extends StatelessWidget {
                       topLeft: Radius.circular(MySizes.cardRadiusMd),
                       bottomRight: Radius.circular(MySizes.productImageRadius),
                     ),
-                  ), // BoxDecoration
+                  ),
                   child: const SizedBox(
                     width: MySizes.iconLg * 1.2,
                     height: MySizes.iconLg * 1.2,
                     child:
                         Center(child: Icon(Iconsax.add, color: MyColors.white)),
-                  ), // SizedBox
+                  ),
                 ), // Container
               ],
-            ), // Row
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: MySizes.sm),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         const SizedBox(height: MySizes.spaceBtwItems / 2),
-            //         const MyProductTitleText(
-            //           title: 'Laptop',
-            //           smallSize: true,
-            //         ),
-            //         const SizedBox(height: MySizes.spaceBtwItems / 2),
-            //         MyBrandTitleWithVerifiedIcon(title: 'DELL'),
-            //         const Spacer(),
-            //         Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             const MyProductPriceText(price: '35.0'),
-            //             Container(
-            //               decoration: const BoxDecoration(
-            //                 color: MyColors.dark,
-            //                 borderRadius: BorderRadius.only(
-            //                   topLeft: Radius.circular(MySizes.cardRadiusMd),
-            //                   bottomRight:
-            //                       Radius.circular(MySizes.productImageRadius),
-            //                 ),
-            //               ),
-            //               child: const SizedBox(
-            //                 width: MySizes.iconLg * 1.2,
-            //                 height: MySizes.iconLg * 1.2,
-            //                 child: Center(
-            //                   child: Icon(
-            //                     Iconsax.add,
-            //                     color: MyColors.white,
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         const SizedBox(height: MySizes.spaceBtwItems / 2),
-            //       ],
-            //     ),
-            //   ),
-            // ),

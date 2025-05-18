@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/text_strings.dart';
 import '../../../../utils/helpers/helper_functions.dart';
-import '../layout/responsive_container.dart';
+import '../layouts/responsive_container.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({

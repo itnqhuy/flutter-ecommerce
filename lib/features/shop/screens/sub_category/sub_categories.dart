@@ -2,7 +2,6 @@ import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
 import 'package:ecommerce/common/widgets/products/products_cards/product_card_horizontal.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,8 @@ class SubCategoriesScreen extends StatelessWidget {
               // Banner
               MyRoundedImage(
                   width: double.infinity,
-                  imageUrl: MyImages.promoBanner3,
+                  imageUrl:
+                      "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/H1_1440x242_42b816baef.png",
                   applyImageRadius: true),
               SizedBox(height: MySizes.spaceBtwSections),
 

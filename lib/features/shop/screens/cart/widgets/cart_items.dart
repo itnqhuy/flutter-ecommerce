@@ -35,7 +35,7 @@ class MyCartItems extends StatelessWidget {
                     MyProductQuanityWithAddRemoveButton(),
                   ],
                 ),
-                MyProductPriceText(price: '256'),
+                MyProductPriceText(price: 256),
               ],
             ),
         ],

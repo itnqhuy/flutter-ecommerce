@@ -69,7 +69,7 @@ class MyLoginForm extends StatelessWidget {
                 ),
                 // Forget Pass
                 TextButton(
-                  onPressed: () => Get.to(() => const ForgetPassword()),
+                  onPressed: () => Get.to(() => const ForgetPasswordScreen()),
                   child: const Text(MyTexts.forgetPassword, style: TextStyle()),
                 ),
               ],

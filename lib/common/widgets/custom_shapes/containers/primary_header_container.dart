@@ -3,8 +3,8 @@ import 'package:ecommerce/common/widgets/custom_shapes/curved_edges/curved_edges
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class TPrimaryHeaderContainer extends StatelessWidget {
-  const TPrimaryHeaderContainer({
+class MyPrimaryHeaderContainer extends StatelessWidget {
+  const MyPrimaryHeaderContainer({
     super.key,
     required this.child,
   });
@@ -13,7 +13,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TCurvedEdgeWidget(
+    return MyCurvedEdgeWidget(
       child: Container(
         width: double.infinity,
         color: MyColors.primary,
@@ -24,19 +24,20 @@ class TPrimaryHeaderContainer extends StatelessWidget {
             Positioned(
               top: -150,
               right: -250,
-              child: TCircularContainer(
-                backgroundColor: MyColors.textWhite.withOpacity(0.1),
+              child: MyCircularContainer(
+                backgroundColor:
+                    MyColors.textWhite.withAlpha((255 * 0.1).round()),
               ),
             ),
             Positioned(
               top: 100,
               right: -300,
-              child: TCircularContainer(
-                backgroundColor: MyColors.textWhite.withOpacity(0.1),
-              ),
+              child: MyCircularContainer(
+                  backgroundColor:
+                      MyColors.textWhite.withAlpha((255 * 0.1).round())),
             ),
 
-            // ✅ Nội dung chính, không ép height
+            // Nội dung chính, không ép height
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: child,
