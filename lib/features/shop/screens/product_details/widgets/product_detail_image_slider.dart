@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
 import '../../../../../common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import '../../../../../common/widgets/icons/my_circular_icon.dart';
 import '../../../../../common/widgets/images/my_rounded_image.dart';
+import '../../../../../common/widgets/products/favorite_icon/favorite_icon.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
@@ -22,12 +20,21 @@ class MyProductImageSlider extends StatefulWidget {
 }
 
 class _MyProductImageSliderState extends State<MyProductImageSlider> {
-  final controller = Get.put(ImagesController());
+  late final ImagesController controller;
 
   @override
   void initState() {
     super.initState();
+
+    controller = Get.put(ImagesController(), tag: widget.product.id);
+
     controller.loadImages(widget.product);
+  }
+
+  @override
+  void dispose() {
+    Get.delete<ImagesController>(tag: widget.product.id);
+    super.dispose();
   }
 
   @override
@@ -39,62 +46,100 @@ class _MyProductImageSliderState extends State<MyProductImageSlider> {
         color: dark ? MyColors.darkerGrey : MyColors.light,
         child: Stack(
           children: [
-            // Main Image
+            /// Main Image
             SizedBox(
               height: 400,
               child: Padding(
                 padding: const EdgeInsets.all(MySizes.productImageRadius * 2),
                 child: Center(
-                  child: Obx(
-                    () => CachedNetworkImage(
-                      imageUrl: controller.selectedImage.value,
-                      progressIndicatorBuilder: (_, __, downloadProgess) =>
-                          CircularProgressIndicator(
-                        value: downloadProgess.progress,
-                        color: MyColors.primary,
+                  child: Obx(() {
+                    final imageUrl =
+                        Get.find<ImagesController>(tag: widget.product.id)
+                            .selectedImage
+                            .value;
+
+                    return GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              panEnabled: true,
+                              minScale: 1.0,
+                              maxScale: 4.0,
+                              child: CachedNetworkImage(
+                                imageUrl: imageUrl,
+                                progressIndicatorBuilder:
+                                    (_, __, downloadProgress) =>
+                                        CircularProgressIndicator(
+                                  value: downloadProgress.progress,
+                                  color: MyColors.primary,
+                                ),
+                                errorWidget: (_, url, error) =>
+                                    const Icon(Icons.broken_image),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        progressIndicatorBuilder: (_, __, downloadProgress) =>
+                            CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                          color: MyColors.primary,
+                        ),
+                        errorWidget: (_, url, error) =>
+                            const Icon(Icons.broken_image),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ),
             ),
 
-            // Thumbnail Slider
+            /// Thumbnail Slider
             Positioned(
               right: 0,
               bottom: 30,
               left: MySizes.defaultSpace,
               child: SizedBox(
                 height: 80,
-                child: Obx(() => ListView.separated(
-                      itemCount: controller.productImages.length,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(width: MySizes.spaceBtwItems),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) {
-                        final img = controller.productImages[index];
-                        return GestureDetector(
-                          onTap: () => controller.selectImage(img),
-                          child: MyRoundedImage(
-                            width: 80,
-                            imageUrl: img,
-                            isNetworkImage: true,
-                            border: Border.all(color: MyColors.primary),
-                            padding: const EdgeInsets.all(MySizes.sm),
-                            backgroundColor:
-                                dark ? MyColors.dark : MyColors.white,
-                          ),
-                        );
-                      },
-                    )),
+                child: Obx(() {
+                  final images =
+                      Get.find<ImagesController>(tag: widget.product.id)
+                          .productImages;
+
+                  return ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: images.length,
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(width: MySizes.spaceBtwItems),
+                    itemBuilder: (_, index) {
+                      final img = images[index];
+                      return GestureDetector(
+                        onTap: () => controller.selectImage(img),
+                        child: MyRoundedImage(
+                          width: 80,
+                          imageUrl: img,
+                          isNetworkImage: true,
+                          border: Border.all(color: MyColors.primary),
+                          padding: const EdgeInsets.all(MySizes.sm),
+                          backgroundColor:
+                              dark ? MyColors.dark : MyColors.white,
+                        ),
+                      );
+                    },
+                  );
+                }),
               ),
             ),
 
-            // AppBar
+            /// AppBar
             MyAppBar(
               showBackArrow: true,
-              actions: const [
-                MyCircularIcon(icon: Iconsax.heart, color: Colors.red)
+              actions: [
+                MyFavoriteIcon(productId: widget.product.id),
               ],
             ),
           ],

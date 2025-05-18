@@ -86,36 +86,6 @@ class SettingsScreen extends StatelessWidget {
                       title: 'Account Privacy',
                       subTitle: 'Manage data usage and connected accounts'),
 
-                  /// -- App Settings
-                  SizedBox(height: MySizes.spaceBtwSections),
-                  MySectionHeading(
-                      title: 'App Settings', showActionButton: false),
-                  SizedBox(height: MySizes.spaceBtwItems),
-                  MySettingsMenuTile(
-                      icon: Iconsax.document_upload,
-                      title: 'Load Data',
-                      subTitle: 'Upload Data to your Cloud Firebase'),
-                  MySettingsMenuTile(
-                    icon: Iconsax.location,
-                    title: 'Geolocation',
-                    subTitle: 'Set recommendation based on location',
-                    trailing: Switch(value: true, onChanged: (value) {}),
-                  ),
-
-                  MySettingsMenuTile(
-                    icon: Iconsax.security_user,
-                    title: 'Safe Mode',
-                    subTitle: 'Search result is safe for all ages',
-                    trailing: Switch(value: false, onChanged: (value) {}),
-                  ),
-
-                  MySettingsMenuTile(
-                    icon: Iconsax.image,
-                    title: 'HD Image Quality',
-                    subTitle: 'Set image quality to be seen',
-                    trailing: Switch(value: false, onChanged: (value) {}),
-                  ),
-
                   //logout
                   const SizedBox(height: MySizes.spaceBtwSections),
                   SizedBox(

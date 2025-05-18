@@ -1,14 +1,3 @@
-import 'package:ecommerce/common/styles/rounded_container.dart';
-import 'package:ecommerce/common/styles/shadows.dart';
-import 'package:ecommerce/common/widgets/icons/my_circular_icon.dart';
-import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
-import 'package:ecommerce/common/widgets/texts/my_brand_title_text_verified_icon.dart';
-import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
-import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
-import 'package:ecommerce/features/shop/screens/product_details/product_detail.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -16,6 +5,17 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../features/shop/controllers/brand_controller.dart';
 import '../../../../features/shop/controllers/product/product_controller.dart';
 import '../../../../features/shop/models/product_model.dart';
+import '../../../../features/shop/screens/product_details/product_detail.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/helpers/helper_functions.dart';
+import '../../../styles/rounded_container.dart';
+import '../../../styles/shadows.dart';
+import '../../images/my_rounded_image.dart';
+import '../../texts/my_brand_title_text_verified_icon.dart';
+import '../../texts/product_price_text.dart';
+import '../../texts/product_title_text.dart';
+import '../favorite_icon/favorite_icon.dart';
 
 class MyProductCardVertical extends StatelessWidget {
   const MyProductCardVertical({super.key, required this.product});
@@ -45,49 +45,52 @@ class MyProductCardVertical extends StatelessWidget {
             // Ảnh với icon trái tim + sale tag
             MyRoundedContainer(
               height: 185,
-              backgroundColor: dark ? MyColors.dark : MyColors.light,
+              backgroundColor: Colors.transparent,
               child: Stack(
                 children: [
                   // Ảnh không bị méo
                   Align(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topCenter,
                     child: MyRoundedImage(
                       imageUrl: product.imagesUrl.first,
+                      backgroundColor: dark ? MyColors.light : MyColors.grey,
                       applyImageRadius: true,
                       isNetworkImage: true,
                     ),
                   ),
 
-                  // Sale tag ở góc trên trái
+                  // Phần trăm giảm giá (nếu có)
+                  Obx(() {
+                    final discountPercent = ProductController.instance
+                        .getLowestPriceWithPromotionPercent(product.id);
+                    if (discountPercent <= 0) return const SizedBox.shrink();
+                    return Positioned(
+                      top: 0,
+                      left: 0,
+                      child: MyRoundedContainer(
+                        radius: MySizes.sm,
+                        backgroundColor:
+                            MyColors.secondary.withAlpha((255 * 0.8).round()),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: MySizes.sm,
+                          vertical: MySizes.xs,
+                        ),
+                        child: Text(
+                          '-$discountPercent%',
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    color: MyColors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    );
+                  }),
+                  // Favourite Icon
                   Positioned(
                     top: 0,
-                    left: 0,
-                    child: MyRoundedContainer(
-                      radius: MySizes.sm,
-                      backgroundColor:
-                          MyColors.secondary.withAlpha((255 * 0.8).round()),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: MySizes.sm,
-                        vertical: MySizes.xs,
-                      ),
-                      child: Text(
-                        '25%',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: MyColors.black),
-                      ),
-                    ),
-                  ),
-
-                  // Favourite Icon
-                  const Positioned(
-                    top: 0,
                     right: 0,
-                    child: MyCircularIcon(
-                      icon: Iconsax.heart,
-                      color: Colors.red,
-                    ),
+                    child: MyFavoriteIcon(productId: product.id),
                   ),
                 ],
               ),
@@ -123,8 +126,8 @@ class MyProductCardVertical extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: MySizes.sm),
                   child: Obx(() {
-                    final sku = ProductController.instance.skuCache[product.id];
-                    final price = sku?.price ?? 0;
+                    final price = ProductController.instance
+                        .getLowestPriceWithPromotion(product.id);
                     return MyProductPriceText(price: price);
                   }),
                 ),

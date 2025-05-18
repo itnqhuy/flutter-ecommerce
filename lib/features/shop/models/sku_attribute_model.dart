@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SkuAttributeModel {
-  final String attributeId;
+  final DocumentReference skuId;
+  final DocumentReference attributeId;
   final String value;
   final Timestamp createdAt;
   final Timestamp updatedAt;
 
   SkuAttributeModel({
+    required this.skuId,
     required this.attributeId,
     required this.value,
     required this.createdAt,
@@ -14,17 +16,30 @@ class SkuAttributeModel {
   });
 
   static SkuAttributeModel empty() => SkuAttributeModel(
-        attributeId: "",
-        value: "",
+        skuId: FirebaseFirestore.instance.doc('SKUs/empty'),
+        attributeId: FirebaseFirestore.instance.doc('ProductAttributes/empty'),
+        value: '',
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       );
 
-  factory SkuAttributeModel.fromJson(Map<String, dynamic> doc) {
-    final data = doc;
+  factory SkuAttributeModel.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty) return SkuAttributeModel.empty();
+
     return SkuAttributeModel(
-      attributeId: data['attributeId'] ?? '',
+      skuId: data['skuId'] as DocumentReference,
+      attributeId: data['attributeId'] as DocumentReference,
+      value: data['value'] ?? '',
+      createdAt: data['createdAt'] ?? Timestamp.now(),
+      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+    );
+  }
+
+  factory SkuAttributeModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>? ?? {};
+    return SkuAttributeModel(
+      skuId: data['skuId'] as DocumentReference,
+      attributeId: data['attributeId'] as DocumentReference,
       value: data['value'] ?? '',
       createdAt: data['createdAt'] ?? Timestamp.now(),
       updatedAt: data['updatedAt'] ?? Timestamp.now(),
@@ -33,6 +48,7 @@ class SkuAttributeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'skuId': skuId,
       'attributeId': attributeId,
       'value': value,
       'createdAt': createdAt,

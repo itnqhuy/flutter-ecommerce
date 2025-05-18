@@ -1,12 +1,12 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/products/cart/cart_menu_icon.dart';
-import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common/widgets/animations/shimmer_effect.dart';
+import '../../../../../common/widgets/appbar/appbar.dart';
+import '../../../../../common/widgets/products/cart/cart_menu_icon.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/constants/text_strings.dart';
+import '../../../../personalization/controllers/user_controller.dart';
 
 class MyHomeAppBar extends StatelessWidget {
   const MyHomeAppBar({
@@ -41,10 +41,7 @@ class MyHomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        MyCartCountericon(
-          onPressed: () {},
-          iconColor: MyColors.white,
-        ),
+        MyCartCounterIcon(iconColor: MyColors.white),
       ],
     );
   }

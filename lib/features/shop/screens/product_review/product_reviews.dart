@@ -1,17 +1,21 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/products/ratings/rating_indicator.dart';
-import 'package:ecommerce/features/shop/screens/product_review/widgets/rating_progress_indicator.dart';
-import 'package:ecommerce/features/shop/screens/product_review/widgets/user_review_card.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/products/ratings/rating_indicator.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../models/product_model.dart';
+import 'widgets/rating_progress_indicator.dart';
+import 'widgets/user_review_card.dart';
+
 class ProductReviewsScreen extends StatelessWidget {
-  const ProductReviewsScreen({super.key});
+  const ProductReviewsScreen({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: Text("Reviews & Ratings"), showBackArrow: true),
+      appBar:
+          MyAppBar(title: Text("Nhận xét và đánh giá"), showBackArrow: true),
 
       // -- Body
       body: SingleChildScrollView(
@@ -25,7 +29,7 @@ class ProductReviewsScreen extends StatelessWidget {
               SizedBox(height: MySizes.spaceBtwItems),
 
               // Overall Product Ratings
-              const MyOverallProductRating(),
+              MyOverallProductRating(product: product),
               MyRatingBarIndicator(rating: 3.5),
               Text("12,611", style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: MySizes.spaceBtwItems),

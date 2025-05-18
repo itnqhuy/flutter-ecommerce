@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SkuModel {
   final String id;
   final String productId;
-  final String name;
-  final String imagesUrl;
+  final String code;
+  final String imageUrl;
   final int cost;
   final int price;
   final int stock;
@@ -17,8 +17,8 @@ class SkuModel {
   SkuModel({
     required this.id,
     required this.productId,
-    required this.name,
-    required this.imagesUrl,
+    required this.code,
+    required this.imageUrl,
     required this.cost,
     required this.price,
     required this.stock,
@@ -32,8 +32,8 @@ class SkuModel {
   static SkuModel empty() => SkuModel(
         id: '',
         productId: '',
-        name: '',
-        imagesUrl: '',
+        code: '',
+        imageUrl: '',
         cost: 0,
         price: 0,
         stock: 0,
@@ -50,8 +50,27 @@ class SkuModel {
     return SkuModel(
       id: data['id'] ?? '',
       productId: data['productId'] ?? '',
-      name: data['name'] ?? '',
-      imagesUrl: data['imagesUrl'] ?? '',
+      code: data['code'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
+      cost: data['cost'] ?? 0,
+      price: data['price'] ?? 0,
+      stock: data['stock'] ?? 0,
+      minStock: data['minStock'] ?? 0,
+      maxStock: data['maxStock'] ?? 0,
+      status: data['status'] ?? true,
+      createdAt: data['createdAt'] ?? Timestamp.now(),
+      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+    );
+  }
+
+  factory SkuModel.fromDocumentSnapshot(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+
+    return SkuModel(
+      id: doc.id,
+      productId: data['productId'] ?? '',
+      code: data['code'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
       cost: data['cost'] ?? 0,
       price: data['price'] ?? 0,
       stock: data['stock'] ?? 0,
@@ -67,8 +86,8 @@ class SkuModel {
     return {
       'id': id,
       'productId': productId,
-      'name': name,
-      'imagesUrl': imagesUrl,
+      'code': code,
+      'imageUrl': imageUrl,
       'cost': cost,
       'price': price,
       'stock': stock,
@@ -83,8 +102,8 @@ class SkuModel {
   SkuModel copyWith({
     String? id,
     String? productId,
-    String? name,
-    String? imagesUrl,
+    String? code,
+    String? imageUrl,
     int? cost,
     int? price,
     int? stock,
@@ -97,8 +116,8 @@ class SkuModel {
     return SkuModel(
       id: id ?? this.id,
       productId: productId ?? this.productId,
-      name: name ?? this.name,
-      imagesUrl: imagesUrl ?? this.imagesUrl,
+      code: code ?? this.code,
+      imageUrl: imageUrl ?? this.imageUrl,
       cost: cost ?? this.cost,
       price: price ?? this.price,
       stock: stock ?? this.stock,

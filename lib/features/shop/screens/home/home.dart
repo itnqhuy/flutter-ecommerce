@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productController = Get.put(ProductController());
+    final controller = Get.put(ProductController());
+
     return LayoutBuilder(
       builder: (context, constraints) {
         double width = constraints.maxWidth;
@@ -62,39 +64,40 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Body section
                       Padding(
                         padding: const EdgeInsets.all(MySizes.defaultSpace),
                         child: Column(
                           children: [
-                            //promo
                             const MyPromoSlider(),
                             SizedBox(height: MySizes.spaceBtwSections),
-
                             MySectionHeading(
                               title: 'Popular product',
-                              onPressed: () =>
-                                  Get.to(() => const AllProducts()),
+                              onPressed: () => Get.to(() => AllProducts(
+                                    title: 'Popular product',
+                                    query: FirebaseFirestore.instance
+                                        .collection('Products')
+                                        .where('isFeatured', isEqualTo: true)
+                                        .limit(6),
+                                    futureMethod:
+                                        controller.fetchAllFeaturedProducts(),
+                                  )),
                             ),
                             SizedBox(height: MySizes.spaceBtwSections),
-
-                            //Products
                             Obx(() {
-                              if (productController.isLoading.value) {
+                              if (controller.isLoading.value) {
                                 return const MyVerticalProductShimmer();
                               }
-                              if (productController.featuredProducts.isEmpty) {
-                                return Center(
+                              if (controller.featuredProducts.isEmpty) {
+                                return const Center(
                                   child: Text("Không tìm thấy dữ liệu"),
                                 );
                               }
                               return MyGridLayout(
-                                itemCount:
-                                    productController.featuredProducts.length,
+                                itemCount: controller.featuredProducts.length,
                                 itemBuilder: (_, index) =>
                                     MyProductCardVertical(
-                                        product: productController
-                                            .featuredProducts[index]),
+                                        product:
+                                            controller.featuredProducts[index]),
                               );
                             }),
                           ],

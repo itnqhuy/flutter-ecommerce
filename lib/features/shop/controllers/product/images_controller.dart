@@ -9,61 +9,94 @@ import '../../models/product_model.dart';
 class ImagesController extends GetxController {
   static ImagesController get instance => Get.find();
 
-  RxString selectedImage = ''.obs;
-  RxList<String> productImages = <String>[].obs;
+  final RxString selectedImage = ''.obs;
+  final RxList<String> productImages = <String>[].obs;
 
+  /// Load ảnh từ sản phẩm và các SKU
   Future<void> loadImages(ProductModel product) async {
     final images = <String>[];
 
-    images.addAll(product.imagesUrl);
+    images.addAll(product.imagesUrl.where((url) => url.trim().isNotEmpty));
 
     final skus = await SkuRepository.getAllSkusByProductId(product.id);
     for (var sku in skus) {
-      if (sku.imagesUrl.isNotEmpty) {
-        images.add(sku.imagesUrl);
+      if (sku.imageUrl.trim().isNotEmpty) {
+        images.add(sku.imageUrl);
       }
     }
 
-    if (images.isNotEmpty) selectedImage.value = images.first;
     productImages.assignAll(images);
+    selectedImage.value = images.isNotEmpty ? images.first : '';
   }
 
   void selectImage(String image) => selectedImage.value = image;
 
-  void showEnlargedImage(String image) {
+  void showEnlargedImage(String imageUrl) {
     Get.to(
       () => Dialog.fullscreen(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
           children: [
-            // Ảnh phóng to
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: MySizes.defaultSpace * 2,
                 horizontal: MySizes.defaultSpace,
               ),
-              child: CachedNetworkImage(imageUrl: image),
+              child: _buildNetworkImage(imageUrl, enlarged: true),
             ),
-
             const SizedBox(height: MySizes.spaceBtwSections),
-
-            // Nút đóng
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: 150,
-                child: OutlinedButton(
-                  onPressed: () => Get.back(),
-                  child: const Text('Đóng'),
-                ),
+            SizedBox(
+              width: 150,
+              child: OutlinedButton(
+                onPressed: () => Get.back(),
+                child: const Text('Đóng'),
               ),
             ),
           ],
         ),
       ),
       fullscreenDialog: true,
+    );
+  }
+
+  Widget buildImage(String url,
+      {double? width, double? height, BoxFit fit = BoxFit.cover}) {
+    return _buildNetworkImage(url, width: width, height: height, fit: fit);
+  }
+
+  Widget _buildNetworkImage(
+    String url, {
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.cover,
+    bool enlarged = false,
+  }) {
+    if (url.isEmpty) {
+      Get.snackbar('Lỗi ảnh', 'Không có đường dẫn ảnh.',
+          snackPosition: SnackPosition.BOTTOM);
+      return const Icon(Icons.broken_image, size: 40);
+    }
+
+    return CachedNetworkImage(
+      imageUrl: url,
+      width: width,
+      height: height,
+      fit: fit,
+      progressIndicatorBuilder: (_, __, progress) =>
+          CircularProgressIndicator(value: progress.progress),
+      errorWidget: (_, failedUrl, error) {
+        Get.snackbar(
+          'Lỗi khi tải ảnh',
+          'Không thể tải ảnh: $failedUrl',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 3),
+        );
+        return Icon(
+          Icons.broken_image,
+          size: enlarged ? 80 : 40,
+          color: Colors.grey,
+        );
+      },
     );
   }
 }

@@ -77,8 +77,8 @@ class ProductModel {
 
   toJson() {
     return {
-      'categoryId': categoryId,
-      'brandId': brandId,
+      'idCategory': categoryId,
+      'idBrand': brandId,
       'name': name,
       'description': description,
       'isFeatured': isFeatured,

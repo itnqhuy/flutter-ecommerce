@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import '../../../data/repositories/categories/categories_repository.dart';
+import '../../../data/repositories/products/product_repository.dart';
 import '../../../utils/popups/loaders.dart';
 import '../models/category_model.dart';
+import '../models/product_model.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
@@ -45,5 +47,30 @@ class CategoryController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  /// Load selected category data
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      final subCategories =
+          await _categoryRepository.getSubCategories(categoryId);
+      return subCategories;
+    } catch (e) {
+      MyLoaders.errorSnackBar(
+        title: 'Oops!!',
+        message: e.toString(),
+      );
+      return [];
+    }
+  }
+
+  /// Get Category or Sub-Category Products
+  Future<List<ProductModel>> getCategoryProducts({
+    required String categoryId,
+    int limit = 4,
+  }) async {
+    final products = await ProductRepository.instance
+        .getProductsByCategory(categoryId, limit);
+    return products;
   }
 }

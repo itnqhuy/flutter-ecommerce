@@ -1,3 +1,4 @@
+import 'package:ecommerce/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,12 +32,13 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Function to determine which screen to show
-  screenRedirect() {
+  screenRedirect() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final user = _auth.currentUser;
 
       if (user != null) {
         if (user.emailVerified) {
+          await MyLocalStorage.init(user.uid);
           Get.offAll(() => NavigationMenu());
         } else {
           Get.offAll(() => VerifyEmailScreen(

@@ -32,6 +32,7 @@ class MyImages {
 
   static const String loadingAnimation =
       "assets/amimations/loadingAnimation.json";
+  static const String loveAnimation = "assets/amimations/loveAnimation.json";
 
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";

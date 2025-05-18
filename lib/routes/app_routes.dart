@@ -8,6 +8,7 @@ import '../features/authentication/screens/signup/verify_email.dart';
 import '../features/personalization/screens/address/address.dart';
 import '../features/personalization/screens/profile/profile.dart';
 import '../features/personalization/screens/settings/settings.dart';
+import '../features/shop/models/product_model.dart';
 import '../features/shop/screens/cart/cart.dart';
 import '../features/shop/screens/checkout/checkout.dart';
 import '../features/shop/screens/home/home.dart';
@@ -27,7 +28,8 @@ class AppRoutes {
     // Product
     GetPage(
         name: MyRoutes.productReviews,
-        page: () => const ProductReviewsScreen()),
+        page: () =>
+            ProductReviewsScreen(product: Get.arguments as ProductModel)),
 
     // Order & Cart
     GetPage(name: MyRoutes.order, page: () => const OrderScreen()),
