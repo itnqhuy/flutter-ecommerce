@@ -15,6 +15,7 @@ class CategoryController extends GetxController {
 
   /// Repository
   final CategoryRepository _categoryRepository = Get.put(CategoryRepository());
+  final ProductRepository _productRepository = Get.put(ProductRepository());
 
   @override
   void onInit() {
@@ -34,7 +35,7 @@ class CategoryController extends GetxController {
       // Filter featured top-level categories
       final featured = categories
           .where(
-              (category) => category.isFeatured && category.parentCate.isEmpty)
+              (category) => category.isFeatured && category.parentCate == null)
           .take(6)
           .toList();
 
@@ -49,7 +50,7 @@ class CategoryController extends GetxController {
     }
   }
 
-  /// Load selected category data
+  /// Load subcategories by categoryId
   Future<List<CategoryModel>> getSubCategories(String categoryId) async {
     try {
       final subCategories =
@@ -64,13 +65,21 @@ class CategoryController extends GetxController {
     }
   }
 
-  /// Get Category or Sub-Category Products
+  /// Get products by categoryId
   Future<List<ProductModel>> getCategoryProducts({
     required String categoryId,
     int limit = 4,
   }) async {
-    final products = await ProductRepository.instance
-        .getProductsByCategory(categoryId, limit);
-    return products;
+    try {
+      final products =
+          await _productRepository.getProductsByCategory(categoryId, limit);
+      return products;
+    } catch (e) {
+      MyLoaders.errorSnackBar(
+        title: 'Lỗi!',
+        message: e.toString(),
+      );
+      return [];
+    }
   }
 }

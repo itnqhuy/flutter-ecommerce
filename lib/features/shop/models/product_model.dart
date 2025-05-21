@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
   final String id;
-  final String categoryId;
-  final String brandId;
+  final DocumentReference categoryId;
+  final DocumentReference brandId;
   final String name;
   final String description;
   final bool isFeatured;
@@ -27,8 +27,8 @@ class ProductModel {
 
   static ProductModel empty() => ProductModel(
         id: '',
-        categoryId: '',
-        brandId: '',
+        categoryId: FirebaseFirestore.instance.collection('Categories').doc(''),
+        brandId: FirebaseFirestore.instance.collection('Brands').doc(''),
         name: '',
         description: '',
         status: '',
@@ -40,12 +40,19 @@ class ProductModel {
 
   factory ProductModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> doc) {
-    if (doc.data() == null) return ProductModel.empty();
-    final data = doc.data()!;
+    final data = doc.data();
+    if (data == null) return ProductModel.empty();
+
     return ProductModel(
       id: doc.id,
-      categoryId: (data['idCategory'] as DocumentReference).id,
-      brandId: (data['idBrand'] as DocumentReference).id,
+      categoryId: data['idCategory'] is DocumentReference
+          ? data['idCategory'] as DocumentReference
+          : FirebaseFirestore.instance
+              .collection('Categories')
+              .doc('fakeCategory'),
+      brandId: data['idBrand'] is DocumentReference
+          ? data['idBrand'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Brands').doc('fakeCategory'),
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       isFeatured: data['isFeatured'] ?? false,
@@ -58,13 +65,18 @@ class ProductModel {
 
   factory ProductModel.fromQuerySnapshot(
       QueryDocumentSnapshot<Object?> document) {
-    final data = document.data() as Map<String, dynamic>;
-    if (data.isEmpty) return ProductModel.empty();
+    final data = document.data() as Map<String, dynamic>? ?? {};
 
     return ProductModel(
       id: document.id,
-      categoryId: (data['idCategory'] as DocumentReference).id,
-      brandId: (data['idBrand'] as DocumentReference).id,
+      categoryId: data['idCategory'] is DocumentReference
+          ? data['idCategory'] as DocumentReference
+          : FirebaseFirestore.instance
+              .collection('Categories')
+              .doc('fakeCategory'),
+      brandId: data['idBrand'] is DocumentReference
+          ? data['idBrand'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Brands').doc('fakeCategory'),
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       isFeatured: data['isFeatured'] ?? false,

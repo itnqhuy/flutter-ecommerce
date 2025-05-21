@@ -4,13 +4,6 @@ import '../../../features/shop/models/sku_attribute_model.dart';
 
 class SkuAttributeRepository {
   static final _db = FirebaseFirestore.instance;
-  static Future<QuerySnapshot<Map<String, dynamic>>> getAttributesBySkuId(
-      String skuId) async {
-    return await _db
-        .collection('SkuAttributes')
-        .where('SKUId', isEqualTo: _db.doc('SKUs/$skuId'))
-        .get();
-  }
 
   static Future<List<SkuAttributeModel>> getBySkus(List<String> skuIds) async {
     if (skuIds.isEmpty) return [];
@@ -25,7 +18,7 @@ class SkuAttributeRepository {
 
     for (final chunk in chunks) {
       final snapshot = await _db
-          .collection('SkuAttributes')
+          .collection('SKUAttributes')
           .where('SKUId',
               whereIn: chunk.map((id) => _db.doc('SKUs/$id')).toList())
           .get();

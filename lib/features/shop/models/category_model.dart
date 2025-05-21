@@ -4,7 +4,7 @@ class CategoryModel {
   String id;
   String name;
   String imageUrl;
-  String parentCate;
+  DocumentReference? parentCate; // Thay đổi thành DocumentReference
   bool isFeatured;
   Timestamp createdAt;
   Timestamp updatedAt;
@@ -13,7 +13,7 @@ class CategoryModel {
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.parentCate,
+    this.parentCate, // Có thể null nếu không có danh mục cha
     required this.isFeatured,
     required this.createdAt,
     required this.updatedAt,
@@ -24,7 +24,7 @@ class CategoryModel {
         id: '',
         name: '',
         imageUrl: '',
-        parentCate: '',
+        parentCate: null, // Đặt null
         isFeatured: false,
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
@@ -33,20 +33,23 @@ class CategoryModel {
   /// From Firestore
   factory CategoryModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> doc) {
-    if (doc.data() != null) {
-      final data = doc.data()!;
-      return CategoryModel(
-        id: doc.id,
-        name: data['name'] ?? '',
-        imageUrl: data['imageUrl'] ?? '',
-        parentCate: data['parentCate'] ?? '',
-        isFeatured: data['isFeatured'] ?? false,
-        createdAt: data['createdAt'] ?? Timestamp.now(),
-        updatedAt: data['updatedAt'] ?? Timestamp.now(),
-      );
-    } else {
+    final data = doc.data();
+    if (data == null) {
       return CategoryModel.empty();
     }
+
+    return CategoryModel(
+      id: doc.id,
+      name: data['name'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
+      parentCate: data.containsKey('parentCate') &&
+              data['parentCate'] is DocumentReference
+          ? data['parentCate'] as DocumentReference
+          : null,
+      isFeatured: data['isFeatured'] ?? false,
+      createdAt: data['createdAt'] ?? Timestamp.now(),
+      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+    );
   }
 
   /// To JSON for Firestore
@@ -54,7 +57,7 @@ class CategoryModel {
     return {
       'name': name,
       'imageUrl': imageUrl,
-      'parentCate': parentCate,
+      'parentCate': parentCate?.path, // Chuyển DocumentReference thành string
       'isFeatured': isFeatured,
       'createdAt': createdAt,
       'updatedAt': updatedAt,

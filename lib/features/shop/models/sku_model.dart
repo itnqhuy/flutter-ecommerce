@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SkuModel {
   final String id;
-  final String productId;
+  final DocumentReference productId;
   final String code;
   final String imageUrl;
   final int cost;
@@ -31,7 +31,9 @@ class SkuModel {
 
   static SkuModel empty() => SkuModel(
         id: '',
-        productId: '',
+        productId: FirebaseFirestore.instance
+            .collection('Products')
+            .doc(''), // Placeholder
         code: '',
         imageUrl: '',
         cost: 0,
@@ -49,7 +51,7 @@ class SkuModel {
 
     return SkuModel(
       id: data['id'] ?? '',
-      productId: data['productId'] ?? '',
+      productId: data['productId'] as DocumentReference,
       code: data['code'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       cost: data['cost'] ?? 0,
@@ -68,7 +70,7 @@ class SkuModel {
 
     return SkuModel(
       id: doc.id,
-      productId: data['productId'] ?? '',
+      productId: data['productId'] as DocumentReference,
       code: data['code'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       cost: data['cost'] ?? 0,
@@ -85,7 +87,7 @@ class SkuModel {
   toJson() {
     return {
       'id': id,
-      'productId': productId,
+      'productId': productId, // Giữ nguyên DocumentReference
       'code': code,
       'imageUrl': imageUrl,
       'cost': cost,
@@ -101,7 +103,7 @@ class SkuModel {
 
   SkuModel copyWith({
     String? id,
-    String? productId,
+    DocumentReference? productId,
     String? code,
     String? imageUrl,
     int? cost,
@@ -115,7 +117,8 @@ class SkuModel {
   }) {
     return SkuModel(
       id: id ?? this.id,
-      productId: productId ?? this.productId,
+      productId:
+          productId ?? this.productId, // Giữ nguyên kiểu DocumentReference
       code: code ?? this.code,
       imageUrl: imageUrl ?? this.imageUrl,
       cost: cost ?? this.cost,

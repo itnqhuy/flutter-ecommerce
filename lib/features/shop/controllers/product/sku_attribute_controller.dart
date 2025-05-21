@@ -71,8 +71,8 @@ class SkuAttributeController extends GetxController {
     required List<SkuAttributeModel> skuAttrs,
   }) {
     _allSkus.assignAll(skus);
-    _allProductAttrs.assignAll(attrs);
     _allSkuAttrs.assignAll(skuAttrs);
+    _allProductAttrs.assignAll(attrs);
 
     _skuAttrMap.clear();
 

@@ -13,6 +13,7 @@ class ProductRepository {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  // Lấy danh sách sản phẩm nổi bật
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -33,6 +34,7 @@ class ProductRepository {
     }
   }
 
+  // Lấy tất cả sản phẩm nổi bật
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -52,6 +54,7 @@ class ProductRepository {
     }
   }
 
+  // Lấy tất cả sản phẩm đã xuất bản
   Future<List<ProductModel>> getAllPublishedProducts() async {
     try {
       final snapshot = await _db
@@ -70,16 +73,17 @@ class ProductRepository {
     }
   }
 
+  // Lấy sản phẩm nổi bật theo category
   Future<List<ProductModel>> getFeatureProductsByCategory(
       String categoryId) async {
     try {
-      final cateRef = _db.doc('Categories/$categoryId');
+      final categoryRef = _db.collection('Categories').doc(categoryId);
 
       final snapshot = await _db
           .collection('Products')
           .where('status', isEqualTo: 'published')
           .where('isFeatured', isEqualTo: true)
-          .where('idCategory', isEqualTo: cateRef)
+          .where('idCategory', isEqualTo: categoryRef)
           .get();
 
       debugPrint(
@@ -94,15 +98,16 @@ class ProductRepository {
     }
   }
 
+  // Lấy sản phẩm theo category
   Future<List<ProductModel>> getProductsByCategory(
       String categoryId, int limit) async {
     try {
-      final cateRef = _db.doc('Categories/$categoryId');
+      final categoryRef = _db.collection('Categories').doc(categoryId);
 
       Query query = _db
           .collection('Products')
           .where('status', isEqualTo: 'published')
-          .where('idCategory', isEqualTo: cateRef);
+          .where('idCategory', isEqualTo: categoryRef);
 
       if (limit > 0) {
         query = query.limit(limit);
@@ -122,9 +127,10 @@ class ProductRepository {
     }
   }
 
+  // Lấy sản phẩm theo brand
   Future<List<ProductModel>> getProductsByBrand(String brandId) async {
     try {
-      final brandRef = _db.doc('Brands/$brandId');
+      final brandRef = _db.collection('Brands').doc(brandId);
 
       final snapshot = await _db
           .collection('Products')
@@ -144,6 +150,7 @@ class ProductRepository {
     }
   }
 
+  // Lấy thuộc tính sản phẩm
   Future<List<ProductAttributeModel>> getByProductId(String productId) async {
     try {
       final snapshot = await _db
@@ -163,6 +170,7 @@ class ProductRepository {
     }
   }
 
+  // Lấy sản phẩm theo Query tùy chỉnh
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
     try {
       final querySnapshot = await query.get();
@@ -178,6 +186,7 @@ class ProductRepository {
     }
   }
 
+  // Lấy danh sách sản phẩm yêu thích theo ID
   Future<List<ProductModel>> getFavoriteProducts(
       List<String> productIds) async {
     try {

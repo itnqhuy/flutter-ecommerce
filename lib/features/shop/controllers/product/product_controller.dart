@@ -125,8 +125,8 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       if (skuList.isNotEmpty &&
-          skuList.any((sku) => sku.productId == productId)) {
-        return skuList.where((sku) => sku.productId == productId).toList();
+          skuList.any((sku) => sku.productId.id == productId)) {
+        return skuList.where((sku) => sku.productId.id == productId).toList();
       }
 
       final skus = await SkuRepository.getAllSkusByProductId(productId);

@@ -14,7 +14,7 @@ class MyCloudHelperFunction {
       return const Center(child: Text('Đã có lỗi xảy ra'));
     }
 
-    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+    if (!snapshot.hasData) {
       return const Center(child: Text('Không tìm thấy dữ liệu'));
     }
     return null;
