@@ -11,6 +11,7 @@ class CategoryController extends GetxController {
   /// Observables
   final isLoading = false.obs;
   final RxList<CategoryModel> allCategories = <CategoryModel>[].obs;
+  final RxList<ProductModel> categoryProducts = <ProductModel>[].obs;
   final RxList<CategoryModel> featuredCategories = <CategoryModel>[].obs;
 
   /// Repository
@@ -21,6 +22,16 @@ class CategoryController extends GetxController {
   void onInit() {
     fetchCategories();
     super.onInit();
+  }
+
+  Future<void> fetchCategoryProducts(String categoryId, {int limit = 6}) async {
+    try {
+      final products =
+          await _productRepository.getProductsByCategory(categoryId, limit);
+      categoryProducts.assignAll(products); // Lưu vào danh sách observable
+    } catch (e) {
+      MyLoaders.errorSnackBar(title: "Lỗi!", message: e.toString());
+    }
   }
 
   /// Fetch all categories and filter featured ones

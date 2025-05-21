@@ -12,6 +12,7 @@ class MyRatingAndShare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
+    controller.loadProductRatings(product.id);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

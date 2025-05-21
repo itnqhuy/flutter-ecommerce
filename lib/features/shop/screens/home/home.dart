@@ -71,13 +71,11 @@ class HomeScreen extends StatelessWidget {
                             const MyPromoSlider(),
                             SizedBox(height: MySizes.spaceBtwSections),
                             MySectionHeading(
-                              title: 'Popular product',
+                              title: 'Sản phẩm nổi bật',
                               onPressed: () => Get.to(() => AllProducts(
-                                    title: 'Popular product',
+                                    title: 'Tất cả sản phẩm',
                                     query: FirebaseFirestore.instance
-                                        .collection('Products')
-                                        .where('isFeatured', isEqualTo: true)
-                                        .limit(6),
+                                        .collection('Products'),
                                     futureMethod:
                                         controller.fetchAllFeaturedProducts(),
                                   )),

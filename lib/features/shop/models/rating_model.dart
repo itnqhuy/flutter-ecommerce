@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RatingModel {
   final String id;
-  final DocumentReference skuId; // Chuyển thành DocumentReference
-  final DocumentReference userId; // Chuyển thành DocumentReference
+  final DocumentReference skuId;
+  final DocumentReference userId;
   final int star;
   final DateTime createdAt;
   final DateTime updatedAt;

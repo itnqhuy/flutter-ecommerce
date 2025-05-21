@@ -3,6 +3,7 @@ import 'package:ecommerce/utils/local_storage/storage_utility.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:ecommerce/data/repositories/SKUs/sku_repository.dart';
 import 'package:ecommerce/features/shop/models/sku_model.dart';
+import '../../../data/repositories/products/product_repository.dart';
 import '../models/cart_item_model.dart';
 import 'product/sku_attribute_controller.dart';
 
@@ -23,7 +24,7 @@ class CartController extends GetxController {
   /// Add item to cart
   Future<void> addToCart(SkuModel sku) async {
     if (productQuantityInCart.value < 1) {
-      MyLoaders.warningSnackBar(title: 'Chọn số lượng');
+      MyLoaders.warningSnackBar(title: 'Vui lòng chọn số lượng');
       return;
     }
 
@@ -67,10 +68,13 @@ class CartController extends GetxController {
     // imageUrl lấy thẳng từ sku
     String? imageUrl = sku.imageUrl;
 
+    String? productName =
+        await ProductRepository.getProductName(sku.productId.id);
+
     return CartItemModel(
       skuId: sku.id,
       quantity: quantity,
-      title: sku.code,
+      title: productName ?? 'Không rõ tên sản phẩm',
       price: skuAttrController.finalPrice.value.toDouble(),
       image: imageUrl,
       brandName: brandName,

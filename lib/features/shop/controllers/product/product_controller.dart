@@ -49,7 +49,6 @@ class ProductController extends GetxController {
       for (var p in products) {
         await Future.wait([
           loadDefaultSkuByProductId(p.id),
-          loadProductRatings(p.id),
           loadPriceRange(p.id),
           _loadLowestPriceSku(p.id),
         ]);
@@ -65,6 +64,16 @@ class ProductController extends GetxController {
     try {
       final products = await _productRepository.getFeaturedProducts();
       featuredProducts.assignAll(products);
+      return products;
+    } catch (e) {
+      MyLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());
+      return [];
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllProductsForHome() async {
+    try {
+      final products = await _productRepository.getAllPublishedProducts();
       return products;
     } catch (e) {
       MyLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());

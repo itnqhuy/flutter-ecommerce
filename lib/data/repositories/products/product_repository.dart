@@ -54,6 +54,23 @@ class ProductRepository {
     }
   }
 
+  // ProductRepository.dart
+  static Future<String?> getProductName(String productId) async {
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection("Products")
+          .doc(productId)
+          .get();
+
+      if (snapshot.exists) {
+        return snapshot.data()?['name'] ?? '';
+      }
+    } catch (e) {
+      print("Error getting product name: $e");
+    }
+    return null;
+  }
+
   // Lấy tất cả sản phẩm đã xuất bản
   Future<List<ProductModel>> getAllPublishedProducts() async {
     try {

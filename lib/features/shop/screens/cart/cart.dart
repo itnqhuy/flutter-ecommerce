@@ -31,11 +31,13 @@ class CartScreen extends StatelessWidget {
         padding: const EdgeInsets.all(MySizes.defaultSpace),
         child: Obx(() {
           final total = cartController.totalCartPrice.value;
-          return ElevatedButton(
-            onPressed:
-                total > 0 ? () => Get.to(() => const CheckoutScreen()) : null,
-            child: Text('Thanh toán ${MyFormatter.formatDecimalOnly(total)}'),
-          );
+          return total == 0
+              ? const SizedBox.shrink()
+              : ElevatedButton(
+                  onPressed: () => Get.to(() => const CheckoutScreen()),
+                  child:
+                      Text('Thanh toán ${MyFormatter.formatCurrency(total)}'),
+                );
         }),
       ),
     );

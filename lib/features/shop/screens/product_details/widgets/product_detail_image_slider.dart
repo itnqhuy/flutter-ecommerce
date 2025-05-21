@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
 import '../../../../../common/widgets/images/my_rounded_image.dart';
+import '../../../../../common/widgets/products/cart/cart_menu_icon.dart';
 import '../../../../../common/widgets/products/favorite_icon/favorite_icon.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -140,6 +141,8 @@ class _MyProductImageSliderState extends State<MyProductImageSlider> {
               showBackArrow: true,
               actions: [
                 MyFavoriteIcon(productId: widget.product.id),
+                MyCartCounterIcon(
+                    iconColor: dark ? MyColors.white : MyColors.black),
               ],
             ),
           ],

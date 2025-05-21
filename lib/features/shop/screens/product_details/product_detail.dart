@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/shop/controllers/product/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -23,6 +24,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductController.instance.loadProductRatings(product.id);
     final dark = MyHelperFunctions.isDarkMode(context);
     final dividerColor = dark ? Colors.grey.shade700 : Colors.grey.shade300;
     final iconColor = dark ? MyColors.white : MyColors.black;

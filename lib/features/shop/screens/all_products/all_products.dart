@@ -21,7 +21,7 @@ class AllProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(AllProductController());
     return Scaffold(
-      appBar: const MyAppBar(title: Text('All Products'), showBackArrow: true),
+      appBar: MyAppBar(title: Text(title), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(MySizes.defaultSpace),
