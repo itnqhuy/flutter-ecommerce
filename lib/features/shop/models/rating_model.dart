@@ -5,6 +5,7 @@ class RatingModel {
   final DocumentReference skuId;
   final DocumentReference userId;
   final int star;
+  final String description;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -13,6 +14,7 @@ class RatingModel {
     required this.skuId,
     required this.userId,
     required this.star,
+    required this.description,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -25,6 +27,7 @@ class RatingModel {
       skuId: data['skuId'] as DocumentReference,
       userId: data['userId'] as DocumentReference,
       star: data['star'] ?? 0,
+      description: data['description'] ?? '',
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
@@ -35,6 +38,7 @@ class RatingModel {
       'skuId': skuId,
       'userId': userId,
       'star': star,
+      'description': description,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
     };

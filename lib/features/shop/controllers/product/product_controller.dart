@@ -7,6 +7,7 @@ import '../../../../data/repositories/products/product_repository.dart';
 import '../../../../data/repositories/promotions/promotion_repository.dart';
 import '../../../../data/repositories/ratings/rating_repository.dart';
 import '../../models/product_model.dart';
+import '../../models/rating_model.dart';
 import '../../models/sku_model.dart';
 
 class ProductController extends GetxController {
@@ -340,5 +341,9 @@ class ProductController extends GetxController {
     });
     sortableProducts.assignAll(sorted);
     sortableProducts.refresh();
+  }
+
+  Future<List<RatingModel>> getRatingsByProduct(String productId) async {
+    return await ProductRepository.instance.getRatingsByProduct(productId);
   }
 }

@@ -224,4 +224,14 @@ class UserController extends GetxController {
       user.refresh();
     }
   }
+
+  /// Lấy username từ userId
+  Future<String> getUsernameById(String userId) async {
+    try {
+      final userData = await userRepository.fetchUserById(userId);
+      return userData.fullNameWithSpaces;
+    } catch (e) {
+      return 'Người dùng ẩn danh';
+    }
+  }
 }

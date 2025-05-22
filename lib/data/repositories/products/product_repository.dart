@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../../features/shop/models/product_attribute_model.dart';
 import '../../../features/shop/models/product_model.dart';
+import '../../../features/shop/models/rating_model.dart';
+import '../../../features/shop/models/sku_model.dart';
 import '../../../utils/exceptions/my_firebase_exception.dart';
 
 class ProductRepository {
@@ -223,6 +225,85 @@ class ProductRepository {
       throw MyFirebaseAuthException(e.code, e.message ?? 'Lỗi Firebase');
     } on Exception catch (e) {
       throw Exception('Đã xảy ra lỗi khi tải danh mục: $e');
+    }
+  }
+
+  Future<RatingModel?> getRatingById(String ratingId) async {
+    try {
+      DocumentSnapshot doc =
+          await _db.collection('Ratings').doc(ratingId).get();
+
+      if (doc.exists) {
+        return RatingModel.fromFirestore(doc);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Error getting rating: $e");
+      return null;
+    }
+  }
+
+  Future<List<RatingModel>> getRatingsByProduct(String productId) async {
+    try {
+      final productRef = _db.collection('Products').doc(productId);
+
+      // Lấy danh sách SKU của sản phẩm
+      QuerySnapshot skuQuery = await _db
+          .collection('SKUs')
+          .where('productId', isEqualTo: productRef)
+          .get();
+
+      // Chuyển đổi danh sách SKU thành danh sách DocumentReference
+      List<DocumentReference> skuRefs =
+          skuQuery.docs.map((doc) => doc.reference).toList();
+
+      if (skuRefs.isEmpty) {
+        return []; // Không có SKU thì không có đánh giá
+      }
+
+      // Nếu danh sách quá dài (Firestore giới hạn whereIn <= 10), chia nhỏ:
+      List<RatingModel> allRatings = [];
+
+      for (int i = 0; i < skuRefs.length; i += 10) {
+        final subList = skuRefs.sublist(
+            i, i + 10 > skuRefs.length ? skuRefs.length : i + 10);
+
+        QuerySnapshot ratingQuery = await _db
+            .collection('Ratings')
+            .where('skuId', whereIn: subList)
+            .get();
+
+        final ratings = ratingQuery.docs
+            .map((doc) => RatingModel.fromFirestore(doc))
+            .toList();
+        allRatings.addAll(ratings);
+      }
+
+      return allRatings;
+    } catch (e) {
+      print("Lỗi khi lấy đánh giá: $e");
+      throw Exception('Không thể lấy đánh giá sản phẩm');
+    }
+  }
+
+  Future<List<SkuModel>> fetchSKUsByProduct(String productId) async {
+    try {
+      // Tạo DocumentReference từ productId
+      final productRef = _db.collection('Products').doc(productId);
+
+      // Truy vấn danh sách SKU dựa trên productRef
+      QuerySnapshot skuQuery = await _db
+          .collection('SKUs')
+          .where('productId', isEqualTo: productRef) // Dùng DocumentReference
+          .get();
+
+      return skuQuery.docs
+          .map((doc) => SkuModel.fromDocumentSnapshot(doc))
+          .toList();
+    } catch (e) {
+      print("Error fetching SKUs: $e");
+      return [];
     }
   }
 }
