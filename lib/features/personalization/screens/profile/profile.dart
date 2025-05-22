@@ -98,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                   value: controller.user.value.email,
                   onPressed: () {}),
               MyProfileMenu(
-                  title: ' Số điện thoại',
+                  title: 'Số điện thoại',
                   value: controller.user.value.phoneNumber ?? "",
                   onPressed: () {}),
               MyProfileMenu(title: 'Giới tính', value: 'Nam', onPressed: () {}),

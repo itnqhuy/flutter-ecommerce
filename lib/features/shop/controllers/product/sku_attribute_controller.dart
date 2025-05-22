@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../../data/repositories/SKUs/sku_repository.dart';
-import '../../../../data/repositories/product_attribute/product_attribute_repository.dart';
+import '../../../../data/repositories/product_attributes/product_attribute_repository.dart';
 import '../../../../data/repositories/promotions/promotion_repository.dart';
 import '../../../../data/repositories/sku_attributes/sku_attribute_repository.dart';
 import '../../models/product_attribute_model.dart';

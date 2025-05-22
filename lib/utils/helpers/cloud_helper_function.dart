@@ -7,7 +7,7 @@ class MyCloudHelperFunction {
       Widget? error,
       Widget? nothingFound}) {
     if (snapshot.connectionState == ConnectionState.waiting) {
-      return loader;
+      return loader ?? const Center(child: CircularProgressIndicator());
     }
 
     if (snapshot.hasError) {

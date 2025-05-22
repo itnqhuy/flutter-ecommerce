@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import '../../../data/repositories/SKUs/sku_repository.dart';
-import '../../../utils/popups/loaders.dart';
-import '../models/sku_model.dart';
+import '../../../../data/repositories/SKUs/sku_repository.dart';
+import '../../../../utils/popups/loaders.dart';
+import '../../models/sku_model.dart';
 
 class SkuController extends GetxController {
   static SkuController get instance => Get.find();

@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
-import 'package:ecommerce/utils/local_storage/storage_utility.dart';
-import 'package:ecommerce/utils/popups/loaders.dart';
-import 'package:ecommerce/data/repositories/SKUs/sku_repository.dart';
-import 'package:ecommerce/features/shop/models/sku_model.dart';
-import '../../../data/repositories/products/product_repository.dart';
-import '../models/cart_item_model.dart';
-import 'product/sku_attribute_controller.dart';
+
+import '../../../../data/repositories/SKUs/sku_repository.dart';
+import '../../../../data/repositories/products/product_repository.dart';
+import '../../../../utils/local_storage/storage_utility.dart';
+import '../../../../utils/popups/loaders.dart';
+import '../../models/cart_item_model.dart';
+import '../../models/sku_model.dart';
+import 'sku_attribute_controller.dart';
 
 class CartController extends GetxController {
   static CartController get instance => Get.find();

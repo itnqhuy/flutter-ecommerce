@@ -65,8 +65,10 @@ class ProductRepository {
       if (snapshot.exists) {
         return snapshot.data()?['name'] ?? '';
       }
-    } catch (e) {
-      print("Error getting product name: $e");
+    } on FirebaseException catch (e) {
+      throw MyFirebaseAuthException(e.code, e.message ?? 'Lỗi Firebase');
+    } on Exception catch (e) {
+      throw Exception('Không thể tải sản phẩm: $e');
     }
     return null;
   }
