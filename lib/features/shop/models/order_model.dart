@@ -9,9 +9,9 @@ class OrderModel {
   final OrderStatus status;
   final int totalPrice;
   final String payMethod;
-  final int payTime;
-  final int shippingTime;
-  final int cancelledTime;
+  final Timestamp? payTime;
+  final Timestamp? shippingTime;
+  final Timestamp? cancelledTime;
   final ShippingInfoModel shippingInfo;
   final DocumentReference? couponCode;
   final int? pointUsed;
@@ -45,7 +45,7 @@ class OrderModel {
   /// Factory từ Firestore snapshot
   factory OrderModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final data = snapshot.data() ?? {};
+    final data = snapshot.data() ?? {}; // Kiểm tra dữ liệu không bị null
 
     return OrderModel(
       id: snapshot.id,
@@ -54,13 +54,18 @@ class OrderModel {
           (e) => e.toString() == 'OrderStatus.${data['status']}',
           orElse: () => OrderStatus.processing),
       totalPrice: data['totalPrice'] ?? 0,
-      payMethod: data['payMethod'] ?? 0,
-      payTime: data['payTime'] ?? 0,
-      shippingTime: data['shippingTime'] ?? 0,
-      cancelledTime: data['cancelledTime'] ?? 0,
-      shippingInfo: ShippingInfoModel.fromSnapshot(data['shippingInfo']),
+      payMethod: data['payMethod'] ?? '',
+      payTime: data['payTime'] as Timestamp?,
+      shippingTime:
+          data['shippingTime'] as Timestamp?, // Giữ nguyên null nếu chưa có
+      cancelledTime:
+          data['cancelledTime'] as Timestamp?, // Giữ nguyên null nếu chưa có
+      shippingInfo: data['shippingInfo'] != null &&
+              data['shippingInfo'] is Map<String, dynamic>
+          ? ShippingInfoModel.fromJson(data['shippingInfo'])
+          : ShippingInfoModel.empty(),
       couponCode: data['couponCode'] as DocumentReference?,
-      pointUsed: data['pointUsed'] ?? '',
+      pointUsed: data['pointUsed'] ?? 0,
       createdAt: data['createdAt'] ?? Timestamp.now(),
       updatedAt: data['updatedAt'] ?? Timestamp.now(),
       items: (data['items'] as List<dynamic>? ?? [])
@@ -95,9 +100,9 @@ class OrderModel {
     OrderStatus? status,
     int? totalPrice,
     String? payMethod,
-    int? payTime,
-    int? shippingTime,
-    int? cancelledTime,
+    Timestamp? payTime,
+    Timestamp? shippingTime,
+    Timestamp? cancelledTime,
     ShippingInfoModel? shippingInfo,
     DocumentReference? couponCode,
     int? pointUsed,
@@ -130,9 +135,9 @@ class OrderModel {
         status: OrderStatus.processing,
         totalPrice: 0,
         payMethod: 'Thanh toán khi nhận hàng',
-        payTime: 0,
-        shippingTime: 0,
-        cancelledTime: 0,
+        payTime: Timestamp.now(),
+        shippingTime: null,
+        cancelledTime: null,
         shippingInfo: ShippingInfoModel.empty(),
         couponCode: null,
         pointUsed: 0,

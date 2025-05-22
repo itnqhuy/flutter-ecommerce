@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import '../../../../../common/styles/rounded_container.dart';
 import '../../../../../common/widgets/loaders/animation_loader.dart';
 import '../../../../../navigation_menu.dart';
@@ -25,7 +26,7 @@ class MyOrderListItems extends StatelessWidget {
       builder: (_, snapshot) {
         final emptyWidget = MyAnimationLoaderWidget(
           text: 'Không có lịch sử đơn hàng',
-          animation: MyImages.loveAnimation,
+          animation: MyImages.emptyAnimation,
           onActionPressed: () => Get.off(() => const NavigationMenu()),
         );
 
@@ -74,7 +75,8 @@ class MyOrderListItems extends StatelessWidget {
                                       fontWeightDelta: 1),
                             ),
                             Text(
-                              order.createdAt.toDate().toLocal().toString(),
+                              DateFormat('dd/MM/yyy')
+                                  .format(order.createdAt.toDate().toLocal()),
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
@@ -114,7 +116,7 @@ class MyOrderListItems extends StatelessWidget {
                                         Theme.of(context).textTheme.labelMedium,
                                   ),
                                   Text(
-                                    '[#${order.id}]',
+                                    order.id,
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
@@ -142,11 +144,11 @@ class MyOrderListItems extends StatelessWidget {
                                         Theme.of(context).textTheme.labelMedium,
                                   ),
                                   Text(
-                                    order.shippingTime > 0
-                                        ? DateTime.fromMillisecondsSinceEpoch(
-                                                order.shippingTime)
-                                            .toLocal()
-                                            .toString()
+                                    order.shippingTime != null
+                                        ? DateFormat('dd/MM/yyyy').format(order
+                                            .shippingTime!
+                                            .toDate()
+                                            .toLocal())
                                         : 'Chưa có ngày giao hàng',
                                     style:
                                         Theme.of(context).textTheme.titleMedium,

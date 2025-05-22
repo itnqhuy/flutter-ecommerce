@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../data/repositories/user/user_repository.dart';
@@ -30,6 +33,7 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     fetchUserRecord();
+    loadUserAvatar();
   }
 
   /// Fetch user record
@@ -181,9 +185,10 @@ class UserController extends GetxController {
   }
 
   /// Upload Profile Image
-  uploadUserProfilePicture() async {
+  final localStorage = GetStorage();
+
+  Future<void> uploadUserProfilePicture() async {
     try {
-      // Pick image from gallery
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
         imageQuality: 70,
@@ -193,33 +198,30 @@ class UserController extends GetxController {
 
       if (image != null) {
         uploadImage.value = true;
-        // Upload image to Firebase Storage
-        final imageUrl = await userRepository.uploadImage(
-          'Users/Images/Profile/',
-          image,
-        );
 
-        final json = {'avatarUrl': imageUrl};
-        await userRepository.updateSingleField(json);
+        // Lưu đường dẫn ảnh vào GetStorage
+        localStorage.write('avatarPath', image.path);
 
-        // Update local user model
-        user.value = user.value.copyWith(avatarUrl: imageUrl);
+        // Cập nhật giao diện
+        user.value = user.value.copyWith(avatarUrl: image.path);
         user.refresh();
 
-        // Show success message
         MyLoaders.successSnackBar(
-          title: 'Chúc mừng',
-          message: 'Ảnh đại diện đã được cập nhật!',
-        );
+            title: 'Chúc mừng', message: 'Ảnh đã được cập nhật!');
       }
     } catch (e) {
-      // Show error message
-      MyLoaders.errorSnackBar(
-        title: 'Oops!',
-        message: e.toString(),
-      );
+      MyLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());
     } finally {
-      uploadImage.value = true;
+      uploadImage.value = false;
+    }
+  }
+
+  Future<void> loadUserAvatar() async {
+    final avatarPath = localStorage.read('avatarPath') ?? '';
+
+    if (avatarPath.isNotEmpty && File(avatarPath).existsSync()) {
+      user.value = user.value.copyWith(avatarUrl: avatarPath);
+      user.refresh();
     }
   }
 }

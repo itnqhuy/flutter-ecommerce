@@ -36,6 +36,8 @@ class MyImages {
   static const String pencilAnimation =
       "assets/amimations/pencilAnimation.json";
 
+  static const String emptyAnimation = "assets/amimations/emptyAnimation.json";
+
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";
   static const String userPlaceholder = "assets/images/content/user.png";

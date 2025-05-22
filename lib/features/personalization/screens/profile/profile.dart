@@ -1,16 +1,16 @@
-import 'package:ecommerce/common/widgets/animations/shimmer_effect.dart';
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/images/my_circular_image.dart';
-import 'package:ecommerce/common/widgets/texts/section_heading.dart';
-import 'package:ecommerce/features/personalization/screens/profile/widgets/profile_menu.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/images/my_circular_image.dart';
+import '../../../../common/widgets/texts/section_heading.dart';
+import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/constants/sizes.dart';
 import '../../controllers/user_controller.dart';
 import 'widgets/change_name.dart';
+import 'widgets/profile_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -34,19 +34,15 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Obx(() {
-                      final networkImage = controller.user.value.avatarUrl;
-                      final image = networkImage.isNotEmpty
-                          ? networkImage
-                          : MyImages.user;
-                      return controller.uploadImage.value
-                          ? const MyShimmerEffect(
-                              width: 80, height: 80, radius: 80)
+                      final imagePath = controller.user.value.avatarUrl;
+                      final isLocalImage = File(imagePath).existsSync();
+                      return isLocalImage
+                          ? CircleAvatar(
+                              radius: 40,
+                              backgroundImage: FileImage(File(imagePath)),
+                            )
                           : MyCircularImage(
-                              image: image,
-                              width: 80,
-                              height: 80,
-                              isNetworkImage: networkImage.isNotEmpty,
-                            );
+                              image: MyImages.user, width: 80, height: 80);
                     }),
                     TextButton(
                         onPressed: () => controller.uploadUserProfilePicture(),

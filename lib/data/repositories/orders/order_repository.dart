@@ -20,7 +20,6 @@ class OrderRepository extends GetxController {
       final snapshot = await _db
           .collection('Orders')
           .where('userId', isEqualTo: userRef)
-          .orderBy('createdAt', descending: true)
           .get();
 
       return snapshot.docs.map((doc) => OrderModel.fromSnapshot(doc)).toList();

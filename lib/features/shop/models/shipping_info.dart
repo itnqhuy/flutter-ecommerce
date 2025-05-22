@@ -77,7 +77,8 @@ class ShippingInfoModel {
   // Factory method to create a ShippingInfo from Firestore document snapshot
   factory ShippingInfoModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
+    final data = document.data() ?? {}; // Kiểm tra dữ liệu không bị null
+
     return ShippingInfoModel(
       id: document.id,
       name: data['name'] ?? "",
@@ -89,7 +90,26 @@ class ShippingInfoModel {
       isDefault: data['isDefault'] ?? false,
       createdAt: data['createdAt'] ?? Timestamp.now(),
       updatedAt: data['updatedAt'] ?? Timestamp.now(),
-      userId: data['userId'] as DocumentReference, // ép kiểu DocumentReference
+      userId: data['userId'] is DocumentReference
+          ? data['userId'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Users').doc('none'),
+    );
+  }
+  factory ShippingInfoModel.fromJson(Map<String, dynamic> json) {
+    return ShippingInfoModel(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      phone: json['phone'] ?? '',
+      provinceOrCity: json['provinceOrCity'] ?? '',
+      district: json['district'] ?? '',
+      ward: json['ward'] ?? '',
+      detailAddress: json['detailAddress'] ?? '',
+      isDefault: json['isDefault'] ?? false,
+      createdAt: json['createdAt'] ?? Timestamp.now(),
+      updatedAt: json['updatedAt'] ?? Timestamp.now(),
+      userId: json['userId'] is DocumentReference
+          ? json['userId'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Users').doc('none'),
     );
   }
 
