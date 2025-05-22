@@ -37,6 +37,7 @@ class MyImages {
       "assets/amimations/pencilAnimation.json";
 
   static const String emptyAnimation = "assets/amimations/emptyAnimation.json";
+  static const String cartAnimation = "assets/amimations/cartAnimation.json";
 
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";

@@ -271,9 +271,32 @@ class ProductController extends GetxController {
   }
 
   final RxList<ProductModel> sortableProducts = <ProductModel>[].obs;
+  final RxString selectedSortOption = 'Tên'.obs;
 
   void loadProducts(List<ProductModel> products) {
     sortableProducts.assignAll(products);
+    sortProducts('Tên');
+  }
+
+  void sortProducts(String sortOption) {
+    selectedSortOption.value = sortOption;
+    switch (sortOption) {
+      case 'Tên':
+        sortByName();
+        break;
+      case 'Giá giảm dần':
+        sortByPrice(descending: true);
+        break;
+      case 'Giá tăng dần':
+        sortByPrice(descending: false);
+        break;
+      case 'Đánh giá':
+        sortByRating(descending: true);
+        break;
+      default:
+        sortByName();
+        break;
+    }
   }
 
   void sortByPrice({bool descending = false}) {
@@ -284,12 +307,14 @@ class ProductController extends GetxController {
       return descending ? priceB.compareTo(priceA) : priceA.compareTo(priceB);
     });
     sortableProducts.assignAll(sorted);
+    sortableProducts.refresh();
   }
 
   void sortByName() {
     final sorted = [...sortableProducts];
     sorted.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     sortableProducts.assignAll(sorted);
+    sortableProducts.refresh();
   }
 
   void search(String query, List<ProductModel> sourceList) {
@@ -300,6 +325,7 @@ class ProductController extends GetxController {
           .where((p) => p.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
       sortableProducts.assignAll(filtered);
+      sortableProducts.refresh();
     }
   }
 
@@ -313,5 +339,6 @@ class ProductController extends GetxController {
           : ratingA.compareTo(ratingB);
     });
     sortableProducts.assignAll(sorted);
+    sortableProducts.refresh();
   }
 }

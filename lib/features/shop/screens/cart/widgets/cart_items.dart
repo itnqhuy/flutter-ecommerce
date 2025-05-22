@@ -1,10 +1,13 @@
-import 'package:ecommerce/common/widgets/products/cart/add_remove_button.dart';
-import 'package:ecommerce/common/widgets/products/cart/cart_item.dart';
-import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
-import 'package:ecommerce/features/shop/controllers/product/cart_controller.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../../common/widgets/loaders/animation_loader.dart';
+import '../../../../../common/widgets/products/cart/add_remove_button.dart';
+import '../../../../../common/widgets/products/cart/cart_item.dart';
+import '../../../../../common/widgets/texts/product_price_text.dart';
+import '../../../../../utils/constants/image_strings.dart';
+import '../../../../../utils/constants/sizes.dart';
+import '../../../controllers/product/cart_controller.dart';
 
 class MyCartItems extends StatelessWidget {
   const MyCartItems({
@@ -43,7 +46,10 @@ class MyCartItems extends StatelessWidget {
       final items = cartController.cartItems;
 
       if (items.isEmpty) {
-        return const Center(child: Text('Giỏ hàng của bạn đang trống.'));
+        return MyAnimationLoaderWidget(
+          text: 'Giỏ hàng của bạn đang trống.',
+          animation: MyImages.cartAnimation,
+        );
       }
 
       return ListView.separated(

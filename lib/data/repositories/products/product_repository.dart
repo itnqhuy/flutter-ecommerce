@@ -194,7 +194,6 @@ class ProductRepository {
     try {
       final querySnapshot = await query.get();
 
-      debugPrint('Products fetched by query: ${querySnapshot.docs.length}');
       return querySnapshot.docs
           .map((doc) => ProductModel.fromQuerySnapshot(doc))
           .toList();
