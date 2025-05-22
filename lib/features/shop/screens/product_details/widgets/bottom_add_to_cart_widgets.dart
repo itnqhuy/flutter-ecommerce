@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../controllers/product/sku_attribute_controller.dart';
+
 class MyBottomAddToCart extends StatelessWidget {
   const MyBottomAddToCart({
     super.key,
@@ -66,7 +68,18 @@ class MyBottomAddToCart extends StatelessWidget {
 
               /// Add to Cart Button
               ElevatedButton(
-                onPressed: () => cartController.addToCart(sku),
+                onPressed: () async {
+                  final skuAttriController = SkuAttributeController.instance;
+                  if (await skuAttriController.isSelectionComplete()) {
+                    cartController.addToCart(sku);
+                  } else {
+                    Get.snackbar(
+                      'Chưa đầy đủ phân loại',
+                      'Hãy chọn đầy đủ phân loại nhé',
+                      snackPosition: SnackPosition.BOTTOM,
+                    );
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(MySizes.md),
                   backgroundColor: dark ? MyColors.grey : MyColors.black,

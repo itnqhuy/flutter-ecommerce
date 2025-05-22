@@ -27,72 +27,77 @@ class SubCategoriesScreen extends StatelessWidget {
             children: [
               // Banner
               MyRoundedImage(
-                  width: double.infinity,
-                  imageUrl: category.imageUrl,
-                  isNetworkImage: true,
-                  applyImageRadius: true),
+                height: 145,
+                width: double.infinity,
+                imageUrl: category.thumbnail ?? '',
+                applyImageRadius: true,
+                isNetworkImage: true,
+              ),
+
               SizedBox(height: MySizes.spaceBtwSections),
 
               // Sub-Categories
               FutureBuilder(
-                  future: controller.getSubCategories(category.id),
-                  builder: (context, snapshot) {
-                    const loader = MyVerticalProductShimmer();
-                    final widget = MyCloudHelperFunction.checkMultiRecorState(
-                        snapshot: snapshot, loader: loader);
-                    if (widget != null) return widget;
-                    final subCategories = snapshot.data!;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: subCategories.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (_, index) {
-                        final subCategory = subCategories[index];
+                future: controller.getSubCategories(category.id),
+                builder: (context, snapshot) {
+                  const loader = MyVerticalProductShimmer();
+                  final widget = MyCloudHelperFunction.checkMultiRecorState(
+                      snapshot: snapshot, loader: loader);
+                  if (widget != null) return widget;
+                  final subCategories = snapshot.data!;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: subCategories.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      final subCategory = subCategories[index];
 
-                        return FutureBuilder(
-                            future: controller.getCategoryProducts(
-                                categoryId: subCategory.id),
-                            builder: (context, snapshot) {
-                              final widget =
-                                  MyCloudHelperFunction.checkMultiRecorState(
-                                      snapshot: snapshot, loader: loader);
-                              if (widget != null) return widget;
+                      return FutureBuilder(
+                          future: controller.getCategoryProducts(
+                              categoryId: subCategory.id),
+                          builder: (context, snapshot) {
+                            final widget =
+                                MyCloudHelperFunction.checkMultiRecorState(
+                                    snapshot: snapshot, loader: loader);
+                            if (widget != null) return widget;
 
-                              final products = snapshot.data!;
-                              return Column(
-                                children: [
-                                  // Heading
-                                  MySectionHeading(
+                            final products = snapshot.data!;
+                            return Column(
+                              children: [
+                                // Heading
+                                MySectionHeading(
+                                  title: subCategory.name,
+                                  onPressed: () => AllProducts(
                                     title: subCategory.name,
-                                    onPressed: () => AllProducts(
-                                        title: subCategory.name,
-                                        futureMethod:
-                                            controller.getCategoryProducts(
-                                                categoryId: subCategory.id,
-                                                limit: -1)),
+                                    futureMethod:
+                                        controller.getCategoryProducts(
+                                            categoryId: subCategory.id,
+                                            limit: -1),
                                   ),
-                                  const SizedBox(
-                                      height: MySizes.spaceBtwItems / 2),
+                                ),
+                                const SizedBox(
+                                    height: MySizes.spaceBtwItems / 2),
 
-                                  SizedBox(
-                                    height: 120,
-                                    child: ListView.separated(
-                                      itemCount: products.length,
-                                      scrollDirection: Axis.horizontal,
-                                      separatorBuilder: (context, index) =>
-                                          const SizedBox(
-                                              width: MySizes.spaceBtwItems),
-                                      itemBuilder: (context, index) =>
-                                          MyProductCardHorizontal(
-                                              product: products[index]),
-                                    ),
+                                SizedBox(
+                                  height: 120,
+                                  child: ListView.separated(
+                                    itemCount: products.length,
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(
+                                            width: MySizes.spaceBtwItems),
+                                    itemBuilder: (context, index) =>
+                                        MyProductCardHorizontal(
+                                            product: products[index]),
                                   ),
-                                ],
-                              );
-                            });
-                      },
-                    );
-                  }),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),

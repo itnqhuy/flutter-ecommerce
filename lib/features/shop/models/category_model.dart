@@ -4,7 +4,8 @@ class CategoryModel {
   String id;
   String name;
   String imageUrl;
-  DocumentReference? parentCate; // Thay đổi thành DocumentReference
+  String? thumbnail;
+  DocumentReference? parentCate;
   bool isFeatured;
   Timestamp createdAt;
   Timestamp updatedAt;
@@ -13,7 +14,8 @@ class CategoryModel {
     required this.id,
     required this.name,
     required this.imageUrl,
-    this.parentCate, // Có thể null nếu không có danh mục cha
+    this.thumbnail,
+    this.parentCate,
     required this.isFeatured,
     required this.createdAt,
     required this.updatedAt,
@@ -24,7 +26,8 @@ class CategoryModel {
         id: '',
         name: '',
         imageUrl: '',
-        parentCate: null, // Đặt null
+        thumbnail: null,
+        parentCate: null,
         isFeatured: false,
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
@@ -42,8 +45,8 @@ class CategoryModel {
       id: doc.id,
       name: data['name'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
-      parentCate: data.containsKey('parentCate') &&
-              data['parentCate'] is DocumentReference
+      thumbnail: data['thumbnail'],
+      parentCate: data['parentCate'] is DocumentReference
           ? data['parentCate'] as DocumentReference
           : null,
       isFeatured: data['isFeatured'] ?? false,
@@ -57,7 +60,8 @@ class CategoryModel {
     return {
       'name': name,
       'imageUrl': imageUrl,
-      'parentCate': parentCate?.path, // Chuyển DocumentReference thành string
+      'thumbnail': thumbnail,
+      'parentCate': parentCate?.path,
       'isFeatured': isFeatured,
       'createdAt': createdAt,
       'updatedAt': updatedAt,

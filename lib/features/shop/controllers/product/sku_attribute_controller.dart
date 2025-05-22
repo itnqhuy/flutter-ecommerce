@@ -149,12 +149,22 @@ class SkuAttributeController extends GetxController {
       finalPrice.value > 0 &&
       finalPrice.value < originalPrice.value;
 
+  Future<bool> isSelectionComplete() async {
+    final requiredAttrCount = await SkuAttributeRepository.countAttributesOfSku(
+        selectedSku.value!.id);
+    return selectedAttributes.length == requiredAttrCount &&
+        !selectedAttributes.values.any((v) => v.isEmpty);
+  }
+
   bool _matchesSelected(
-      Map<String, String> skuAttrs, Map<String, String> selected) {
-    if (selected.length > skuAttrs.length) return false;
+      Map<String, String> skuAttrs, Map<String, String> selected,
+      {bool exactMatch = false}) {
+    if (exactMatch && selected.length != skuAttrs.length) return false;
+
     for (final key in selected.keys) {
       if (skuAttrs[key] != selected[key]) return false;
     }
+
     return true;
   }
 
@@ -188,7 +198,7 @@ class SkuAttributeController extends GetxController {
         final sku = _allSkus.firstWhereOrNull((s) => s.id == entry.key);
         if (sku == null || sku.stock <= 0) return false;
 
-        return _matchesSelected(entry.value, selected);
+        return _matchesSelected(entry.value, selected, exactMatch: false);
       });
 
       if (!found) unavailable.add(value);

@@ -134,4 +134,27 @@ class CartController extends GetxController {
     cartItems.clear();
     updateCart();
   }
+
+  Future<void> buyNow(SkuModel sku) async {
+    final selectedSku = skuAttrController.selectedSku.value;
+    if (selectedSku == null || selectedSku.id.isEmpty) {
+      MyLoaders.warningSnackBar(title: 'Vui lòng chọn phân loại');
+      return;
+    }
+
+    if (selectedSku.stock < 1) {
+      MyLoaders.warningSnackBar(
+        title: 'Hết hàng',
+        message: 'Phân loại này đã hết hàng',
+      );
+      return;
+    }
+
+    final newItem = await convertToCartItem(sku, 1);
+
+    cartItems.clear();
+    cartItems.add(newItem);
+
+    updateCart();
+  }
 }

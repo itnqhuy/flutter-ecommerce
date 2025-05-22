@@ -1,13 +1,13 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/features/personalization/screens/address/widgets/single_address.dart';
-import 'package:ecommerce/features/shop/controllers/shippinginfo/shipping_info_controller.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/helpers/cloud_helper_function.dart';
+import '../../../shop/controllers/shippinginfo/shipping_info_controller.dart';
 import 'add_new_address.dart';
+import 'widgets/single_address.dart';
 
 class UserAddressScreen extends StatelessWidget {
   const UserAddressScreen({super.key});

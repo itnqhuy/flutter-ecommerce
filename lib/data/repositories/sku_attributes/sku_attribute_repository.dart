@@ -32,4 +32,15 @@ class SkuAttributeRepository {
 
     return results;
   }
+
+  static Future<int> countAttributesOfSku(String skuId) async {
+    final skuRef = _db.collection('SKUs').doc(skuId);
+
+    final snapshot = await _db
+        .collection('SKUAttributes')
+        .where('SKUId', isEqualTo: skuRef)
+        .get();
+
+    return snapshot.size;
+  }
 }
