@@ -1,41 +1,57 @@
-import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/common/widgets/products/ratings/rating_indicator.dart';
-import 'package:ecommerce/features/shop/screens/product_review/widgets/rating_progress_indicator.dart';
-import 'package:ecommerce/features/shop/screens/product_review/widgets/user_review_card.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import '../../controllers/product/product_controller.dart';
+import '../../models/product_model.dart';
+import '../../models/rating_model.dart';
+import 'widgets/user_review_card.dart';
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../utils/constants/sizes.dart';
 
 class ProductReviewsScreen extends StatelessWidget {
-  const ProductReviewsScreen({super.key});
+  const ProductReviewsScreen({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+
     return Scaffold(
-      appBar: MyAppBar(title: Text("Reviews & Ratings"), showBackArrow: true),
+      appBar:
+          MyAppBar(title: Text("Nhận xét và đánh giá"), showBackArrow: true),
+      body: FutureBuilder<List<RatingModel>>(
+        future: controller.getRatingsByProduct(product.id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Lỗi: ${snapshot.error}"));
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: Text("Chưa có đánh giá nào!"));
+          }
 
-      // -- Body
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(MySizes.defaultSpace),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  "Ratings and reviews are verified and are from people who use the same type of device that you use."),
-              SizedBox(height: MySizes.spaceBtwItems),
+          final ratings = snapshot.data ?? [];
 
-              // Overall Product Ratings
-              const MyOverallProductRating(),
-              MyRatingBarIndicator(rating: 3.5),
-              Text("12,611", style: Theme.of(context).textTheme.bodySmall),
-              const SizedBox(height: MySizes.spaceBtwItems),
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(MySizes.defaultSpace),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Xếp hạng và đánh giá từ người dùng."),
+                  SizedBox(height: MySizes.spaceBtwItems),
 
-              //User Review List
-              UserReviewCard(),
-              UserReviewCard(),
-            ],
-          ),
-        ),
+                  // Hiển thị danh sách đánh giá
+                  Column(
+                    children: ratings
+                        .map((rating) => UserReviewCard(rating: rating))
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

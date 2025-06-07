@@ -1,6 +1,7 @@
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MyRoundedImage extends StatelessWidget {
   const MyRoundedImage({
@@ -31,6 +32,18 @@ class MyRoundedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageWidget = isNetworkImage
+        ? CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: fit,
+            errorWidget: (context, url, error) =>
+                const Icon(Icons.broken_image),
+          )
+        : Image.asset(
+            imageUrl,
+            fit: fit,
+          );
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -38,18 +51,15 @@ class MyRoundedImage extends StatelessWidget {
         height: height,
         padding: padding,
         decoration: BoxDecoration(
-            border: border,
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius)),
+          border: border,
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
         child: ClipRRect(
           borderRadius: applyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child: Image(
-              fit: fit,
-              image: isNetworkImage
-                  ? NetworkImage(imageUrl)
-                  : AssetImage(imageUrl) as ImageProvider),
+          child: imageWidget,
         ),
       ),
     );

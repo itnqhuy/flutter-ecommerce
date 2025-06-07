@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
 
-class MyVNOrderUtils {
+class MyPricingCalculator {
   static String formatCurrency(double amount) {
     final format = NumberFormat.currency(locale: 'vi_VN', symbol: '₫');
     return format.format(amount);
   }
 
-  static String calculateTax(double productPrice) {
+  static String calculateTax(int productPrice) {
     const double taxRate = 0.1;
     final double taxAmount = productPrice * taxRate;
     return formatCurrency(taxAmount);
@@ -18,11 +18,12 @@ class MyVNOrderUtils {
   }
 
   /// Tổng cộng: giá sản phẩm + thuế + phí vận chuyển
-  static String calculateTotal(double productPrice) {
+  static int calculateTotal(int productPrice) {
     const double taxRate = 0.1;
     const double shippingCost = 30000;
-    final double total = productPrice + (productPrice * taxRate) + shippingCost;
-    return formatCurrency(total);
+    final int total =
+        (productPrice + (productPrice * taxRate) + shippingCost).toInt();
+    return total;
   }
 
   /* 

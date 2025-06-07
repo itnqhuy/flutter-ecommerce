@@ -1,36 +1,52 @@
-import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../../../../utils/constants/sizes.dart';
+import '../../../controllers/product/product_controller.dart';
+import '../../../models/product_model.dart';
 
 class MyRatingAndShare extends StatelessWidget {
-  const MyRatingAndShare({
-    super.key,
-  });
+  const MyRatingAndShare({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    controller.loadProductRatings(product.id);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        //Rating
+        // Rating
         Row(
           children: [
-            Icon(Iconsax.star, color: Colors.amber, size: 24),
-            SizedBox(width: MySizes.spaceBtwItems / 2),
-            Text.rich(TextSpan(
-              children: [
+            const Icon(Iconsax.star, color: Colors.amber, size: 24),
+            const SizedBox(width: MySizes.spaceBtwItems / 2),
+            Obx(() {
+              final avg = controller.productRatingCache[product.id] ?? 0.0;
+              final count = controller.productRatingCountCache[product.id] ?? 0;
+              return Text.rich(
                 TextSpan(
-                    text: '5.0', style: Theme.of(context).textTheme.bodyLarge),
-                const TextSpan(text: '2004')
-              ],
-            ))
+                  children: [
+                    TextSpan(
+                      text: avg.toStringAsFixed(1),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    TextSpan(text: ' ($count)'),
+                  ],
+                ),
+              );
+            }),
           ],
         ),
 
-        //Share
+        // Share button
         IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.share, size: MySizes.iconMd))
+          onPressed: () {
+            // share logic ở đây
+          },
+          icon: const Icon(Icons.share, size: MySizes.iconMd),
+        ),
       ],
     );
   }
