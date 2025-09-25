@@ -6,7 +6,7 @@
   version: 1.0.0+1
 
   environment:
-    sdk: ^3.6.1
+    sdk: ^3.5.4
 
   dependencies:
     flutter:
@@ -22,8 +22,6 @@
     lottie: ^2.6.0
     connectivity_plus: ^6.1.4
     flutter_carousel_widget: ^2.1.0
-
-
 
     # Icons
     cupertino_icons: ^1.0.8
@@ -47,7 +45,7 @@
     firebase_storage: ^12.4.5
     image_picker: ^1.1.2
     cached_network_image: ^3.4.1
-    collection: ^1.19.0
+    collection: 1.18.0
 
   dev_dependencies:
     flutter_test:
