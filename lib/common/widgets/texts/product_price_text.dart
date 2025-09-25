@@ -1,16 +1,18 @@
+import 'package:ecommerce/utils/formatters/fomatter.dart';
 import 'package:flutter/material.dart';
 
 class MyProductPriceText extends StatelessWidget {
   const MyProductPriceText({
     super.key,
-    this.currencySign = '\$',
+    this.currencySign = 'đ',
     required this.price,
     this.isLarge = false,
     this.maxLines = 1,
     this.lineThrough = false,
   });
 
-  final String currencySign, price;
+  final String currencySign;
+  final int price;
   final int maxLines;
   final bool isLarge;
   final bool lineThrough;
@@ -18,7 +20,7 @@ class MyProductPriceText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      currencySign + price,
+      '$currencySign ${MyFormatter.formatDecimalOnly(price)}',
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style: isLarge

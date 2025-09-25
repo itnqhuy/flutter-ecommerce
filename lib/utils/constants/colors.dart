@@ -5,6 +5,8 @@ class MyColors {
 
   // App Basic Colors
   static const Color primary = Color(0xFF4b68ff);
+  static const Color primaryLight = Color.fromARGB(255, 83, 112, 255);
+
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFb0c7ff);
 
@@ -31,12 +33,7 @@ class MyColors {
 
   // Background Container Colors
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static final Color darkContainer = white.withValues(
-    alpha: 255 * 0.1,
-    red: white.r.toDouble(),
-    green: white.g.toDouble(),
-    blue: white.b.toDouble(),
-  );
+  static final Color darkContainer = white.withAlpha((255 * 0.1).round());
 
   // Button Colors
   static const Color buttonPrimary = Color(0xFF4b68ff);

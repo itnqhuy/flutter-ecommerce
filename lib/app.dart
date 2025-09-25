@@ -16,6 +16,7 @@ class App extends StatelessWidget {
       darkTheme: MyAppTheme.darkTheme,
       initialBinding: GeneralBindings(),
       home: const OnBoardingScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

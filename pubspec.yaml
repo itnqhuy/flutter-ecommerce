@@ -43,6 +43,10 @@
     #Product Management
     readmore: ^2.2.0
     flutter_rating_bar: ^4.0.1
+    shimmer: ^3.0.0
+    cached_network_image: ^3.4.1
+    firebase_storage: ^12.4.6
+    image_picker: ^1.1.2
 
   dev_dependencies:
     flutter_test:
@@ -62,7 +66,7 @@
       - assets/icons/
       - assets/images/content/
       - assets/images/products/
-      - assets/icons/brands/
+      - assets/images/categories/
       - assets/icons/payment_methods/
       - assets/images/banners/
       - assets/amimations/
