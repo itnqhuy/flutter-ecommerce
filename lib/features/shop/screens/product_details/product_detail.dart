@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import 'package:ecommerce/features/shop/controllers/product/product_controller.dart';
+import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -7,6 +12,10 @@ import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
+<<<<<<< HEAD
+=======
+import '../../controllers/product/cart_controller.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import '../../controllers/product/sku_attribute_controller.dart';
 import '../../models/product_model.dart';
 import '../product_review/product_reviews.dart';
@@ -23,6 +32,9 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+
+    ProductController.instance.loadProductRatings(product.id);
     final dark = MyHelperFunctions.isDarkMode(context);
     final dividerColor = dark ? Colors.grey.shade700 : Colors.grey.shade300;
     final iconColor = dark ? MyColors.white : MyColors.black;
@@ -61,9 +73,42 @@ class ProductDetailScreen extends StatelessWidget {
                   const SizedBox(height: MySizes.spaceBtwItems),
                   //Checkout Button
                   SizedBox(
+<<<<<<< HEAD
                       width: double.infinity,
                       child: ElevatedButton(
                           onPressed: () {}, child: Text('Mua ngay'))),
+=======
+                    width: double.infinity,
+                    child: Obx(() {
+                      final sku =
+                          SkuAttributeController.instance.selectedSku.value;
+                      final skuAttriController =
+                          SkuAttributeController.instance;
+
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: sku == null || sku.id.isEmpty
+                              ? null
+                              : () async {
+                                  if (!(await skuAttriController
+                                      .isSelectionComplete())) {
+                                    Get.snackbar(
+                                      'Chưa đầy đủ phân loại',
+                                      'Hãy chọn đầy đủ phân loại nhé',
+                                      snackPosition: SnackPosition.BOTTOM,
+                                    );
+                                    return; // Ngăn việc tiếp tục xử lý giỏ hàng nếu chưa đủ phân loại
+                                  }
+                                  cartController.addToCart(sku);
+                                  Get.to(() => const CheckoutScreen());
+                                },
+                          child: Text('Mua ngay'),
+                        ),
+                      );
+                    }),
+                  ),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                   const SizedBox(height: MySizes.spaceBtwSections),
                   //Description
                   MySectionHeading(

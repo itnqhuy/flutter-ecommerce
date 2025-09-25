@@ -1,7 +1,16 @@
+<<<<<<< HEAD
+=======
+import 'dart:io';
+
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
+=======
+import 'package:get_storage/get_storage.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:image_picker/image_picker.dart';
 import '../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../data/repositories/user/user_repository.dart';
@@ -30,6 +39,10 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     fetchUserRecord();
+<<<<<<< HEAD
+=======
+    loadUserAvatar();
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   }
 
   /// Fetch user record
@@ -181,9 +194,16 @@ class UserController extends GetxController {
   }
 
   /// Upload Profile Image
+<<<<<<< HEAD
   uploadUserProfilePicture() async {
     try {
       // Pick image from gallery
+=======
+  final localStorage = GetStorage();
+
+  Future<void> uploadUserProfilePicture() async {
+    try {
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
         imageQuality: 70,
@@ -193,6 +213,7 @@ class UserController extends GetxController {
 
       if (image != null) {
         uploadImage.value = true;
+<<<<<<< HEAD
         // Upload image to Firebase Storage
         final imageUrl = await userRepository.uploadImage(
           'Users/Images/Profile/',
@@ -220,6 +241,42 @@ class UserController extends GetxController {
       );
     } finally {
       uploadImage.value = true;
+=======
+
+        // Lưu đường dẫn ảnh vào GetStorage
+        localStorage.write('avatarPath', image.path);
+
+        // Cập nhật giao diện
+        user.value = user.value.copyWith(avatarUrl: image.path);
+        user.refresh();
+
+        MyLoaders.successSnackBar(
+            title: 'Chúc mừng', message: 'Ảnh đã được cập nhật!');
+      }
+    } catch (e) {
+      MyLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());
+    } finally {
+      uploadImage.value = false;
+    }
+  }
+
+  Future<void> loadUserAvatar() async {
+    final avatarPath = localStorage.read('avatarPath') ?? '';
+
+    if (avatarPath.isNotEmpty && File(avatarPath).existsSync()) {
+      user.value = user.value.copyWith(avatarUrl: avatarPath);
+      user.refresh();
+    }
+  }
+
+  /// Lấy username từ userId
+  Future<String> getUsernameById(String userId) async {
+    try {
+      final userData = await userRepository.fetchUserById(userId);
+      return userData.fullNameWithSpaces;
+    } catch (e) {
+      return 'Người dùng ẩn danh';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     }
   }
 }

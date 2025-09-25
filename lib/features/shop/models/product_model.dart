@@ -2,8 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
   final String id;
+<<<<<<< HEAD
   final String categoryId;
   final String brandId;
+=======
+  final DocumentReference categoryId;
+  final DocumentReference brandId;
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   final String name;
   final String description;
   final bool isFeatured;
@@ -27,8 +32,13 @@ class ProductModel {
 
   static ProductModel empty() => ProductModel(
         id: '',
+<<<<<<< HEAD
         categoryId: '',
         brandId: '',
+=======
+        categoryId: FirebaseFirestore.instance.collection('Categories').doc(''),
+        brandId: FirebaseFirestore.instance.collection('Brands').doc(''),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
         name: '',
         description: '',
         status: '',
@@ -40,12 +50,28 @@ class ProductModel {
 
   factory ProductModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> doc) {
+<<<<<<< HEAD
     if (doc.data() == null) return ProductModel.empty();
     final data = doc.data()!;
     return ProductModel(
       id: doc.id,
       categoryId: (data['idCategory'] as DocumentReference).id,
       brandId: (data['idBrand'] as DocumentReference).id,
+=======
+    final data = doc.data();
+    if (data == null) return ProductModel.empty();
+
+    return ProductModel(
+      id: doc.id,
+      categoryId: data['idCategory'] is DocumentReference
+          ? data['idCategory'] as DocumentReference
+          : FirebaseFirestore.instance
+              .collection('Categories')
+              .doc('fakeCategory'),
+      brandId: data['idBrand'] is DocumentReference
+          ? data['idBrand'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Brands').doc('fakeCategory'),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       isFeatured: data['isFeatured'] ?? false,
@@ -58,6 +84,7 @@ class ProductModel {
 
   factory ProductModel.fromQuerySnapshot(
       QueryDocumentSnapshot<Object?> document) {
+<<<<<<< HEAD
     final data = document.data() as Map<String, dynamic>;
     if (data.isEmpty) return ProductModel.empty();
 
@@ -65,6 +92,20 @@ class ProductModel {
       id: document.id,
       categoryId: (data['idCategory'] as DocumentReference).id,
       brandId: (data['idBrand'] as DocumentReference).id,
+=======
+    final data = document.data() as Map<String, dynamic>? ?? {};
+
+    return ProductModel(
+      id: document.id,
+      categoryId: data['idCategory'] is DocumentReference
+          ? data['idCategory'] as DocumentReference
+          : FirebaseFirestore.instance
+              .collection('Categories')
+              .doc('fakeCategory'),
+      brandId: data['idBrand'] is DocumentReference
+          ? data['idBrand'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Brands').doc('fakeCategory'),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       name: data['name'] ?? '',
       description: data['description'] ?? '',
       isFeatured: data['isFeatured'] ?? false,

@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import '../../../../data/repositories/SKUs/sku_repository.dart';
+<<<<<<< HEAD
 import '../../../../data/repositories/product_attribute/product_attribute_repository.dart';
+=======
+import '../../../../data/repositories/product_attributes/product_attribute_repository.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import '../../../../data/repositories/promotions/promotion_repository.dart';
 import '../../../../data/repositories/sku_attributes/sku_attribute_repository.dart';
 import '../../models/product_attribute_model.dart';
@@ -71,8 +75,13 @@ class SkuAttributeController extends GetxController {
     required List<SkuAttributeModel> skuAttrs,
   }) {
     _allSkus.assignAll(skus);
+<<<<<<< HEAD
     _allProductAttrs.assignAll(attrs);
     _allSkuAttrs.assignAll(skuAttrs);
+=======
+    _allSkuAttrs.assignAll(skuAttrs);
+    _allProductAttrs.assignAll(attrs);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
     _skuAttrMap.clear();
 
@@ -149,12 +158,31 @@ class SkuAttributeController extends GetxController {
       finalPrice.value > 0 &&
       finalPrice.value < originalPrice.value;
 
+<<<<<<< HEAD
   bool _matchesSelected(
       Map<String, String> skuAttrs, Map<String, String> selected) {
     if (selected.length > skuAttrs.length) return false;
     for (final key in selected.keys) {
       if (skuAttrs[key] != selected[key]) return false;
     }
+=======
+  Future<bool> isSelectionComplete() async {
+    final requiredAttrCount = await SkuAttributeRepository.countAttributesOfSku(
+        selectedSku.value!.id);
+    return selectedAttributes.length == requiredAttrCount &&
+        !selectedAttributes.values.any((v) => v.isEmpty);
+  }
+
+  bool _matchesSelected(
+      Map<String, String> skuAttrs, Map<String, String> selected,
+      {bool exactMatch = false}) {
+    if (exactMatch && selected.length != skuAttrs.length) return false;
+
+    for (final key in selected.keys) {
+      if (skuAttrs[key] != selected[key]) return false;
+    }
+
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     return true;
   }
 
@@ -188,7 +216,11 @@ class SkuAttributeController extends GetxController {
         final sku = _allSkus.firstWhereOrNull((s) => s.id == entry.key);
         if (sku == null || sku.stock <= 0) return false;
 
+<<<<<<< HEAD
         return _matchesSelected(entry.value, selected);
+=======
+        return _matchesSelected(entry.value, selected, exactMatch: false);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       });
 
       if (!found) unavailable.add(value);

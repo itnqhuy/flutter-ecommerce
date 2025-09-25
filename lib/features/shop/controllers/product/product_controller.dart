@@ -7,6 +7,10 @@ import '../../../../data/repositories/products/product_repository.dart';
 import '../../../../data/repositories/promotions/promotion_repository.dart';
 import '../../../../data/repositories/ratings/rating_repository.dart';
 import '../../models/product_model.dart';
+<<<<<<< HEAD
+=======
+import '../../models/rating_model.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import '../../models/sku_model.dart';
 
 class ProductController extends GetxController {
@@ -49,7 +53,10 @@ class ProductController extends GetxController {
       for (var p in products) {
         await Future.wait([
           loadDefaultSkuByProductId(p.id),
+<<<<<<< HEAD
           loadProductRatings(p.id),
+=======
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
           loadPriceRange(p.id),
           _loadLowestPriceSku(p.id),
         ]);
@@ -72,6 +79,19 @@ class ProductController extends GetxController {
     }
   }
 
+<<<<<<< HEAD
+=======
+  Future<List<ProductModel>> fetchAllProductsForHome() async {
+    try {
+      final products = await _productRepository.getAllPublishedProducts();
+      return products;
+    } catch (e) {
+      MyLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());
+      return [];
+    }
+  }
+
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   Future<void> fetchFeaturedProducts() async {
     try {
       isLoading.value = true;
@@ -125,8 +145,13 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       if (skuList.isNotEmpty &&
+<<<<<<< HEAD
           skuList.any((sku) => sku.productId == productId)) {
         return skuList.where((sku) => sku.productId == productId).toList();
+=======
+          skuList.any((sku) => sku.productId.id == productId)) {
+        return skuList.where((sku) => sku.productId.id == productId).toList();
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       }
 
       final skus = await SkuRepository.getAllSkusByProductId(productId);
@@ -262,9 +287,38 @@ class ProductController extends GetxController {
   }
 
   final RxList<ProductModel> sortableProducts = <ProductModel>[].obs;
+<<<<<<< HEAD
 
   void loadProducts(List<ProductModel> products) {
     sortableProducts.assignAll(products);
+=======
+  final RxString selectedSortOption = 'Tên'.obs;
+
+  void loadProducts(List<ProductModel> products) {
+    sortableProducts.assignAll(products);
+    sortProducts('Tên');
+  }
+
+  void sortProducts(String sortOption) {
+    selectedSortOption.value = sortOption;
+    switch (sortOption) {
+      case 'Tên':
+        sortByName();
+        break;
+      case 'Giá giảm dần':
+        sortByPrice(descending: true);
+        break;
+      case 'Giá tăng dần':
+        sortByPrice(descending: false);
+        break;
+      case 'Đánh giá':
+        sortByRating(descending: true);
+        break;
+      default:
+        sortByName();
+        break;
+    }
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   }
 
   void sortByPrice({bool descending = false}) {
@@ -275,12 +329,20 @@ class ProductController extends GetxController {
       return descending ? priceB.compareTo(priceA) : priceA.compareTo(priceB);
     });
     sortableProducts.assignAll(sorted);
+<<<<<<< HEAD
+=======
+    sortableProducts.refresh();
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   }
 
   void sortByName() {
     final sorted = [...sortableProducts];
     sorted.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     sortableProducts.assignAll(sorted);
+<<<<<<< HEAD
+=======
+    sortableProducts.refresh();
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   }
 
   void search(String query, List<ProductModel> sourceList) {
@@ -291,6 +353,10 @@ class ProductController extends GetxController {
           .where((p) => p.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
       sortableProducts.assignAll(filtered);
+<<<<<<< HEAD
+=======
+      sortableProducts.refresh();
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     }
   }
 
@@ -304,5 +370,13 @@ class ProductController extends GetxController {
           : ratingA.compareTo(ratingB);
     });
     sortableProducts.assignAll(sorted);
+<<<<<<< HEAD
+=======
+    sortableProducts.refresh();
+  }
+
+  Future<List<RatingModel>> getRatingsByProduct(String productId) async {
+    return await ProductRepository.instance.getRatingsByProduct(productId);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   }
 }

@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SkuModel {
   final String id;
+<<<<<<< HEAD
   final String productId;
+=======
+  final DocumentReference productId;
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   final String code;
   final String imageUrl;
   final int cost;
@@ -31,7 +35,13 @@ class SkuModel {
 
   static SkuModel empty() => SkuModel(
         id: '',
+<<<<<<< HEAD
         productId: '',
+=======
+        productId: FirebaseFirestore.instance
+            .collection('Products')
+            .doc(''), // Placeholder
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
         code: '',
         imageUrl: '',
         cost: 0,
@@ -49,7 +59,11 @@ class SkuModel {
 
     return SkuModel(
       id: data['id'] ?? '',
+<<<<<<< HEAD
       productId: data['productId'] ?? '',
+=======
+      productId: data['productId'] as DocumentReference,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       code: data['code'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       cost: data['cost'] ?? 0,
@@ -68,7 +82,11 @@ class SkuModel {
 
     return SkuModel(
       id: doc.id,
+<<<<<<< HEAD
       productId: data['productId'] ?? '',
+=======
+      productId: data['productId'] as DocumentReference,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       code: data['code'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       cost: data['cost'] ?? 0,
@@ -85,7 +103,11 @@ class SkuModel {
   toJson() {
     return {
       'id': id,
+<<<<<<< HEAD
       'productId': productId,
+=======
+      'productId': productId, // Giữ nguyên DocumentReference
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       'code': code,
       'imageUrl': imageUrl,
       'cost': cost,
@@ -101,7 +123,11 @@ class SkuModel {
 
   SkuModel copyWith({
     String? id,
+<<<<<<< HEAD
     String? productId,
+=======
+    DocumentReference? productId,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     String? code,
     String? imageUrl,
     int? cost,
@@ -115,7 +141,12 @@ class SkuModel {
   }) {
     return SkuModel(
       id: id ?? this.id,
+<<<<<<< HEAD
       productId: productId ?? this.productId,
+=======
+      productId:
+          productId ?? this.productId, // Giữ nguyên kiểu DocumentReference
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       code: code ?? this.code,
       imageUrl: imageUrl ?? this.imageUrl,
       cost: cost ?? this.cost,

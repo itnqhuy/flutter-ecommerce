@@ -8,6 +8,7 @@ import '../../../../utils/constants/sizes.dart';
 import '../../layouts/grid_layout.dart';
 import '../products_cards/product_card_vertical.dart';
 
+<<<<<<< HEAD
 class MySortableProducts extends StatefulWidget {
   const MySortableProducts({super.key, required this.products});
   final List<ProductModel> products;
@@ -26,11 +27,24 @@ class _MySortableProductsState extends State<MySortableProducts> {
     super.initState();
     productController.loadProducts(widget.products);
   }
+=======
+class MySortableProducts extends StatelessWidget {
+  const MySortableProducts({super.key, required this.products});
+  final List<ProductModel> products;
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
   @override
   Widget build(BuildContext context) {
+    final productController = ProductController.instance;
+
+    // Gọi `loadProducts()` một lần trước khi hiển thị UI
+    Future.delayed(Duration.zero, () {
+      productController.loadProducts(products);
+    });
+
     return Column(
       children: [
+<<<<<<< HEAD
         DropdownButtonFormField<String>(
           decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
           value: selectedSortOption,
@@ -75,6 +89,34 @@ class _MySortableProductsState extends State<MySortableProducts> {
             ),
           ),
         ),
+=======
+        Obx(() => DropdownButtonFormField<String>(
+              decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
+              value: productController.selectedSortOption.value,
+              hint: const Text('Lọc với'),
+              onChanged: (value) {
+                if (value != null) {
+                  productController.sortProducts(value);
+                }
+              },
+              items: [
+                'Tên',
+                'Giá giảm dần',
+                'Giá tăng dần',
+                'Đánh giá',
+              ]
+                  .map((option) =>
+                      DropdownMenuItem(value: option, child: Text(option)))
+                  .toList(),
+            )),
+        const SizedBox(height: MySizes.md),
+        Obx(() => MyGridLayout(
+              itemCount: productController.sortableProducts.length,
+              itemBuilder: (_, index) => MyProductCardVertical(
+                product: productController.sortableProducts[index],
+              ),
+            )),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       ],
     );
   }

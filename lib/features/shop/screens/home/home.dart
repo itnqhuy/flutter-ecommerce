@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
         }
         return Center(
           child: SizedBox(
+<<<<<<< HEAD
               width: width,
               child: SafeArea(
                 child: SingleChildScrollView(
@@ -107,6 +108,81 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               )),
+=======
+            width: width,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    MyPrimaryHeaderContainer(
+                      child: Column(
+                        children: [
+                          MyHomeAppBar(),
+                          SizedBox(height: MySizes.spaceBtwSections),
+                          MySearchContainer(text: 'Search in store'),
+                          SizedBox(height: MySizes.spaceBtwSections),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: MySizes.defaultSpace),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                MySectionHeading(
+                                  title: 'Popular Categories',
+                                  showActionButton: false,
+                                  textColor: Colors.white,
+                                ),
+                                SizedBox(height: MySizes.spaceBtwItems),
+                                MyHomeCategories(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(MySizes.defaultSpace),
+                      child: Column(
+                        children: [
+                          const MyPromoSlider(),
+                          SizedBox(height: MySizes.spaceBtwSections),
+                          MySectionHeading(
+                            title: 'Sản phẩm nổi bật',
+                            onPressed: () => Get.to(
+                              () => AllProducts(
+                                title: 'Tất cả sản phẩm',
+                                query: FirebaseFirestore.instance
+                                    .collection('Products'),
+                                futureMethod:
+                                    controller.fetchAllFeaturedProducts(),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: MySizes.spaceBtwSections),
+                          Obx(() {
+                            if (controller.isLoading.value) {
+                              return const MyVerticalProductShimmer();
+                            }
+                            if (controller.featuredProducts.isEmpty) {
+                              return const Center(
+                                child: Text("Không tìm thấy dữ liệu"),
+                              );
+                            }
+                            return MyGridLayout(
+                              itemCount: controller.featuredProducts.length,
+                              itemBuilder: (_, index) => MyProductCardVertical(
+                                  product: controller.featuredProducts[index]),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
         );
       },
     );

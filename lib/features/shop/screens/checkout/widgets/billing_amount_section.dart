@@ -1,19 +1,26 @@
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/formatters/fomatter.dart';
+import 'package:ecommerce/utils/helpers/pricing_calculator.dart';
 import 'package:flutter/material.dart';
+
+import '../../../controllers/product/cart_controller.dart';
 
 class MyBillingAmountSection extends StatelessWidget {
   const MyBillingAmountSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+    final subTotal = cartController.totalCartPrice.value;
     return Column(
       children: [
         // SubTotal
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Subtotal', style: Theme.of(context).textTheme.bodyMedium),
-            Text('\$256.0', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Tổng', style: Theme.of(context).textTheme.bodyMedium),
+            Text(MyFormatter.formatCurrency(subTotal),
+                style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         const SizedBox(height: MySizes.spaceBtwItems / 2),
@@ -22,8 +29,10 @@ class MyBillingAmountSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Shipping Fee', style: Theme.of(context).textTheme.bodyMedium),
-            Text('\$6.0', style: Theme.of(context).textTheme.labelLarge),
+            Text('Phí vận chuyển',
+                style: Theme.of(context).textTheme.bodyMedium),
+            Text(MyPricingCalculator.getShippingCost(),
+                style: Theme.of(context).textTheme.labelLarge),
           ],
         ),
         const SizedBox(height: MySizes.spaceBtwItems / 2),
@@ -32,8 +41,9 @@ class MyBillingAmountSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Tax Fee', style: Theme.of(context).textTheme.bodyMedium),
-            Text('\$6.0', style: Theme.of(context).textTheme.labelLarge),
+            Text('Thuế', style: Theme.of(context).textTheme.bodyMedium),
+            Text(MyPricingCalculator.calculateTax(subTotal),
+                style: Theme.of(context).textTheme.labelLarge),
           ],
         ),
         const SizedBox(height: MySizes.spaceBtwItems / 2),
@@ -42,8 +52,12 @@ class MyBillingAmountSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Order Total', style: Theme.of(context).textTheme.bodyMedium),
-            Text('\$6.0', style: Theme.of(context).textTheme.titleMedium),
+            Text('Tổng đơn hàng',
+                style: Theme.of(context).textTheme.bodyMedium),
+            Text(
+                MyFormatter.formatCurrency(
+                    MyPricingCalculator.calculateTotal(subTotal)),
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
       ],

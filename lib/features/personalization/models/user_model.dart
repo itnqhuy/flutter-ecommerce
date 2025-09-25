@@ -12,7 +12,7 @@ class UserModel {
   final String? phoneNumber;
   final String avatarUrl;
   final String role;
-  final List<ShippingInfo>? shippingInfo;
+  final List<ShippingInfoModel>? shippingInfo;
   final bool isBanned;
   final int loyaltyPoints;
   final Timestamp createdAt;
@@ -43,7 +43,11 @@ class UserModel {
     String? phoneNumber,
     String? avatarUrl,
     String? role,
+<<<<<<< HEAD
     List<ShippingInfo>? shippingInfo,
+=======
+    List<ShippingInfoModel>? shippingInfo,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     bool? isBanned,
     int? loyaltyPoints,
     Timestamp? createdAt,
@@ -128,7 +132,11 @@ class UserModel {
     final data = document.data();
     if (data != null) {
       var shippingInfoList = (data['shippingInfo'] as List<dynamic>?)
+<<<<<<< HEAD
           ?.map((s) => ShippingInfo.fromSnapshot(s))
+=======
+          ?.map((s) => ShippingInfoModel.fromSnapshot(s))
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
           .toList();
 
       return UserModel(

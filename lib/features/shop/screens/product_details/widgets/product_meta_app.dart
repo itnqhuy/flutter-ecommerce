@@ -27,14 +27,22 @@ class MyProductMetaData extends StatelessWidget {
         : Get.put(SkuAttributeController());
     final darkMode = MyHelperFunctions.isDarkMode(context);
 
+<<<<<<< HEAD
     brandController.loadBrandById(product.brandId);
+=======
+    brandController.loadBrandById(product.brandId.id);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Obx(() {
           final hasSelectedSku =
+<<<<<<< HEAD
               skuAttrController.selectedSku.value?.productId == product.id;
+=======
+              skuAttrController.selectedSku.value?.productId.id == product.id;
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
           // Lấy SKU giá thấp nhất
           final lowestPriceSku =
@@ -99,7 +107,11 @@ class MyProductMetaData extends StatelessWidget {
         ),
         const SizedBox(height: MySizes.spaceBtwItems / 1.5),
         Obx(() {
+<<<<<<< HEAD
           final brand = brandController.brandCache[product.brandId];
+=======
+          final brand = brandController.brandCache[product.brandId.id];
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
           return Row(
             children: [
               MyBrandTitleWithVerifiedIcon(

@@ -1,3 +1,5 @@
+import 'package:ecommerce/routes/app_routes.dart';
+
 import 'bindings/general_bindings.dart';
 import 'features/authentication/screens/onboarding/onboarding.dart';
 import '/utils/theme/theme.dart';
@@ -15,6 +17,7 @@ class App extends StatelessWidget {
       theme: MyAppTheme.lightTheme,
       darkTheme: MyAppTheme.darkTheme,
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
       home: const OnBoardingScreen(),
       debugShowCheckedModeBanner: false,
     );

@@ -37,7 +37,11 @@ class ProductAttributeModel {
   factory ProductAttributeModel.fromDocumentSnapshot(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return ProductAttributeModel(
+<<<<<<< HEAD
       id: data['id'] ?? '',
+=======
+      id: doc.id,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       productId: data['productId'] as DocumentReference,
       name: data['name'] ?? '',
       createdAt: data['createdAt'] ?? Timestamp.now(),

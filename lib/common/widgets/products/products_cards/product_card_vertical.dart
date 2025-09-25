@@ -27,7 +27,11 @@ class MyProductCardVertical extends StatelessWidget {
     final dark = MyHelperFunctions.isDarkMode(context);
 
     final brandController = Get.put(BrandController());
+<<<<<<< HEAD
     brandController.loadBrandById(product.brandId);
+=======
+    brandController.loadBrandById(product.brandId.id);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),
@@ -107,7 +111,12 @@ class MyProductCardVertical extends StatelessWidget {
                     MyProductTitleText(title: product.name, smallSize: true),
                     SizedBox(height: MySizes.spaceBtwItems / 2),
                     Obx(() {
+<<<<<<< HEAD
                       final brand = brandController.brandCache[product.brandId];
+=======
+                      final brand =
+                          brandController.brandCache[product.brandId.id];
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                       return MyBrandTitleWithVerifiedIcon(
                           title: brand?.name ?? 'Thương hiệu không rõ');
                     }),

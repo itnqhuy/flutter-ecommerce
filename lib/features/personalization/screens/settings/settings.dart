@@ -53,7 +53,11 @@ class SettingsScreen extends StatelessWidget {
                   // User Settings
                   MySettingsMenuTile(
                     icon: Iconsax.safe_home,
+<<<<<<< HEAD
                     title: 'Địa chỉ',
+=======
+                    title: 'Địa chỉ của tôi',
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                     subTitle: 'Đặt địa chỉ giao hàng của bạn',
                     onTap: () => Get.to(() => UserAddressScreen()),
                   ),
@@ -79,12 +83,17 @@ class SettingsScreen extends StatelessWidget {
                       subTitle: 'List of all the discounted coupons'),
                   MySettingsMenuTile(
                       icon: Iconsax.notification,
-                      title: 'Notifications',
-                      subTitle: 'Set any kind of notification message'),
+                      title: 'Thông báo',
+                      subTitle: 'Thiết lập loại thông báo muốn nhận'),
                   MySettingsMenuTile(
                       icon: Iconsax.security_card,
+<<<<<<< HEAD
                       title: 'Account Privacy',
                       subTitle: 'Manage data usage and connected accounts'),
+=======
+                      title: 'Bảo mật tài khoản',
+                      subTitle: 'Quản lý việc sử dụng dữ liệu và kết nối'),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
                   //logout
                   const SizedBox(height: MySizes.spaceBtwSections),

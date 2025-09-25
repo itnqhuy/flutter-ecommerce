@@ -33,6 +33,14 @@ class MyImages {
   static const String loadingAnimation =
       "assets/amimations/loadingAnimation.json";
   static const String loveAnimation = "assets/amimations/loveAnimation.json";
+<<<<<<< HEAD
+=======
+  static const String pencilAnimation =
+      "assets/amimations/pencilAnimation.json";
+
+  static const String emptyAnimation = "assets/amimations/emptyAnimation.json";
+  static const String cartAnimation = "assets/amimations/cartAnimation.json";
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";
@@ -49,6 +57,8 @@ class MyImages {
   static const String visa = "assets/icons/payment_methods/visa.png";
   static const String paystack = "assets/icons/payment_methods/paystack.png";
   static const String paytm = "assets/icons/payment_methods/paytm.png";
+  static const String onDelivery =
+      "assets/icons/payment_methods/cash-on-delivery.png";
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
 

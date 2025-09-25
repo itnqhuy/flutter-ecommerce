@@ -12,6 +12,10 @@ class MyRatingAndShare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
+<<<<<<< HEAD
+=======
+    controller.loadProductRatings(product.id);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

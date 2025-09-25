@@ -12,7 +12,11 @@ class DummyData {
       id: '1',
       name: 'Laptop',
       imageUrl: MyImages.laptopCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -21,7 +25,11 @@ class DummyData {
       id: '2',
       name: 'Monitor',
       imageUrl: MyImages.monitorCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -30,7 +38,11 @@ class DummyData {
       id: '3',
       name: 'Hardware',
       imageUrl: MyImages.hardwareCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -39,7 +51,11 @@ class DummyData {
       id: '4',
       name: 'Keyboard',
       imageUrl: MyImages.keyboardCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -48,7 +64,11 @@ class DummyData {
       id: '5',
       name: 'Mouse',
       imageUrl: MyImages.mouseCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -57,7 +77,11 @@ class DummyData {
       id: '6',
       name: 'Camera',
       imageUrl: MyImages.cameraCategory,
+<<<<<<< HEAD
       parentCate: '',
+=======
+      parentCate: null,
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
       isFeatured: true,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
@@ -65,6 +89,7 @@ class DummyData {
 
     // -------- SUBCATEGORIES --------
 
+<<<<<<< HEAD
     // Laptop
     CategoryModel(
       id: '7',
@@ -184,6 +209,127 @@ class DummyData {
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
     ),
+=======
+    //   // Laptop
+    //   CategoryModel(
+    //     id: '7',
+    //     name: 'Laptop cảm ứng',
+    //     imageUrl: MyImages.laptopCategory,
+    //     parentCate: '1',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '8',
+    //     name: 'Laptop không cảm ứng',
+    //     imageUrl: MyImages.laptopCategory,
+    //     parentCate: '1',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+
+    //   // Monitor
+    //   CategoryModel(
+    //     id: '9',
+    //     name: 'Gaming Monitor',
+    //     imageUrl: MyImages.monitorCategory,
+    //     parentCate: '2',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '10',
+    //     name: 'Office Monitor',
+    //     imageUrl: MyImages.monitorCategory,
+    //     parentCate: '2',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+
+    //   // Hardware
+    //   CategoryModel(
+    //     id: '11',
+    //     name: 'Mainboard',
+    //     imageUrl: MyImages.hardwareCategory,
+    //     parentCate: '3',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '12',
+    //     name: 'CPU',
+    //     imageUrl: MyImages.hardwareCategory,
+    //     parentCate: '3',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '13',
+    //     name: 'RAM',
+    //     imageUrl: MyImages.hardwareCategory,
+    //     parentCate: '3',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+
+    //   // Keyboard
+    //   CategoryModel(
+    //     id: '14',
+    //     name: 'Cơ',
+    //     imageUrl: MyImages.keyboardCategory,
+    //     parentCate: '4',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '15',
+    //     name: 'Không cơ',
+    //     imageUrl: MyImages.keyboardCategory,
+    //     parentCate: '4',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+
+    //   // Mouse
+    //   CategoryModel(
+    //     id: '16',
+    //     name: 'Có dây',
+    //     imageUrl: MyImages.mouseCategory,
+    //     parentCate: '5',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+    //   CategoryModel(
+    //     id: '17',
+    //     name: 'Không dây',
+    //     imageUrl: MyImages.mouseCategory,
+    //     parentCate: '5',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+
+    //   // Camera
+    //   CategoryModel(
+    //     id: '18',
+    //     name: 'Webcam',
+    //     imageUrl: MyImages.cameraCategory,
+    //     parentCate: '6',
+    //     isFeatured: false,
+    //     createdAt: Timestamp.now(),
+    //     updatedAt: Timestamp.now(),
+    //   ),
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
   ];
 
   /// -- Banners

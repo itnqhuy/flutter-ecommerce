@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ShippingInfo {
+class ShippingInfoModel {
   final String id;
   final String name;
   final String phone;
@@ -12,7 +12,10 @@ class ShippingInfo {
   final Timestamp createdAt;
   final Timestamp updatedAt;
 
-  ShippingInfo({
+  /// Tham chiếu đến User document (khóa ngoại)
+  final DocumentReference userId;
+
+  ShippingInfoModel({
     required this.id,
     required this.name,
     required this.phone,
@@ -23,6 +26,7 @@ class ShippingInfo {
     required this.isDefault,
     required this.createdAt,
     required this.updatedAt,
+    required this.userId,
   });
 
   // Convert ShippingInfo to JSON for Firebase
@@ -38,14 +42,44 @@ class ShippingInfo {
       'isDefault': isDefault,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'userId': userId,
     };
   }
 
+  ShippingInfoModel copyWith({
+    String? id,
+    String? name,
+    String? phone,
+    String? provinceOrCity,
+    String? district,
+    String? ward,
+    String? detailAddress,
+    bool? isDefault,
+    Timestamp? createdAt,
+    Timestamp? updatedAt,
+    DocumentReference<Object?>? userId,
+  }) {
+    return ShippingInfoModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      phone: phone ?? this.phone,
+      provinceOrCity: provinceOrCity ?? this.provinceOrCity,
+      district: district ?? this.district,
+      ward: ward ?? this.ward,
+      detailAddress: detailAddress ?? this.detailAddress,
+      isDefault: isDefault ?? this.isDefault,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      userId: userId ?? this.userId,
+    );
+  }
+
   // Factory method to create a ShippingInfo from Firestore document snapshot
-  factory ShippingInfo.fromSnapshot(
+  factory ShippingInfoModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
-    return ShippingInfo(
+    final data = document.data() ?? {}; // Kiểm tra dữ liệu không bị null
+
+    return ShippingInfoModel(
       id: document.id,
       name: data['name'] ?? "",
       phone: data['phone'] ?? "",
@@ -56,6 +90,43 @@ class ShippingInfo {
       isDefault: data['isDefault'] ?? false,
       createdAt: data['createdAt'] ?? Timestamp.now(),
       updatedAt: data['updatedAt'] ?? Timestamp.now(),
+      userId: data['userId'] is DocumentReference
+          ? data['userId'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Users').doc('none'),
+    );
+  }
+  factory ShippingInfoModel.fromJson(Map<String, dynamic> json) {
+    return ShippingInfoModel(
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      phone: json['phone'] ?? '',
+      provinceOrCity: json['provinceOrCity'] ?? '',
+      district: json['district'] ?? '',
+      ward: json['ward'] ?? '',
+      detailAddress: json['detailAddress'] ?? '',
+      isDefault: json['isDefault'] ?? false,
+      createdAt: json['createdAt'] ?? Timestamp.now(),
+      updatedAt: json['updatedAt'] ?? Timestamp.now(),
+      userId: json['userId'] is DocumentReference
+          ? json['userId'] as DocumentReference
+          : FirebaseFirestore.instance.collection('Users').doc('none'),
+    );
+  }
+
+  /// Tạo ShippingInfo rỗng
+  static ShippingInfoModel empty() {
+    return ShippingInfoModel(
+      id: '',
+      name: '',
+      phone: '',
+      provinceOrCity: '',
+      district: '',
+      ward: '',
+      detailAddress: '',
+      isDefault: false,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      userId: FirebaseFirestore.instance.collection('Users').doc('none'),
     );
   }
 }

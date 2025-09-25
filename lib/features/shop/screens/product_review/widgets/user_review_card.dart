@@ -1,98 +1,68 @@
-import 'package:ecommerce/common/styles/rounded_container.dart';
-import 'package:ecommerce/common/widgets/products/ratings/rating_indicator.dart';
-import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/image_strings.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import '../../../../../common/widgets/products/ratings/rating_indicator.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/constants/image_strings.dart';
+import '../../../../../utils/constants/sizes.dart';
+import '../../../../personalization/controllers/user_controller.dart';
+import '../../../models/rating_model.dart';
+
 import 'package:readmore/readmore.dart';
 
 class UserReviewCard extends StatelessWidget {
-  const UserReviewCard({super.key});
+  const UserReviewCard({super.key, required this.rating});
+
+  final RatingModel rating;
 
   @override
   Widget build(BuildContext context) {
-    final dark = MyHelperFunctions.isDarkMode(context);
+    final controller = UserController.instance;
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                CircleAvatar(backgroundImage: AssetImage(MyImages.user)),
-                SizedBox(width: MySizes.spaceBtwItems),
-                Text('John Doe', style: Theme.of(context).textTheme.titleLarge),
-              ],
+            const CircleAvatar(backgroundImage: AssetImage(MyImages.user)),
+            const SizedBox(width: MySizes.spaceBtwItems),
+            FutureBuilder<String>(
+              future: controller.getUsernameById(rating.userId.id),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Text('Đang tải...');
+                } else if (snapshot.hasError) {
+                  return const Text('Không rõ người dùng');
+                } else {
+                  return Text(snapshot.data ?? 'Ẩn danh',
+                      style: Theme.of(context).textTheme.titleLarge);
+                }
+              },
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
           ],
         ),
         SizedBox(height: MySizes.spaceBtwItems),
-
-        //Reviews
         Row(
           children: [
-            MyRatingBarIndicator(rating: 4),
+            MyRatingBarIndicator(rating: rating.star.toDouble()),
             const SizedBox(width: MySizes.spaceBtwItems),
-            Text('01 Nov 2023', style: Theme.of(context).textTheme.bodyMedium),
+            Text('${rating.createdAt.toLocal()}',
+                style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
-        const SizedBox(width: MySizes.spaceBtwItems),
-        const ReadMoreText(
-          'Laptop là một thiết bị công nghệ không thể thiếu trong cuộc sống hiện đại, phục vụ cho nhiều mục đích như học tập, làm việc và giải trí. Với sự phát triển của công nghệ, laptop ngày càng trở nên mạnh mẽ, gọn nhẹ và dễ dàng mang theo bên mình. Các dòng laptop hiện nay được trang bị các cấu hình mạnh mẽ với bộ vi xử lý hiệu suất cao, bộ nhớ RAM lớn và ổ cứng SSD, giúp người dùng thực hiện các tác vụ nặng như thiết kế đồ họa, chỉnh sửa video, hay chơi game mượt mà',
-          trimLines: 1,
+        const SizedBox(height: MySizes.spaceBtwItems),
+        ReadMoreText(
+          rating.description,
+          trimLines: 2,
           trimMode: TrimMode.Line,
           trimExpandedText: 'show less',
           trimCollapsedText: 'show more',
-          moreStyle: TextStyle(
+          moreStyle: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: MyColors.primary),
-          lessStyle: TextStyle(
+          lessStyle: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: MyColors.primary),
         ),
         const SizedBox(width: MySizes.spaceBtwItems),
-
-        // Company Review
-        MyRoundedContainer(
-          backgroundColor: dark ? MyColors.darkerGrey : MyColors.grey,
-          child: Padding(
-            padding: const EdgeInsets.all(MySizes.md),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("NHuy's Store",
-                        style: Theme.of(context).textTheme.titleMedium),
-                    Text('02 Nov, 2023',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                  ],
-                ),
-                const SizedBox(width: MySizes.spaceBtwItems),
-                const ReadMoreText(
-                  'Laptop là một thiết bị công nghệ không thể thiếu trong cuộc sống hiện đại, phục vụ cho nhiều mục đích như học tập, làm việc và giải trí. Với sự phát triển của công nghệ, laptop ngày càng trở nên mạnh mẽ, gọn nhẹ và dễ dàng mang theo bên mình. Các dòng laptop hiện nay được trang bị các cấu hình mạnh mẽ với bộ vi xử lý hiệu suất cao, bộ nhớ RAM lớn và ổ cứng SSD, giúp người dùng thực hiện các tác vụ nặng như thiết kế đồ họa, chỉnh sửa video, hay chơi game mượt mà',
-                  trimLines: 1,
-                  trimMode: TrimMode.Line,
-                  trimExpandedText: 'show less',
-                  trimCollapsedText: 'show more',
-                  moreStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: MyColors.primary),
-                  lessStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: MyColors.primary),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: MySizes.spaceBtwSections),
       ],
     );
   }

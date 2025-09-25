@@ -1,9 +1,16 @@
 import 'package:get/get.dart';
 import '../../../data/repositories/brands/brand_repository.dart';
+<<<<<<< HEAD
 import '../../../data/repositories/products/product_repository.dart'; // import thêm
 import '../../../utils/popups/loaders.dart';
 import '../models/brand_model.dart';
 import '../../shop/models/product_model.dart'; // import ProductModel
+=======
+import '../../../data/repositories/products/product_repository.dart';
+import '../../../utils/popups/loaders.dart';
+import '../models/brand_model.dart';
+import '../../shop/models/product_model.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 
 class BrandController extends GetxController {
   static BrandController get instance => Get.find();

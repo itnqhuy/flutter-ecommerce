@@ -6,6 +6,10 @@ import '../../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../../common/widgets/products/products_cards/product_card_vertical.dart';
 import '../../../../../common/widgets/texts/section_heading.dart';
 import '../../../../../utils/constants/sizes.dart';
+<<<<<<< HEAD
+=======
+import '../../../controllers/category_controller.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import '../../../controllers/product/product_controller.dart';
 import '../../../models/category_model.dart';
 import '../../all_products/all_products.dart';
@@ -15,7 +19,12 @@ class MyCategoryTab extends StatelessWidget {
   final CategoryModel category;
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     ProductController.instance.fetchProductsByCategory(category.id);
+=======
+    final controller = CategoryController.instance;
+    controller.fetchCategoryProducts(category.id);
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
     return ListView(
       children: [
         Padding(
@@ -38,12 +47,21 @@ class MyCategoryTab extends StatelessWidget {
               ),
               const SizedBox(height: MySizes.spaceBtwItems),
 
+<<<<<<< HEAD
               MyGridLayout(
                   itemCount: ProductController.instance.categoryProducts.length,
                   itemBuilder: (_, index) => MyProductCardVertical(
                         product:
                             ProductController.instance.categoryProducts[index],
                       ))
+=======
+              Obx(() => MyGridLayout(
+                    itemCount: controller.categoryProducts.length,
+                    itemBuilder: (_, index) => MyProductCardVertical(
+                      product: controller.categoryProducts[index],
+                    ),
+                  ))
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
             ],
           ),
         ),

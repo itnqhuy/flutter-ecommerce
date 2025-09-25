@@ -1,5 +1,9 @@
 import 'package:ecommerce/common/widgets/icons/my_circular_icon.dart';
+<<<<<<< HEAD
 import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
+=======
+import 'package:ecommerce/features/shop/controllers/product/cart_controller.dart';
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:ecommerce/features/shop/models/sku_model.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
@@ -7,6 +11,8 @@ import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../controllers/product/sku_attribute_controller.dart';
 
 class MyBottomAddToCart extends StatelessWidget {
   const MyBottomAddToCart({
@@ -66,7 +72,22 @@ class MyBottomAddToCart extends StatelessWidget {
 
               /// Add to Cart Button
               ElevatedButton(
+<<<<<<< HEAD
                 onPressed: () => cartController.addToCart(sku),
+=======
+                onPressed: () async {
+                  final skuAttriController = SkuAttributeController.instance;
+                  if (await skuAttriController.isSelectionComplete()) {
+                    cartController.addToCart(sku);
+                  } else {
+                    Get.snackbar(
+                      'Chưa đầy đủ phân loại',
+                      'Hãy chọn đầy đủ phân loại nhé',
+                      snackPosition: SnackPosition.BOTTOM,
+                    );
+                  }
+                },
+>>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(MySizes.md),
                   backgroundColor: dark ? MyColors.grey : MyColors.black,
