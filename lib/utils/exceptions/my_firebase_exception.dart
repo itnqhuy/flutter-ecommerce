@@ -41,12 +41,6 @@ class MyFirebaseAuthException implements Exception {
         return message ?? 'Mã hành động đã hết hạn.';
       case 'credential-already-in-use':
         return message ?? 'Tài khoản này đã được liên kết với email khác.';
-      case 'user-not-found':
-        return message ?? 'Không tìm thấy tài khoản với email này.';
-      case 'wrong-password':
-        return message ?? 'Mật khẩu không đúng. Vui lòng thử lại.';
-      case 'too-many-requests':
-        return message ?? 'Đăng nhập quá nhiều lần. Vui lòng thử lại sau.';
       default:
         return message ?? 'Đã xảy ra lỗi Firebase. Vui lòng thử lại.';
     }

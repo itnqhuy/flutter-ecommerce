@@ -1,4 +1,3 @@
-import 'package:ecommerce/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,6 @@ import '../../../navigation_menu.dart';
 import '../../../utils/exceptions/my_firebase_exception.dart';
 import '../../../utils/exceptions/my_format_exception.dart';
 import '../../../utils/exceptions/my_platform_exception.dart';
-import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -22,9 +20,6 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
 
   final _auth = FirebaseAuth.instance;
-
-  User? get authUser => _auth.currentUser;
-
   @override
   void onReady() {
     FlutterNativeSplash.remove();
@@ -32,13 +27,12 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Function to determine which screen to show
-  screenRedirect() async {
+  screenRedirect() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final user = _auth.currentUser;
 
       if (user != null) {
         if (user.emailVerified) {
-          await MyLocalStorage.init(user.uid);
           Get.offAll(() => NavigationMenu());
         } else {
           Get.offAll(() => VerifyEmailScreen(
@@ -66,6 +60,7 @@ class AuthenticationRepository extends GetxController {
       return await _auth.signInWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
+      // In chi tiết lỗi để kiểm tra
       throw MyFirebaseAuthException(e.code, e.message);
     } on FirebaseException catch (e) {
       throw MyFirebaseAuthException(e.code, e.message);
@@ -97,28 +92,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  //Xác thực lại người dùng
-  Future<void> reAuthenticateWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      final AuthCredential credential = EmailAuthProvider.credential(
-        email: email,
-        password: password,
-      );
-
-      await _auth.currentUser!.reauthenticateWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      throw MyFirebaseAuthException(e.code, e.message);
-    } on FirebaseException catch (e) {
-      throw MyFirebaseAuthException(e.code, e.message);
-    } on FormatException catch (_) {
-      throw const MyFormatException();
-    } on PlatformException catch (e) {
-      throw MyPlatformException(e.code, e.message);
-    } catch (e) {
-      throw 'Có lỗi xảy ra. Vui lòng thử lại.';
-    }
-  }
+  // [ReAuthenticate] - Xác thực lại người dùng
 
   // Xác minh email
   Future<void> sendEmailVerification() async {
@@ -155,34 +129,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // // [GoogleAuthentication] - Google
-  // Future<UserCredential> signInWithGoogle() async {
-  //   try {
-  //     // Trigger the authentication flow
-  //     final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
-
-  //     // Obtain the auth details from the request
-  //     final GoogleSignInAuthentication googleAuth =
-  //         await userAccount?.authentication;
-
-  //     // Create a new credential
-  //     final credentials = GoogleAuthProvider.credential(
-  //         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-
-  //     // Once signed in, return the UserCredential
-  //     return await _auth.signInWithCredential(credentials);
-  //   } on FirebaseAuthException catch (e) {
-  //     throw MyFirebaseAuthException(e.code, e.message);
-  //   } on FirebaseException catch (e) {
-  //     throw MyFirebaseAuthException(e.code, e.message);
-  //   } on FormatException catch (_) {
-  //     throw const MyFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw MyPlatformException(e.code, e.message);
-  //   } catch (e) {
-  //     throw 'Đã xảy ra lỗi. Vui lòng thử lại.';
-  //   }
-  // }
+  // [GoogleAuthentication] - Google
 
   // [FacebookAuthentication] - Facebook
 
@@ -206,20 +153,4 @@ class AuthenticationRepository extends GetxController {
   }
 
   // XÓA NGƯỜI DÙNG - Xóa xác thực và tài khoản Firestore của người dùng
-  Future<void> deleteAccount() async {
-    try {
-      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
-      await _auth.currentUser?.delete();
-    } on FirebaseAuthException catch (e) {
-      throw MyFirebaseAuthException(e.code, e.message);
-    } on FirebaseException catch (e) {
-      throw MyFirebaseAuthException(e.code, e.message);
-    } on FormatException catch (_) {
-      throw const MyFormatException();
-    } on PlatformException catch (e) {
-      throw MyPlatformException(e.code, e.message);
-    } catch (e) {
-      throw 'Có lỗi xảy ra. Vui lòng thử lại.';
-    }
-  }
 }

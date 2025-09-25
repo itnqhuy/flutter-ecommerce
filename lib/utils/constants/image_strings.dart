@@ -9,15 +9,8 @@ class MyImages {
   static const String google = "assets/logos/google_icon.png";
   static const String facebook = "assets/logos/facebook_icon.png";
 
-  // -- Category Icons
-  static const String laptopCategory = "assets/images/categories/laptop.png";
-  static const String monitorCategory = "assets/images/categories/monitor.png";
-  static const String hardwareCategory =
-      "assets/images/categories/hardware.png";
-  static const String keyboardCategory =
-      "assets/images/categories/keyboard.png";
-  static const String mouseCategory = "assets/images/categories/mouse.png";
-  static const String cameraCategory = "assets/images/categories/camera.png";
+  // -- Category Icons (Example)
+  static const String laptopCategory = "assets/icons/laptop.png";
 
   static const String onBoardingImage1 =
       "assets/amimations/onBoardingImage1.json";
@@ -32,6 +25,7 @@ class MyImages {
 
   static const String loadingAnimation =
       "assets/amimations/loadingAnimation.json";
+<<<<<<< HEAD
   static const String loveAnimation = "assets/amimations/loveAnimation.json";
 <<<<<<< HEAD
 =======
@@ -41,10 +35,17 @@ class MyImages {
   static const String emptyAnimation = "assets/amimations/emptyAnimation.json";
   static const String cartAnimation = "assets/amimations/cartAnimation.json";
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
+=======
+>>>>>>> parent of 450796a (restore all)
 
   // -- Placeholder Images
   //static const String productPlaceholder = "assets/images/product_placeholder.png";
-  static const String userPlaceholder = "assets/images/content/user.png";
+  static const String userPlaceholder = "assets/images/user.png";
+
+  //Banners
+  static const String promoBanner1 = "assets/images/banners/banner_1.jpg";
+  static const String promoBanner2 = "assets/images/banners/banner_2.jpg";
+  static const String promoBanner3 = "assets/images/banners/banner_3.jpg";
 
   //Payment Methods
   static const String applePay = "assets/icons/payment_methods/apple-pay.png";

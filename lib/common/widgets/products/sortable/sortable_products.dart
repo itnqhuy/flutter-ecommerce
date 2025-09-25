@@ -1,5 +1,7 @@
+import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
+import 'package:ecommerce/common/widgets/products/products_cards/product_card_vertical.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../features/shop/controllers/product/product_controller.dart';
@@ -47,34 +49,14 @@ class MySortableProducts extends StatelessWidget {
 <<<<<<< HEAD
         DropdownButtonFormField<String>(
           decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
-          value: selectedSortOption,
-          hint: const Text('Lọc với'),
-          onChanged: (value) {
-            setState(() {
-              selectedSortOption = value;
-            });
-            switch (value) {
-              case 'Name':
-                productController.sortByName();
-                break;
-              case 'Higher Price':
-                productController.sortByPrice(descending: true);
-                break;
-              case 'Lower Price':
-                productController.sortByPrice(descending: false);
-                break;
-              case 'Rating':
-                productController.sortByRating(descending: true);
-                break;
-              default:
-                break;
-            }
-          },
+          onChanged: (value) {},
           items: [
-            'Tên',
-            'Giá giảm dần',
-            'Giá tăng dần',
-            'Đánh giá',
+            'Name',
+            'Higher Price',
+            'Lower Price',
+            'Sale',
+            'Newest',
+            'Popularity'
           ]
               .map((option) =>
                   DropdownMenuItem(value: option, child: Text(option)))

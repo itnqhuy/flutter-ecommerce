@@ -1,64 +1,32 @@
+import 'package:ecommerce/features/shop/screens/product_review/widgets/progress_indicator_and_rating.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../controllers/product/product_controller.dart';
-import '../../../models/product_model.dart';
-import 'progress_indicator_and_rating.dart';
 
 class MyOverallProductRating extends StatelessWidget {
   const MyOverallProductRating({
     super.key,
-    required this.product,
   });
-  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
-    final productController = ProductController.instance;
-
-    return Obx(() {
-      final avgRating = productController.getAverageRating(product.id);
-      final ratingCountMap =
-          productController.getRatingCountByStars(product.id);
-      final totalCount =
-          ratingCountMap.values.fold<int>(0, (sum, count) => sum + count);
-
-      double getProgress(int star) =>
-          totalCount == 0 ? 0.0 : (ratingCountMap[star] ?? 0) / totalCount;
-
-      return Row(
-        children: [
-          Expanded(
+    return Row(
+      children: [
+        Expanded(
             flex: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  avgRating.toStringAsFixed(1),
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '($totalCount)',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
+            child:
+                Text('4.8', style: Theme.of(context).textTheme.displayLarge)),
+        Expanded(
+          flex: 7,
+          child: Column(
+            children: [
+              MyRatingProgressIndicator(text: '5', value: 1.0),
+              MyRatingProgressIndicator(text: '4', value: 0.8),
+              MyRatingProgressIndicator(text: '3', value: 0.6),
+              MyRatingProgressIndicator(text: '2', value: 0.4),
+              MyRatingProgressIndicator(text: '1', value: 0.2),
+            ],
           ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              children: List.generate(5, (index) {
-                final star = 5 - index;
-                return MyRatingProgressIndicator(
-                  text: star.toString(),
-                  value: getProgress(star),
-                );
-              }),
-            ),
-          ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 }

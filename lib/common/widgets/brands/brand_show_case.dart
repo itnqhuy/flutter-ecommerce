@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/styles/rounded_container.dart';
+import 'package:ecommerce/common/widgets/brands/my_brand_card.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
@@ -21,7 +22,7 @@ class MyBrandShowCase extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: MySizes.spaceBtwItems),
       child: Column(
         children: [
-          //const MyBrandCard(showBorder: false),
+          const MyBrandCard(showBorder: false),
           const SizedBox(height: MySizes.spaceBtwItems),
           //brand top3
           Row(

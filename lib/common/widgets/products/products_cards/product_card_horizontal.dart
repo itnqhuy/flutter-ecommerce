@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/styles/rounded_container.dart';
+import 'package:ecommerce/common/widgets/icons/my_circular_icon.dart';
 import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
 import 'package:ecommerce/common/widgets/texts/my_brand_title_text_verified_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
@@ -10,12 +11,8 @@ import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../features/shop/models/product_model.dart';
-import '../favorite_icon/favorite_icon.dart';
-
 class MyProductCardHorizontal extends StatelessWidget {
-  const MyProductCardHorizontal({super.key, required this.product});
-  final ProductModel product;
+  const MyProductCardHorizontal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +49,7 @@ class MyProductCardHorizontal extends StatelessWidget {
                   top: 12,
                   child: MyRoundedContainer(
                     radius: MySizes.sm,
-                    backgroundColor:
-                        MyColors.secondary.withAlpha((255 * 0.8).round()),
+                    backgroundColor: MyColors.secondary.withOpacity(0.8),
                     padding: const EdgeInsets.symmetric(
                       horizontal: MySizes.sm,
                       vertical: MySizes.xs,
@@ -69,10 +65,13 @@ class MyProductCardHorizontal extends StatelessWidget {
                 ),
 
                 // Favourite Icon
-                Positioned(
+                const Positioned(
                   top: 0,
                   right: 0,
-                  child: MyFavoriteIcon(productId: product.id),
+                  child: MyCircularIcon(
+                    icon: Iconsax.heart,
+                    color: Colors.red,
+                  ),
                 ),
               ],
             ),
@@ -99,7 +98,7 @@ class MyProductCardHorizontal extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //Price
-                      Flexible(child: MyProductPriceText(price: 256)),
+                      Flexible(child: MyProductPriceText(price: '256.0')),
 
                       //Add to Cart
                       Container(

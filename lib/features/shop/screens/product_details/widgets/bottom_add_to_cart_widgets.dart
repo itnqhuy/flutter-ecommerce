@@ -1,15 +1,17 @@
 import 'package:ecommerce/common/widgets/icons/my_circular_icon.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 =======
 import 'package:ecommerce/features/shop/controllers/product/cart_controller.dart';
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:ecommerce/features/shop/models/sku_model.dart';
+=======
+>>>>>>> parent of 450796a (restore all)
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../controllers/product/sku_attribute_controller.dart';
@@ -17,21 +19,14 @@ import '../../../controllers/product/sku_attribute_controller.dart';
 class MyBottomAddToCart extends StatelessWidget {
   const MyBottomAddToCart({
     super.key,
-    required this.sku,
   });
-
-  final SkuModel sku;
 
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunctions.isDarkMode(context);
-    final cartController = CartController.instance;
-
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: MySizes.defaultSpace,
-        vertical: MySizes.defaultSpace / 2,
-      ),
+          horizontal: MySizes.defaultSpace, vertical: MySizes.defaultSpace / 2),
       decoration: BoxDecoration(
         color: dark ? MyColors.darkerGrey : MyColors.light,
         borderRadius: const BorderRadius.only(
@@ -39,36 +34,19 @@ class MyBottomAddToCart extends StatelessWidget {
           topRight: Radius.circular(MySizes.cardRadiusLg),
         ),
       ),
-      child: Obx(() => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
             children: [
-              /// Quantity Selector
-              Row(
-                children: [
-                  MyCircularIcon(
-                    icon: Iconsax.minus,
-                    backgroundColor: MyColors.darkGrey,
-                    width: 40,
-                    height: 40,
-                    color: MyColors.white,
-                    onPressed: cartController.decreaseQuantity,
-                  ),
-                  const SizedBox(width: MySizes.spaceBtwItems),
-                  Text(
-                    cartController.productQuantityInCart.value.toString(),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  const SizedBox(width: MySizes.spaceBtwItems),
-                  MyCircularIcon(
-                    icon: Iconsax.add,
-                    backgroundColor: MyColors.black,
-                    width: 40,
-                    height: 40,
-                    color: MyColors.white,
-                    onPressed: cartController.increaseQuantity,
-                  ),
-                ],
+              MyCircularIcon(
+                icon: Iconsax.minus,
+                backgroundColor: MyColors.darkGrey,
+                width: 40,
+                height: 40,
+                color: MyColors.white,
               ),
+<<<<<<< HEAD
 
               /// Add to Cart Button
               ElevatedButton(
@@ -111,9 +89,31 @@ class MyBottomAddToCart extends StatelessWidget {
                     ),
                   ],
                 ),
+=======
+              const SizedBox(height: MySizes.spaceBtwItems),
+              Text('2', style: Theme.of(context).textTheme.titleSmall),
+              const SizedBox(height: MySizes.spaceBtwItems),
+              MyCircularIcon(
+                icon: Iconsax.add,
+                backgroundColor: MyColors.black,
+                width: 40,
+                height: 40,
+                color: MyColors.white,
+>>>>>>> parent of 450796a (restore all)
               ),
             ],
-          )),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(MySizes.md),
+              backgroundColor: MyColors.black,
+              side: const BorderSide(color: MyColors.black),
+            ),
+            child: const Text('Add to Cart'),
+          )
+        ],
+      ),
     );
   }
 }

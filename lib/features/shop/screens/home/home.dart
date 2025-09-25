@@ -1,19 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/common/widgets/layouts/grid_layout.dart';
+import 'package:ecommerce/common/widgets/products/products_cards/product_card_vertical.dart';
+import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:ecommerce/common/widgets/custom_shapes/containers/search_container.dart';
+import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dart';
+import 'package:ecommerce/utils/constants/image_strings.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:get/get.dart';
-
-import '../../../../common/widgets/animations/vertical_product_shimmer.dart';
-import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
-import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
-import '../../../../common/widgets/layouts/grid_layout.dart';
-import '../../../../common/widgets/products/products_cards/product_card_vertical.dart';
-import '../../../../common/widgets/texts/section_heading.dart';
-import '../../../../utils/constants/sizes.dart';
-import '../../controllers/product/product_controller.dart';
-import '../all_products/all_products.dart';
-import 'widgets/home_appbar.dart';
-import 'widgets/home_categories.dart';
-import 'widgets/promo_slider.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

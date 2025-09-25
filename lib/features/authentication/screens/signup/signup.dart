@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/styles/spacing_styles.dart';
-import '../../../../common/widgets/layouts/responsive_container.dart';
+import '../../../../common/widgets/layout/responsive_container.dart';
 import 'widgets/signup_form.dart';
 
 class SignupScreen extends StatelessWidget {

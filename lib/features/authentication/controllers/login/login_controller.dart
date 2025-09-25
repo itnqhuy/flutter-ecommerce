@@ -26,19 +26,16 @@ class LoginController extends GetxController {
 
   Future<void> emailAndPasswordSignIn() async {
     try {
+      // Bắt đầu hiển thị loading
       MyFullScreenLoader.openLoadingDialog(
           'Đang đăng nhập...', MyImages.loadingAnimation);
 
+      // Kiểm tra kết nối internet
       final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        MyFullScreenLoader.stopLoading();
-        return;
-      }
+      if (!isConnected) return;
 
-      if (!loginFormKey.currentState!.validate()) {
-        MyFullScreenLoader.stopLoading();
-        return;
-      }
+      // Kiểm tra form hợp lệ
+      if (!loginFormKey.currentState!.validate()) return;
 
       // Lưu dữ liệu nếu chọn "Remember Me"
       if (rememberMe.value) {
@@ -46,16 +43,22 @@ class LoginController extends GetxController {
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
+      // Đăng nhập người dùng với Email & Password
       await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
+      // Dừng hiển thị loading
       MyFullScreenLoader.stopLoading();
 
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      // Dừng hiển thị loading nếu có lỗi
       MyFullScreenLoader.stopLoading();
+
+      // Hiển thị thông báo lỗi
       MyLoaders.errorSnackBar(title: 'Oops!!', message: e.toString());
     } finally {
+      // Dừng hiển thị loading
       MyFullScreenLoader.stopLoading();
     }
   }

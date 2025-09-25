@@ -10,27 +10,21 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../utils/formatters/fomatter.dart';
-
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cartController = CartController.instance;
-
     return Scaffold(
       appBar: MyAppBar(
-        showBackArrow: true,
-        title:
-            Text('Giỏ hàng', style: Theme.of(context).textTheme.headlineSmall),
-      ),
+          showBackArrow: true,
+          title:
+              Text('Cart', style: Theme.of(context).textTheme.headlineSmall)),
       body: Padding(
         padding: const EdgeInsets.all(MySizes.defaultSpace),
-        child: const MyCartItems(),
+        child: MyCartItems(),
       ),
-
-      /// Checkout button
+      //checkout
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(MySizes.defaultSpace),
         child: Obx(() {

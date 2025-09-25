@@ -1,24 +1,22 @@
+import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
+import 'package:ecommerce/common/widgets/texts/my_brand_title_text_verified_icon.dart';
+import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
+import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:ecommerce/utils/constants/image_strings.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import '../../../../features/shop/models/cart_item_model.dart';
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/sizes.dart';
-import '../../../../utils/helpers/helper_functions.dart';
-import '../../images/my_rounded_image.dart';
-import '../../texts/my_brand_title_text_verified_icon.dart';
-import '../../texts/product_title_text.dart';
 
 class MyCartItem extends StatelessWidget {
-  const MyCartItem({super.key, required this.item});
-
-  final CartItemModel item;
+  const MyCartItem({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final isDark = MyHelperFunctions.isDarkMode(context);
-
     return Row(
       children: [
-        /// Hình ảnh sản phẩm
+        //Image
         MyRoundedImage(
           imageUrl: item.image ?? '',
           isNetworkImage: true,
@@ -34,39 +32,37 @@ class MyCartItem extends StatelessWidget {
         ),
         const SizedBox(width: MySizes.spaceBtwItems),
 
-        /// Thông tin sản phẩm
+        //Title price and size
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (item.brandName != null)
-                MyBrandTitleWithVerifiedIcon(title: item.brandName!),
+              MyBrandTitleWithVerifiedIcon(title: 'Dell'),
               Flexible(
                 child: MyProductTitleText(
-                  title: item.title,
-                  maxLines: 1,
-                ),
+                    title: 'Laptop mau den sdvsvsdvsds', maxLines: 1),
               ),
 
-              /// Thuộc tính đã chọn
-              if (item.selectedSKU != null && item.selectedSKU!.isNotEmpty)
-                Text.rich(
-                  TextSpan(
-                    children: item.selectedSKU!.entries
-                        .expand((entry) => [
-                              TextSpan(
-                                text: '${entry.key}: ',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              TextSpan(
-                                text: '${entry.value}   ',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ])
-                        .toList(),
-                  ),
+              //Attributes
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                        text: 'Color',
+                        style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                        text: 'Green',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    TextSpan(
+                        text: 'Size',
+                        style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(
+                        text: 'VN 08',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                  ],
                 ),
+              ),
             ],
           ),
         ),

@@ -44,11 +44,10 @@ class MyCouponCode extends StatelessWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                   foregroundColor: dark
-                      ? MyColors.white.withAlpha((255 * 0.5).round())
-                      : MyColors.dark.withAlpha((255 * 0.5).round()),
-                  backgroundColor: Colors.grey.withAlpha((255 * 0.2).round()),
-                  side: BorderSide(
-                      color: Colors.grey.withAlpha((255 * 0.1).round()))),
+                      ? MyColors.white.withOpacity(0.5)
+                      : MyColors.dark.withOpacity(0.5),
+                  backgroundColor: Colors.grey.withOpacity(0.2),
+                  side: BorderSide(color: Colors.grey.withOpacity(0.1))),
               child: const Text('Apply'),
             ),
           ),

@@ -10,7 +10,6 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'dart:io';
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 <<<<<<< HEAD
@@ -32,10 +31,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserController.instance;
-
     return Scaffold(
-      appBar: const MyAppBar(showBackArrow: true, title: Text('Thông tin')),
+      appBar: const MyAppBar(showBackArrow: true, title: Text('Profile')),
 
       /// -- Body
       body: SingleChildScrollView(
@@ -76,8 +73,8 @@ class ProfileScreen extends StatelessWidget {
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                     }),
                     TextButton(
-                        onPressed: () => controller.uploadUserProfilePicture(),
-                        child: const Text('Thay đổi ảnh đại diện')),
+                        onPressed: () {},
+                        child: const Text('Change Profile Picture')),
                   ],
                 ),
               ),
@@ -87,24 +84,14 @@ class ProfileScreen extends StatelessWidget {
               const Divider(),
               const SizedBox(height: MySizes.spaceBtwItems),
 
-              /// Heading
+              /// Heading Profile Info
               const MySectionHeading(
-                  title: 'Thông tin người dùng', showActionButton: false),
+                  title: 'Profile Information', showActionButton: false),
               const SizedBox(height: MySizes.spaceBtwItems),
 
-              Obx(
-                () => MyProfileMenu(
-                  title: 'Họ và tên',
-                  value: controller.user.value.fullNameWithSpaces,
-                  onPressed: () => Get.to(() => const ChangeName()),
-                ),
-              ),
-              Obx(
-                () => MyProfileMenu(
-                    title: 'Tên đăng nhập',
-                    value: controller.user.value.username,
-                    onPressed: () {}),
-              ),
+              MyProfileMenu(title: 'Name', value: 'NHuy', onPressed: () {}),
+              MyProfileMenu(
+                  title: 'Username', value: 'NHuy_341', onPressed: () {}),
 
               const SizedBox(height: MySizes.spaceBtwItems),
               const Divider(),
@@ -112,17 +99,17 @@ class ProfileScreen extends StatelessWidget {
 
               /// Heading Personal Info
               const MySectionHeading(
-                  title: 'Thông tin cá nhân', showActionButton: false),
+                  title: 'Personal Information', showActionButton: false),
               const SizedBox(height: MySizes.spaceBtwItems),
 
               MyProfileMenu(
-                  title: 'ID người dùng',
-                  value: controller.user.value.id,
+                  title: 'User ID',
+                  value: '52200080',
                   icon: Iconsax.copy,
                   onPressed: () {}),
               MyProfileMenu(
                   title: 'E-mail',
-                  value: controller.user.value.email,
+                  value: '52200080@gmail.com',
                   onPressed: () {}),
               MyProfileMenu(
 <<<<<<< HEAD
@@ -132,14 +119,11 @@ class ProfileScreen extends StatelessWidget {
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
                   value: controller.user.value.phoneNumber ?? "",
                   onPressed: () {}),
-              MyProfileMenu(title: 'Giới tính', value: 'Nam', onPressed: () {}),
-              MyProfileMenu(
-                  title: 'Ngày sinh', value: '22/08/2004', onPressed: () {}),
               const Divider(),
               const SizedBox(height: MySizes.spaceBtwItems),
               Center(
                 child: TextButton(
-                  onPressed: () => controller.deleteAccountWarningPopup(),
+                  onPressed: () {},
                   child: const Text('Close Account',
                       style: TextStyle(color: Colors.red)),
                 ),

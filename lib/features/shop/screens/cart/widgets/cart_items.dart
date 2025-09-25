@@ -2,7 +2,6 @@
 import 'package:ecommerce/common/widgets/products/cart/add_remove_button.dart';
 import 'package:ecommerce/common/widgets/products/cart/cart_item.dart';
 import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
-import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

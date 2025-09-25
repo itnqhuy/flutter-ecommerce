@@ -41,11 +41,14 @@
     #Product Management
     readmore: ^2.2.0
     flutter_rating_bar: ^4.0.1
+<<<<<<< HEAD
     shimmer: ^3.0.0
     firebase_storage: ^12.4.5
     image_picker: ^1.1.2
     cached_network_image: ^3.4.1
     collection: 1.18.0
+=======
+>>>>>>> parent of 450796a (restore all)
 
   dev_dependencies:
     flutter_test:
@@ -65,7 +68,7 @@
       - assets/images/categories/
       - assets/images/content/
       - assets/images/products/
-      - assets/images/categories/
+      - assets/icons/brands/
       - assets/icons/payment_methods/
       - assets/images/banners/
       - assets/amimations/

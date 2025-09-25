@@ -18,8 +18,6 @@ class MyVerticalImageText extends StatelessWidget {
   final Color? backgroundColor;
   final void Function()? onTap;
 
-  bool get isNetworkImage => Uri.tryParse(image)?.isAbsolute ?? false;
-
   @override
   Widget build(BuildContext context) {
     final dark = MyHelperFunctions.isDarkMode(context);
@@ -30,28 +28,21 @@ class MyVerticalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: MySizes.spaceBtwItems),
         child: Column(
           children: [
-            // Circular Image Container
+            //Circular Icon
             Container(
               width: 56,
               height: 56,
               padding: const EdgeInsets.all(MySizes.sm),
               decoration: BoxDecoration(
                 color:
-                    backgroundColor ?? (dark ? MyColors.grey : MyColors.white),
+                    backgroundColor ?? (dark ? MyColors.black : MyColors.white),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
-                child: isNetworkImage
-                    ? Image.network(
-                        image,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.broken_image, size: 24),
-                      )
-                    : Image.asset(
-                        image,
-                        fit: BoxFit.cover,
-                      ),
+                child: Image(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                    color: dark ? MyColors.light : MyColors.dark),
               ),
             ),
             const SizedBox(height: MySizes.spaceBtwItems / 2),

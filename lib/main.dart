@@ -1,11 +1,10 @@
+import 'package:ecommerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-// import 'data/dummy_data.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
-import 'data/services/firebase_storage_service.dart';
 import 'firebase_options.dart';
 import 'app.dart';
 
@@ -27,19 +26,7 @@ Future<void> main() async {
     (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 
-  uploadDummyData();
   // Todo: Initialize Authentication
+
   runApp(const App());
-}
-
-void uploadDummyData() async {
-  Get.put(MyFirebaseStorageService());
-
-  // final storageService = MyFirebaseStorageService.instance;
-
-  // Upload categories
-  // await storageService.uploadDummyData(DummyData().categories);
-
-  // Upload banners
-  // await storageService.uploadDummyBanners(DummyData().banners);
 }

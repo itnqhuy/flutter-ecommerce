@@ -8,13 +8,8 @@ class MyFormatter {
   }
 
   /// Format a given [amount] to Vietnamese currency format, e.g. 75,000₫
-  static String formatCurrency(int amount) {
+  static String formatCurrency(double amount) {
     return NumberFormat.currency(locale: 'vi_VN', symbol: '₫').format(amount);
-  }
-
-  /// Format amount to 1.000.000 (no currency symbol)
-  static String formatDecimalOnly(int amount) {
-    return NumberFormat.decimalPattern('vi_VN').format(amount);
   }
 
   static String formatVietnamPhoneNumber(String phoneNumber) {
@@ -41,7 +36,7 @@ class MyFormatter {
   }
 
   /// Format price per unit like 20.000₫/item
-  static String formatPriceWithUnit(int price, String unit) {
+  static String formatPriceWithUnit(double price, String unit) {
     final currency = formatCurrency(price);
     return '$currency/$unit';
   }

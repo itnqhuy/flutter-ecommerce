@@ -1,19 +1,17 @@
+import 'package:ecommerce/common/widgets/appbar/appbar.dart';
+import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:ecommerce/common/widgets/list_tiles/settings_menu_tile.dart';
+import 'package:ecommerce/common/widgets/list_tiles/user_profile_tile.dart';
+import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/personalization/screens/address/adress.dart';
+import 'package:ecommerce/features/personalization/screens/profile/profile.dart';
+import 'package:ecommerce/features/shop/screens/cart/cart.dart';
+import 'package:ecommerce/features/shop/screens/order/order.dart';
+import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../common/widgets/appbar/appbar.dart';
-import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
-import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
-import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
-import '../../../../common/widgets/texts/section_heading.dart';
-import '../../../../data/repositories/authentication/authentication_repository.dart';
-import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/sizes.dart';
-import '../../../shop/screens/cart/cart.dart';
-import '../../../shop/screens/order/order.dart';
-import '../address/address.dart';
-import '../profile/profile.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -25,11 +23,11 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           children: [
             //header
-            MyPrimaryHeaderContainer(
+            TPrimaryHeaderContainer(
               child: Column(
                 children: [
                   MyAppBar(
-                      title: Text('Tài khoản của tôi',
+                      title: Text('Account',
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium!
@@ -46,11 +44,11 @@ class SettingsScreen extends StatelessWidget {
               padding: EdgeInsets.all(MySizes.defaultSpace),
               child: Column(
                 children: [
-                  //Account settings
-                  MySectionHeading(title: 'Cài đặt tài khoản'),
+                  //Acount settings
+                  MySectionHeading(title: 'Account Settings'),
                   SizedBox(height: MySizes.spaceBtwItems),
 
-                  // User Settings
+                  // -- User Settings
                   MySettingsMenuTile(
                     icon: Iconsax.safe_home,
 <<<<<<< HEAD
@@ -63,23 +61,23 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   MySettingsMenuTile(
                     icon: Iconsax.shopping_cart,
-                    title: 'Giỏ hàng của tôi',
-                    subTitle: 'Thêm, xóa sản phẩm và chuyển đến thanh toán',
+                    title: 'My Cart',
+                    subTitle: 'Add, remove products and move to checkout',
                     onTap: () => Get.to(() => CartScreen()),
                   ),
                   MySettingsMenuTile(
                     icon: Iconsax.bag_tick,
-                    title: 'Đơn hàng của tôi',
-                    subTitle: 'Đơn hàng đang xử lý và đã hoàn thành',
+                    title: 'My Orders',
+                    subTitle: 'In-progress and Completed Orders',
                     onTap: () => Get.to(() => OrderScreen()),
                   ),
                   MySettingsMenuTile(
                       icon: Iconsax.bank,
-                      title: 'Tài khoản ngân hàng',
+                      title: 'Bank Account',
                       subTitle: 'Withdraw balance to registered bank account'),
                   MySettingsMenuTile(
                       icon: Iconsax.discount_shape,
-                      title: 'Coupons của tôi',
+                      title: 'My Coupons',
                       subTitle: 'List of all the discounted coupons'),
                   MySettingsMenuTile(
                       icon: Iconsax.notification,
@@ -100,9 +98,7 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                        onPressed: () =>
-                            AuthenticationRepository.instance.logout(),
-                        child: const Text('Đăng xuất')),
+                        onPressed: () {}, child: const Text('Logout')),
                   ),
                   const SizedBox(height: MySizes.spaceBtwSections * 2.5),
                 ],

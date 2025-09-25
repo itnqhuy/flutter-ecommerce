@@ -1,25 +1,18 @@
-import 'package:ecommerce/common/widgets/animations/vertical_product_shimmer.dart';
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
 import 'package:ecommerce/common/widgets/images/my_rounded_image.dart';
 import 'package:ecommerce/common/widgets/products/products_cards/product_card_horizontal.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
-import 'package:ecommerce/features/shop/controllers/category_controller.dart';
-import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
+import 'package:ecommerce/utils/constants/image_strings.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/helpers/cloud_helper_function.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/category_model.dart';
-
 class SubCategoriesScreen extends StatelessWidget {
-  const SubCategoriesScreen({super.key, required this.category});
-  final CategoryModel category;
+  const SubCategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = CategoryController.instance;
     return Scaffold(
-      appBar: MyAppBar(title: Text(category.name), showBackArrow: true),
+      appBar: MyAppBar(title: Text('Techgear'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(MySizes.defaultSpace),
@@ -29,8 +22,7 @@ class SubCategoriesScreen extends StatelessWidget {
               MyRoundedImage(
 <<<<<<< HEAD
                   width: double.infinity,
-                  imageUrl: category.imageUrl,
-                  isNetworkImage: true,
+                  imageUrl: MyImages.promoBanner3,
                   applyImageRadius: true),
 =======
                 height: 145,
@@ -44,6 +36,7 @@ class SubCategoriesScreen extends StatelessWidget {
               SizedBox(height: MySizes.spaceBtwSections),
 
               // Sub-Categories
+<<<<<<< HEAD
               FutureBuilder(
 <<<<<<< HEAD
                   future: controller.getSubCategories(category.id),
@@ -166,6 +159,30 @@ class SubCategoriesScreen extends StatelessWidget {
                 },
               ),
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
+=======
+              Column(
+                children: [
+                  //Heading
+                  MySectionHeading(
+                    title: 'Laptop',
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: MySizes.spaceBtwItems / 2),
+
+                  SizedBox(
+                    height: 120,
+                    child: ListView.separated(
+                      itemCount: 4,
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: MySizes.spaceBtwItems),
+                      itemBuilder: (context, index) =>
+                          const MyProductCardHorizontal(),
+                    ),
+                  ),
+                ],
+              ),
+>>>>>>> parent of 450796a (restore all)
             ],
           ),
         ),

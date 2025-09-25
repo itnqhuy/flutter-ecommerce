@@ -9,8 +9,8 @@ class UserModel {
   final String lastName;
   final String username;
   final String email;
-  final String? phoneNumber;
-  final String avatarUrl;
+  final String phoneNumber;
+  final String? avatarUrl;
   final String role;
   final List<ShippingInfoModel>? shippingInfo;
   final bool isBanned;
@@ -24,8 +24,8 @@ class UserModel {
     required this.lastName,
     required this.username,
     required this.email,
-    this.phoneNumber,
-    required this.avatarUrl,
+    required this.phoneNumber,
+    this.avatarUrl,
     required this.role,
     this.shippingInfo,
     required this.isBanned,
@@ -75,7 +75,7 @@ class UserModel {
 
   /// Helper function to format phone number.
   String get formattedPhoneNo =>
-      MyFormatter.formatVietnamPhoneNumber(phoneNumber!);
+      MyFormatter.formatVietnamPhoneNumber(phoneNumber);
 
   /// Static function to split full name into first and last name.
   static List<String> nameParts(String fullName) => fullName.split(" ");
@@ -86,8 +86,9 @@ class UserModel {
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
 
-    String camelCaseUsername = "$firstName$lastName";
-    String usernameWithPrefix = "tg_$camelCaseUsername"; //techgear
+    String camelCaseUsername =
+        "$firstName$lastName"; // Combine first and last name
+    String usernameWithPrefix = "cwt_$camelCaseUsername"; // Add "cwt_" prefix
     return usernameWithPrefix;
   }
 
@@ -139,23 +140,20 @@ class UserModel {
 >>>>>>> 6565bfa7f21905c3680d4c666f5911bfd5eac5d1
           .toList();
 
-      return UserModel(
-        id: document.id,
-        firstName: data['firstName'] ?? "",
-        lastName: data['lastName'] ?? "",
-        username: data['username'] ?? "",
-        email: data['email'] ?? "",
-        phoneNumber: data['phoneNumber'] ?? "",
-        avatarUrl: data['avatarUrl'] ?? "",
-        role: data['role'] ?? "",
-        shippingInfo: shippingInfoList,
-        isBanned: data['isBanned'] ?? false,
-        loyaltyPoints: data['loyaltyPoints'] ?? 0,
-        createdAt: data['createdAt'] ?? Timestamp.now(),
-        updatedAt: data['updatedAt'] ?? Timestamp.now(),
-      );
-    } else {
-      return UserModel.empty();
-    }
+    return UserModel(
+      id: document.id,
+      firstName: data['firstName'] ?? "",
+      lastName: data['lastName'] ?? "",
+      username: data['username'] ?? "",
+      email: data['email'] ?? "",
+      phoneNumber: data['phoneNumber'] ?? "",
+      avatarUrl: data['avatarUrl'] ?? "",
+      role: data['role'] ?? "",
+      shippingInfo: shippingInfoList,
+      isBanned: data['isBanned'] ?? false,
+      loyaltyPoints: data['loyaltyPoints'] ?? 0,
+      createdAt: data['createdAt'] ?? Timestamp.now(),
+      updatedAt: data['updatedAt'] ?? Timestamp.now(),
+    );
   }
 }
