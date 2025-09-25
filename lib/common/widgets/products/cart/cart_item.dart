@@ -22,8 +22,8 @@ class MyCartItem extends StatelessWidget {
         MyRoundedImage(
           imageUrl: item.image ?? '',
           isNetworkImage: true,
-          width: 80,
-          height: 80,
+          width: 60,
+          height: 60,
           padding: const EdgeInsets.all(MySizes.sm),
           backgroundColor: isDark ? MyColors.darkerGrey : MyColors.light,
         ),

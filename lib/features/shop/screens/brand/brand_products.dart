@@ -22,6 +22,7 @@ class BrandProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final brandController = Get.find<BrandController>();
 
+    // Gọi fetch products khi build, hoặc dùng binding / onInit nếu StatefulWidget
     brandController.fetchProductsByBrandId(brand.id);
 
     return Scaffold(

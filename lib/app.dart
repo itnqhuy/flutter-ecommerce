@@ -19,6 +19,7 @@ class App extends StatelessWidget {
       initialBinding: GeneralBindings(),
       getPages: AppRoutes.pages,
       home: const OnBoardingScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

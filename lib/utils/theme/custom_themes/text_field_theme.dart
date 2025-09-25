@@ -17,12 +17,7 @@ class MyTextFormFieldTheme {
       fontStyle: FontStyle.normal,
     ),
     floatingLabelStyle: const TextStyle().copyWith(
-      color: Colors.black.withValues(
-        alpha: 255 * 0.8,
-        red: Colors.black.r.toDouble(),
-        green: Colors.black.g.toDouble(),
-        blue: Colors.black.b.toDouble(),
-      ),
+      color: Colors.black.withOpacity(0.8),
     ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),

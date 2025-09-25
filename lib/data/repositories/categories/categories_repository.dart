@@ -28,7 +28,7 @@ class CategoryRepository extends GetxController {
     }
   }
 
-  /// Lấy danh sách danh mục con theo `parentCateId`
+  /// Lấy danh sách danh mục con theo parentCate
   Future<List<CategoryModel>> getSubCategories(String parentCateId) async {
     try {
       final snapshot = await _db
@@ -47,7 +47,7 @@ class CategoryRepository extends GetxController {
     }
   }
 
-  /// Thêm danh mục mới (Firestore tự động tạo ID nếu `id` rỗng)
+  /// Thêm danh mục mới
   Future<void> addCategory(CategoryModel category) async {
     try {
       if (category.id.isEmpty) {

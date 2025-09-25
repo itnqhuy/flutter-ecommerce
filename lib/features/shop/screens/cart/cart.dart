@@ -1,5 +1,5 @@
 import 'package:ecommerce/common/widgets/appbar/appbar.dart';
-import 'package:ecommerce/features/shop/controllers/product/cart_controller.dart';
+import 'package:ecommerce/features/shop/controllers/cart_controller.dart';
 import 'package:ecommerce/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';

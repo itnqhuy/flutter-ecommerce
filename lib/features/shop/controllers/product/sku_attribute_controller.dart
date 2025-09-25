@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../../data/repositories/SKUs/sku_repository.dart';
-import '../../../../data/repositories/product_attributes/product_attribute_repository.dart';
+import '../../../../data/repositories/product_attribute/product_attribute_repository.dart';
 import '../../../../data/repositories/promotions/promotion_repository.dart';
 import '../../../../data/repositories/sku_attributes/sku_attribute_repository.dart';
 import '../../models/product_attribute_model.dart';
@@ -71,8 +71,8 @@ class SkuAttributeController extends GetxController {
     required List<SkuAttributeModel> skuAttrs,
   }) {
     _allSkus.assignAll(skus);
-    _allSkuAttrs.assignAll(skuAttrs);
     _allProductAttrs.assignAll(attrs);
+    _allSkuAttrs.assignAll(skuAttrs);
 
     _skuAttrMap.clear();
 
@@ -164,7 +164,6 @@ class SkuAttributeController extends GetxController {
     for (final key in selected.keys) {
       if (skuAttrs[key] != selected[key]) return false;
     }
-
     return true;
   }
 

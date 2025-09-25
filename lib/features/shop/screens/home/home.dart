@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           MyHomeAppBar(),
                           SizedBox(height: MySizes.spaceBtwSections),
-                          MySearchContainer(text: 'Search in store'),
+                          MySearchContainer(text: 'Tìm kiếm trong cửa hàng'),
                           SizedBox(height: MySizes.spaceBtwSections),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 MySectionHeading(
-                                  title: 'Popular Categories',
+                                  title: 'Phân loại phổ biến',
                                   showActionButton: false,
                                   textColor: Colors.white,
                                 ),

@@ -5,23 +5,13 @@ class MyChipTheme {
 
   /// Light Chip Theme
   static ChipThemeData lightChipTheme = ChipThemeData(
-    disabledColor: Colors.grey.withValues(
-      alpha: 255 * 0.4,
-      red: Colors.grey.r.toDouble(),
-      green: Colors.grey.g.toDouble(),
-      blue: Colors.grey.b.toDouble(),
-    ),
+    disabledColor: Colors.grey.withOpacity(0.4),
     labelStyle: const TextStyle(color: Colors.black),
     selectedColor: Colors.blue,
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
     checkmarkColor: Colors.white,
     backgroundColor: Colors.transparent,
-    secondarySelectedColor: Colors.blue.withValues(
-      alpha: 255 * 0.2,
-      red: Colors.blue.r.toDouble(),
-      green: Colors.blue.g.toDouble(),
-      blue: Colors.blue.b.toDouble(),
-    ),
+    secondarySelectedColor: Colors.blue.withOpacity(0.2),
     brightness: Brightness.light,
   );
 

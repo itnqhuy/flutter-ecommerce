@@ -50,6 +50,7 @@ class ProductController extends GetxController {
       for (var p in products) {
         await Future.wait([
           loadDefaultSkuByProductId(p.id),
+          loadProductRatings(p.id),
           loadPriceRange(p.id),
           _loadLowestPriceSku(p.id),
         ]);

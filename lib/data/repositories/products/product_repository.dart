@@ -15,7 +15,6 @@ class ProductRepository {
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // Lấy danh sách sản phẩm nổi bật
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -36,7 +35,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy tất cả sản phẩm nổi bật
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db
@@ -94,7 +92,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy sản phẩm nổi bật theo category
   Future<List<ProductModel>> getFeatureProductsByCategory(
       String categoryId) async {
     try {
@@ -119,7 +116,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy sản phẩm theo category
   Future<List<ProductModel>> getProductsByCategory(
       String categoryId, int limit) async {
     try {
@@ -148,7 +144,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy sản phẩm theo brand
   Future<List<ProductModel>> getProductsByBrand(String brandId) async {
     try {
       final brandRef = _db.collection('Brands').doc(brandId);
@@ -171,7 +166,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy thuộc tính sản phẩm
   Future<List<ProductAttributeModel>> getByProductId(String productId) async {
     try {
       final snapshot = await _db
@@ -191,11 +185,11 @@ class ProductRepository {
     }
   }
 
-  // Lấy sản phẩm theo Query tùy chỉnh
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
     try {
       final querySnapshot = await query.get();
 
+      debugPrint('Products fetched by query: ${querySnapshot.docs.length}');
       return querySnapshot.docs
           .map((doc) => ProductModel.fromQuerySnapshot(doc))
           .toList();
@@ -206,7 +200,6 @@ class ProductRepository {
     }
   }
 
-  // Lấy danh sách sản phẩm yêu thích theo ID
   Future<List<ProductModel>> getFavoriteProducts(
       List<String> productIds) async {
     try {
@@ -239,7 +232,6 @@ class ProductRepository {
         return null;
       }
     } catch (e) {
-      print("Error getting rating: $e");
       return null;
     }
   }
@@ -282,7 +274,6 @@ class ProductRepository {
 
       return allRatings;
     } catch (e) {
-      print("Lỗi khi lấy đánh giá: $e");
       throw Exception('Không thể lấy đánh giá sản phẩm');
     }
   }
@@ -302,7 +293,6 @@ class ProductRepository {
           .map((doc) => SkuModel.fromDocumentSnapshot(doc))
           .toList();
     } catch (e) {
-      print("Error fetching SKUs: $e");
       return [];
     }
   }
